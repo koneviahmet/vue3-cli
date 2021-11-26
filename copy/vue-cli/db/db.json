@@ -1,0 +1,33 @@
+{
+  "users": [
+    {
+      "email": "koneviahmet@gmail.com",
+      "name": "Ahmet",
+      "lastName": "Şık",
+      "password": "12345",
+      "token": 1,
+      "role": 2,
+      "id": 1
+    },
+    {
+      "email": "ahmetx@gmail.com",
+      "name": "asd",
+      "lastName": "asd",
+      "password": "12345",
+      "token": 1,
+      "role": 2,
+      "id": 2
+    }
+  ],
+  "schema": [
+    {
+      "schemaText": "asdasdx",
+      "id": 1
+    },
+    {
+      "schemaText": "asda",
+      "extra": "extra info",
+      "id": 2
+    }
+  ]
+}

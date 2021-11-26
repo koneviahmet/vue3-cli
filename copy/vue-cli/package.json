@@ -1,0 +1,31 @@
+{
+  "name": "todo-app",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "db": "json-server --watch db/db.json --port 3004"
+  },
+  "dependencies": {
+    "@heroicons/vue": "^1.0.5",
+    "axios": "^0.24.0",
+    "notyf": "^3.10.0",
+    "secure-ls": "^1.2.6",
+    "sweetalert2": "^11.1.10",
+    "vee-validate": "^4.5.6",
+    "vue-router": "^4.0.12",
+    "vue-skeletor": "^1.0.6",
+    "vue-spinner": "^1.0.4",
+    "vuex": "^4.0.2",
+    "vuex-persistedstate": "^4.1.0",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.9.3",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.3.11",
+    "tailwindcss": "^2.2.19",
+    "vite": "^2.6.4"
+  }
+}
