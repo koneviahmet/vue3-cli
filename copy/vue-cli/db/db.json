@@ -5,8 +5,6 @@
       "name": "Ahmet",
       "lastName": "Şık",
       "password": "12345",
-      "token": 1,
-      "role": 2,
       "id": 1
     },
     {
@@ -17,17 +15,31 @@
       "token": 1,
       "role": 2,
       "id": 2
+    },
+    {
+      "email": "dasdsad@gmail.com",
+      "name": "asdasd",
+      "lastName": "asdasd",
+      "password": "asdasd",
+      "token": 2,
+      "role": 2,
+      "id": 3
     }
   ],
   "schema": [
     {
-      "schemaText": "asdasdx",
+      "schemaText": "asdasdxd",
       "id": 1
     },
     {
       "schemaText": "asda",
       "extra": "extra info",
       "id": 2
+    },
+    {
+      "schemaText": "asdad",
+      "extra": "extra info",
+      "id": 3
     }
   ]
 }

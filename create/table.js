@@ -9,22 +9,28 @@ let dir = __dirname;
 if(process.env.OS == "Windows_NT"){dir = slash(dir);}
 dir = dir.replace("/create", "");
 
-const dizin = process.env.PWD;
+const pwd = process.env.PWD;
 
-let models          = dir + '/copy/codeigniter/application/models/';
-let controllers     = dir + '/copy/codeigniter/application/controllers/';
-let views           = dir + '/copy/codeigniter/application/views/klasik/';
-let viewsTaslakCopy = dir + '/copy/codeigniter/application/views/klasik/content/taslakCopy/';
-let js              = dir + '/copy/codeigniter/application/views/klasik/index/js/';
+const sourceViews           = dir + '/copy/vue-cli/src/views/';
+const sourceComponents      = dir + '/copy/vue-cli/src/components/';
+const sourceRouter          = dir + '/copy/vue-cli/src/router/';
+const sourceServices        = dir + '/copy/vue-cli/src/services/';
+const sourceCompositions    = dir + '/copy/vue-cli/src/compositions/';
+
+const copyViews           = pwd + '/src/views/';
+const copyRouter          = pwd + '/src/router/';
+const copyComponents      = pwd + '/src/components/';
+const copyServices        = pwd + '/src/services/';
+const copyCompositions    = pwd + '/src/compositions/';
 
 // async/await
-async function asenkronAkis(table_name, secJson){
+const createTable = async (table_name, secJson) => {
     try {
       //table_name => hepsi_kucuk
 
       /* baş harfi Büyük*/
-      const table_nameUF = _.upperFirst(table_name);
-
+      //const table_nameUF = _.upperFirst(table_name);
+      const table_nameUF = table_name.charAt(0).toUpperCase() + table_name.slice(1);
 
 
       /*
@@ -40,8 +46,8 @@ async function asenkronAkis(table_name, secJson){
       await writeFile('codeigniter/deneme.php', denemeD);
       */
 
-      let codeigniter_durum  = await afs.isFile('src');
-      if(!codeigniter_durum){
+      let src_durum  = await afs.isFile('src');
+      if(!src_durum){
         console.log(clc.red("cd <proje_name>"));
       }else{
         let application_durum  = await afs.isFile('src');
@@ -55,44 +61,126 @@ async function asenkronAkis(table_name, secJson){
             console.log(clc.red("tablo daha önce eklenmiş."));
           }else{
             // her şey yolunda değişimleri yapabilirsin
-            console.log(clc.red("her şey yolunda o halde devam"));
+            console.log(clc.red("tablo hazırlanıyor..."));
 
+
+            
             /* views */
-            await afs.copy_all_file(dir, '/copy/vue-cli/src/views/schema', "src/views/"+table_name);
+            await afs.createPage(copyViews+'/'+table_name);
+            const viewHome  = await afs.readFile(sourceViews + '/schema/Home.vue');
+            const viewCreate  = await afs.readFile(sourceViews + '/schema/Create.vue');
+            const viewDetail  = await afs.readFile(sourceViews + '/schema/Detail.vue');
+            const viewList  = await afs.readFile(sourceViews + '/schema/List.vue');
+            const viewSearch  = await afs.readFile(sourceViews + '/schema/Search.vue');
+            const viewUpdate  = await afs.readFile(sourceViews + '/schema/Update.vue');
 
-            /* components */
-            await afs.copy_all_file(dir, '/copy/vue-cli/src/components/content/schema', "src/components/content/"+table_name);
+
+            let viewHomeR   = await afs.replaceFile(viewHome, 'schema', table_name);
+                viewHomeR   = await afs.replaceFile(viewHomeR, 'Schema', table_nameUF);
+
+            let viewCreateR   = await afs.replaceFile(viewCreate, 'schema', table_name);
+                viewCreateR   = await afs.replaceFile(viewCreateR, 'Schema', table_nameUF);
+
+            let viewDetailR   = await afs.replaceFile(viewDetail, 'schema', table_name);
+                viewDetailR   = await afs.replaceFile(viewDetailR, 'Schema', table_nameUF);
+
+            let viewListR   = await afs.replaceFile(viewList, 'schema', table_name);
+                viewListR   = await afs.replaceFile(viewListR, 'Schema', table_nameUF);
+
+            let viewSearchR   = await afs.replaceFile(viewSearch, 'schema', table_name);
+                viewSearchR   = await afs.replaceFile(viewSearchR, 'Schema', table_nameUF);
+
+            let viewUpdateR   = await afs.replaceFile(viewUpdate, 'schema', table_name);
+                viewUpdateR   = await afs.replaceFile(viewUpdateR, 'Schema', table_nameUF);
+
+
+            await writeFile(copyViews + table_name + '/Home.vue', viewHomeR);
+            await writeFile(copyViews + table_name + '/Create.vue', viewCreateR);
+            await writeFile(copyViews + table_name + '/Detail.vue', viewDetailR);
+            await writeFile(copyViews + table_name + '/List.vue', viewListR);
+            await writeFile(copyViews + table_name + '/Search.vue', viewSearchR);
+            await writeFile(copyViews + table_name + '/Update.vue', viewUpdateR);
+
+
+
+            /* components form */
+            await afs.createPage(copyComponents+'content/'+table_name);
+            await afs.createPage(copyComponents+'content/'+table_name + "/form");
+            await afs.createPage(copyComponents+'content/'+table_name + "/menu");
+            const componentFormCreate  = await afs.readFile(sourceComponents + 'content/schema/form/create.vue');
+            const componentFormCreateValidate  = await afs.readFile(sourceComponents + 'content/schema/form/createValidate.js');
+            const componentFormSearch  = await afs.readFile(sourceComponents + 'content/schema/form/search.vue');
+            const componentFormSearchValidate  = await afs.readFile(sourceComponents + 'content/schema/form/searchValidate.js');
+            const componentFormUpdate  = await afs.readFile(sourceComponents + 'content/schema/form/update.vue');
+            const componentFormUpdateValidate  = await afs.readFile(sourceComponents + 'content/schema/form/updateValidate.js');
+
+
+            let componentFormCreateR   = await afs.replaceFile(componentFormCreate, 'schema', table_name);
+                componentFormCreateR   = await afs.replaceFile(componentFormCreateR, 'Schema', table_nameUF);
+
+            let componentFormCreateValidateR   = await afs.replaceFile(componentFormCreateValidate, 'schema', table_name);
+                componentFormCreateValidateR   = await afs.replaceFile(componentFormCreateValidateR, 'Schema', table_nameUF);
+
+            let componentFormSearchR   = await afs.replaceFile(componentFormSearch, 'schema', table_name);
+                componentFormSearchR   = await afs.replaceFile(componentFormSearchR, 'Schema', table_nameUF);
+
+            let componentFormSearchValidateR   = await afs.replaceFile(componentFormSearchValidate, 'schema', table_name);
+                componentFormSearchValidateR   = await afs.replaceFile(componentFormSearchValidateR, 'Schema', table_nameUF);
+
+
+            let componentFormUpdateR   = await afs.replaceFile(componentFormUpdate, 'schema', table_name);
+                componentFormUpdateR   = await afs.replaceFile(componentFormUpdateR, 'Schema', table_nameUF);
+
+            let componentFormUpdateValidateR   = await afs.replaceFile(componentFormUpdateValidate, 'schema', table_name);
+                componentFormUpdateValidateR   = await afs.replaceFile(componentFormUpdateValidateR, 'Schema', table_nameUF);
+
+
+
+            await writeFile(copyComponents + "content/" + table_name + '/form/create.vue', componentFormCreateR);
+            await writeFile(copyComponents + "content/" + table_name + '/form/createValidate.js', componentFormCreateValidateR);
+            await writeFile(copyComponents + "content/" + table_name + '/form/search.vue', componentFormSearchR);
+            await writeFile(copyComponents + "content/" + table_name + '/form/searchValidate.js', componentFormSearchValidateR);
+            await writeFile(copyComponents + "content/" + table_name + '/form/update.vue', componentFormUpdateR);
+            await writeFile(copyComponents + "content/" + table_name + '/form/updateValidate.js', componentFormUpdateValidateR);
+            
+            /* components menu */
+            await afs.createPage(copyComponents+'content/'+table_name + "/menu");
+            const componentMenuMain = await afs.readFile(sourceComponents + 'content/schema/menu/MainMenu.vue');
+
+            let componentMenuMainR   = await afs.replaceFile(componentMenuMain, 'schema', table_name);
+                componentMenuMainR   = await afs.replaceFile(componentMenuMainR, 'Schema', table_nameUF);
+
+            await writeFile(copyComponents + "content/" + table_name + '/menu/MainMenu.vue', componentMenuMainR);
+
 
             /* compositions */
-            await afs.copy_all_file(dir, '/copy/vue-cli/src/compositions/useModelSchema.js', "src/compositions/useModel"+table_nameUF+".js");
+            const compositionsModel   = await afs.readFile(sourceCompositions + 'useModelSchema.js');
+            let compositionsModelR    = await afs.replaceFile(compositionsModel, 'schema', table_name);
+                compositionsModelR        = await afs.replaceFile(compositionsModelR, 'Schema', table_nameUF);
+
+
+            await writeFile(copyCompositions + 'useModel'+table_nameUF+'.js', compositionsModelR);
+         
+
+
 
             /* router */
-            await afs.copy_all_file(dir, '/copy/vue-cli/src/router/routers/schema.js', "src/router/routers/"+table_name+".js");
-            
+            //await afs.copy_all_file(dir, '/copy/vue-cli/src/router/routers/schema.js', "src/router/routers/"+table_name+".js");
+            const router   = await afs.readFile(sourceRouter + 'routers/schema.js');
+            let routerR    = await afs.replaceFile(router, 'schema', table_name);
+                routerR    = await afs.replaceFile(routerR, 'Schema', table_nameUF);
+
+            await writeFile(copyRouter +"routers/"+table_name+'.js', routerR);
+
             /* services */
-            await afs.copy_all_file(dir, '/copy/vue-cli/src/services/SchemaServices.js', "src/services/"+table_nameUF+"Services.js");
+            //await afs.copy_all_file(dir, '/copy/vue-cli/src/services/SchemaServices.js', "src/services/"+table_nameUF+"Services.js");
+            const services   = await afs.readFile(sourceServices + 'SchemaServices.js');
+            let servicesR    = await afs.replaceFile(services, 'schema', table_name);
+                servicesR    = await afs.replaceFile(servicesR, 'Schema', table_nameUF);
 
-            /*
-            // models 
-            let taslak_model  = await afs.readFile(models + 'taslak_model.php');
-            let taslak_modelD = await afs.replaceFile(taslak_model, 'taslak', table_name);
-            taslak_modelD = await afs.replaceFile(taslak_modelD, 'Taslak', table_nameUF);
+            await writeFile(copyServices +table_nameUF+'Services.js', servicesR);
 
-            let createTable = "";
-            _.forEach(secJson,(value) => {
-              createTable += "'"+value+"'=>array('type' =>'VARCHAR','constraint' => 255), \n";
-            });
-
-            taslak_modelD = await afs.replaceFile(taslak_modelD, '#createTable#', createTable);
-            taslak_modelD = await afs.replaceFile(taslak_modelD, "'satir'", "//'satir'");
-            await writeFile('application/models/'+table_name+'_model.php', taslak_modelD);
-
-            // controllers 
-            let h_taslak  = await afs.readFile(controllers + 'h_taslak.php');
-            let h_taslakD = await afs.replaceFile(h_taslak, 'taslak', table_name);
-            h_taslakD = await afs.replaceFile(h_taslakD, 'Taslak', table_nameUF);
-            await writeFile('application/controllers/h_'+table_name+'.php', h_taslakD);
-            */
+ 
 
 
 
@@ -106,4 +194,4 @@ async function asenkronAkis(table_name, secJson){
 }
 
 
-module.exports.create = asenkronAkis;
+module.exports.create = createTable;

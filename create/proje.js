@@ -1,5 +1,4 @@
 const fs = require('fs');
-const _  = require('lodash');
 const afs = require('../afs.js');
 const slash = require('slash');
 
@@ -15,7 +14,10 @@ async function asenkronAkis(proje_name){
       //proje_name => hepsi_kucuk
 
       /* baş harfi Büyük*/
-      const proje_nameUF = _.upperFirst(proje_name);
+      //const proje_nameUF = _.upperFirst(proje_name);
+      const proje_nameUF = proje_name.charAt(0).toUpperCase() + proje_name.slice(1);
+
+
 
       /* proje daha önce oluşturulmuşmu ana bakalım */
       let proje_durum  = await afs.isFile(proje_name);

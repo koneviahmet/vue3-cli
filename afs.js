@@ -49,6 +49,7 @@ module.exports.readFile = readFile = (file) => {
   return new Promise((resolve, reject) => {
     fs.readFile(file, function read(err, data) {
       if(err){
+        console.log(err);
         reject("file okuma hatası");
       }else{
         resolve(data.toString());

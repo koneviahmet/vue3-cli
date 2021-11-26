@@ -2,9 +2,9 @@
   <MainMenu v-can="'isAuth'"/>
 
   <div class="container bg-white shadow-md min-h-screen rounded p-4">
-    schema home page
+    schema Home Page
   </div>
-
+    
 </template>
 
 <script setup>
