@@ -2,7 +2,7 @@
     <div class="bg-gray-500 border-b ">
         <div class="container mx-auto flex py-3 justify-between">
             <ul class="flex space-x-2 text-white">
-                <li  v-for="url in urlArr" :key="url.id" class="bg-gray-600 rounded border-0 h-8">
+                <li  v-for="(url, i) in urlArr" :key="i" class="bg-gray-600 rounded border-0 h-8">
                     <router-link class="inline-block py-1 px-3" :class='route.fullPath == url.to && "border-0 rounded text-black bg-gray-50"' :to="url.to">{{url.title}}</router-link>
                 </li>
             </ul>
@@ -56,22 +56,18 @@
     const route = useRoute();
     const urlArr = ref([
         {
-            id: 1,
             to: "/",
             title: "Home Page"
         },
         {
-            id: 2,
             to: "/user",
             title: "User"
         },
         {
-            id: 3,
             to: "/schema",
             title: "Schema"
         },
         {
-            id: 4,
             to: "/error",
             title: "Error"
         }

@@ -153,6 +153,14 @@ const createTable = async (table_name, secJson) => {
             await writeFile(copyComponents + "content/" + table_name + '/menu/MainMenu.vue', componentMenuMainR);
 
 
+            //sourceComponents add menu item in header
+            const headerMenu   = await afs.readFile(copyComponents + 'header/Header.vue');
+
+            const headerMenuString = 'title: "Error" \n        },\n        {\n            to: "/'+table_name+'",\n            title: "'+table_nameUF+'"';
+            let headerMenuR    = await afs.replaceFile(headerMenu, 'title: "Error"', headerMenuString);
+            await writeFile(copyComponents + 'header/Header.vue', headerMenuR);
+            
+
             /* compositions */
             const compositionsModel   = await afs.readFile(sourceCompositions + 'useModelSchema.js');
             let compositionsModelR    = await afs.replaceFile(compositionsModel, 'schema', table_name);
@@ -172,6 +180,18 @@ const createTable = async (table_name, secJson) => {
 
             await writeFile(copyRouter +"routers/"+table_name+'.js', routerR);
 
+            //routerde düzenleme yapalım
+            const routerIndex = await afs.readFile(copyRouter + 'index.js');
+
+            const replaceImport = 'import { '+table_name+'Routers } from "./routers/'+table_name+'.js" \n//import';
+            let routerIndexR    = await afs.replaceFile(routerIndex, '//import', replaceImport);
+                
+            //...homeRouters
+            let replaceRouter = '...homeRouters,\n        ...'+table_name+'Routers,';
+            routerIndexR    = await afs.replaceFile(routerIndexR, '...homeRouters,', replaceRouter);
+            await writeFile(copyRouter + 'index.js', routerIndexR);
+
+
             /* services */
             //await afs.copy_all_file(dir, '/copy/vue-cli/src/services/SchemaServices.js', "src/services/"+table_nameUF+"Services.js");
             const services   = await afs.readFile(sourceServices + 'SchemaServices.js');
@@ -181,11 +201,28 @@ const createTable = async (table_name, secJson) => {
             await writeFile(copyServices +table_nameUF+'Services.js', servicesR);
 
  
+            // db düzenlemesi yapalım
+            const dbJson   = await afs.readFile(pwd + '/db/db.json'); 
+            let dbJsonR    = await afs.replaceFile(dbJson, '"empty": \\[]', '"' + table_name + '": [], \n  "empty": []');
+            await writeFile(pwd + '/db/db.json', dbJsonR);
 
-
-
+            
+            //add role
+            const role   = await afs.readFile(pwd + '/src/utils/roles.js'); 
+            const roleString = '"' + table_nameUF + 'Home": [2,3],\n' + 
+                               '    "' + table_nameUF + 'Create": [1,2,3], \n' +
+                               '    "' + table_nameUF + 'Update": [2,3], \n' +
+                               '    "' + table_nameUF + 'Detail": [2,3], \n' +
+                               '    "' + table_nameUF + 'List": [2,3], \n' +
+                               '    "' + table_nameUF + 'Search": [2,3], \n' +
+                               '    "empty": [],';
+                               
+                               
+            let roleR    = await afs.replaceFile(role, '"empty": \\[]', roleString);
+            await writeFile(pwd + '/src/utils/roles.js', roleR);
+          
           }
-        }
+        } 
       }
 
     } catch (e) {

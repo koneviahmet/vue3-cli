@@ -90,7 +90,7 @@ module.exports.writeFile = writeFile = (file, data) => {
 
 module.exports.replaceFile = replaceFile = (data,bunu,bunla) => {
   return new Promise((resolve, reject) => {
-      var res = _.replace(data, new RegExp(bunu,"g"), bunla);
+      var res = data.replace(new RegExp(bunu,"g"), bunla);
       if(!res){
         reject("file okuma hatası");
       }else{
