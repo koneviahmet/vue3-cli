@@ -41,7 +41,7 @@ export default {
     setup(){ 
         const {validate, errors, values} = useCreate();
         const router = useRouter();
-        const {usersLoading, usersError, addSchema} = useSchema();
+        const {schemaLoading, schemaError, addSchema} = useSchema();
        
         const save = () => {
             validate().then(validateSuccess => {
