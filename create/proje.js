@@ -21,7 +21,8 @@ async function asenkronAkis(proje_name){
 
       /* proje daha önce oluşturulmuşmu ana bakalım */
       let proje_durum  = await afs.isFile(proje_name);
-      if(proje_durum && 1 == 2){
+      //if(proje_durum && 1 == 2){
+      if(proje_durum){
         console.log("Proje daha önce oluşturulmuş başka bir isim bulmalısınız.");
       }else{
 

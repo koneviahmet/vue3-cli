@@ -40,11 +40,7 @@ const createTable = async (table_name, secJson) => {
       });
       */
 
-      /*
-      let deneme  = await afs.readFile('codeigniter/deneme.php');
-      let denemeD = await afs.replaceFile(deneme, 'ol', table_name + ' oldu ');
-      await writeFile('codeigniter/deneme.php', denemeD);
-      */
+
 
       let src_durum  = await afs.isFile('src');
       if(!src_durum){
@@ -57,7 +53,8 @@ const createTable = async (table_name, secJson) => {
           // tablo daha önce oluşturulmuş mu ona bakalım 
           let model_durum  = await afs.isFile('src/router/routers/'+table_name+'.js');
           //let model_durum  = false;
-          if(model_durum && 1==2){
+          //if(model_durum && 1==2){
+          if(model_durum){
             console.log(clc.red("tablo daha önce eklenmiş."));
           }else{
             // her şey yolunda değişimleri yapabilirsin
@@ -114,20 +111,39 @@ const createTable = async (table_name, secJson) => {
             const componentFormUpdate  = await afs.readFile(sourceComponents + 'content/schema/form/update.vue');
             const componentFormUpdateValidate  = await afs.readFile(sourceComponents + 'content/schema/form/updateValidate.js');
 
+            let secJsonFirstUF = secJson[0].charAt(0).toUpperCase() + secJson[0].slice(1);
+            let componentFormCreateR   = await afs.replaceFile(componentFormCreate, 'Schema Text', secJson[0]);  
+                            
+                componentFormCreateR   = await afs.replaceFile(componentFormCreateR, 'schemaText', secJson[0]+"Text");  
+                componentFormCreateR   = await afs.replaceFile(componentFormCreateR, 'errorSchemaText', "error"+secJsonFirstUF+"Text");  
 
-            let componentFormCreateR   = await afs.replaceFile(componentFormCreate, 'schema', table_name);
+
+                componentFormCreateR   = await afs.replaceFile(componentFormCreateR, 'schema', table_name);
                 componentFormCreateR   = await afs.replaceFile(componentFormCreateR, 'Schema', table_nameUF);
 
-            let deneleteNline = await afs.replaceFile(componentFormCreateR, '\n', '');
 
 
-            let ustArr = deneleteNline.matchAll(RegExp(/<!--form-->(.*?)<!--#form-->/, 'g'));
-            console.log([...ustArr][0][0]);
+            let removeLn = await afs.replaceFile(componentFormCreate, '\n', '');
+            let ustArr = removeLn.matchAll(RegExp(/<!--form-->(.*?)<!--#form-->/, 'g'));
+            let formItem = [...ustArr][0][0];
 
-            /*
-            let componentFormCreateValidateR   = await afs.replaceFile(componentFormCreateValidate, 'schema', table_name);
-                componentFormCreateValidateR   = await afs.replaceFile(componentFormCreateValidateR, 'Schema', table_nameUF);
-            */
+            
+            
+            if (secJson.length > 1){
+              let formString = "";
+              secJson.slice(1).map(async i => {
+                const iUF = i.charAt(0).toUpperCase() + i.slice(1);
+                let currentForm = formItem;
+                let currentFormR   = await afs.replaceFile(currentForm, 'Schema Text', i);    
+                currentFormR   = await afs.replaceFile(currentFormR, 'schemaText', i+"Text");  
+                currentFormR   = await afs.replaceFile(currentFormR, 'errorSchemaText', "error"+iUF+"Text");  
+
+                formString += currentFormR;
+                formString += "\n\n";
+
+                componentFormCreateR  = await afs.replaceFile(componentFormCreateR, '<!--add-->', formString);
+              })
+            }
 
 
             //console.log("componentFormCreateValidateR", componentFormCreateValidateR);
@@ -147,6 +163,8 @@ const createTable = async (table_name, secJson) => {
             componentFormCreateValidateR   = await afs.replaceFile(componentFormCreateValidateR, 'schemaText,', validationString2);
             componentFormCreateValidateR   = await afs.replaceFile(componentFormCreateValidateR, 'errorSchemaText,', "");
 
+
+
             let componentFormSearchR   = await afs.replaceFile(componentFormSearch, 'schema', table_name);
                 componentFormSearchR   = await afs.replaceFile(componentFormSearchR, 'Schema', table_nameUF);
 
@@ -154,15 +172,46 @@ const createTable = async (table_name, secJson) => {
                 componentFormSearchValidateR   = await afs.replaceFile(componentFormSearchValidateR, 'Schema', table_nameUF);
 
 
-            let componentFormUpdateR   = await afs.replaceFile(componentFormUpdate, 'schema', table_name);
-                componentFormUpdateR   = await afs.replaceFile(componentFormUpdateR, 'Schema', table_nameUF);
+            let componentFormUpdateR   = await afs.replaceFile(componentFormUpdate, 'Schema Text', secJson[0]);  
+                        
+            let valueUpdateString = "";
+            secJson.map(i => {
+              valueUpdateString += "values."+i+" = response."+i+" \n              ";
+            })
 
+            componentFormUpdateR  = await afs.replaceFile(componentFormUpdateR, 'values.schemaText = response.schemaText', valueUpdateString);
+            componentFormUpdateR   = await afs.replaceFile(componentFormUpdateR, 'schemaText', secJson[0]+"Text");  
+            componentFormUpdateR   = await afs.replaceFile(componentFormUpdateR, 'errorSchemaText', "error"+secJsonFirstUF+"Text");  
+            componentFormUpdateR   = await afs.replaceFile(componentFormUpdateR, 'schema', table_name);
+            componentFormUpdateR   = await afs.replaceFile(componentFormUpdateR, 'Schema', table_nameUF);
+
+            let removeUpLn = await afs.replaceFile(componentFormUpdate, '\n', '');
+            let ustUpdArr = removeUpLn.matchAll(RegExp(/<!--form-->(.*?)<!--#form-->/, 'g'));
+            let formItemUpdate = [...ustUpdArr][0][0];
+
+            if (secJson.length > 1){
+              let formString = "";
+              secJson.slice(1).map(async i => {
+                const iUF = i.charAt(0).toUpperCase() + i.slice(1);
+                let currentForm = formItemUpdate;
+                let currentFormR   = await afs.replaceFile(currentForm, 'Schema Text', i);    
+                currentFormR   = await afs.replaceFile(currentFormR, 'schemaText', i+"Text");  
+                currentFormR   = await afs.replaceFile(currentFormR, 'errorSchemaText', "error"+iUF+"Text");  
+
+                formString += currentFormR;
+                formString += "\n\n";
+
+                componentFormUpdateR  = await afs.replaceFile(componentFormUpdateR, '<!--add-->', formString);
+              })
+            }
 
 
             let componentFormUpdateValidateR   = await afs.replaceFile(componentFormUpdateValidate, "schemaText: yup.string\\(\\).required\\(\\),", validationString); 
               componentFormUpdateValidateR   = await afs.replaceFile(componentFormUpdateValidateR, "const { value: schemaText, errorMessage: errorSchemaText} = useField\\('schemaText'\\)", validationString3);
               componentFormUpdateValidateR   = await afs.replaceFile(componentFormUpdateValidateR, 'schemaText,', validationString2);
               componentFormUpdateValidateR   = await afs.replaceFile(componentFormUpdateValidateR, 'errorSchemaText,', "");
+              
+
 
 
             await writeFile(copyComponents + "content/" + table_name + '/form/create.vue', componentFormCreateR);
@@ -202,7 +251,6 @@ const createTable = async (table_name, secJson) => {
 
 
             /* router */
-            //await afs.copy_all_file(dir, '/copy/vue-cli/src/router/routers/schema.js', "src/router/routers/"+table_name+".js");
             const router   = await afs.readFile(sourceRouter + 'routers/schema.js');
             let routerR    = await afs.replaceFile(router, 'schema', table_name);
                 routerR    = await afs.replaceFile(routerR, 'Schema', table_nameUF);

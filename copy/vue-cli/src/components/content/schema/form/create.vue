@@ -1,6 +1,5 @@
 <template> 
   <div class="m-4">
-    
     <form class="w-full max-w-sm">
       <!--form-->
       <div class="md:flex md:items-center mb-6">
@@ -14,10 +13,53 @@
           <p class="text-red-500 text-xs">{{errorSchemaText}}</p>
         </div>
       </div>
-      <!--#form--> 
+      <!--#form-->
 
+      <!--add-->
 
+      <div class="md:flex md:items-center">
+        <div class="md:w-1/3"></div>
+        <div class="md:w-2/3">
+            <button @click="save" class="shadow mr-3 bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
+                Save
+            </button>
+        </div>
+      </div>
     </form>    
   </div>   
 </template>
 
+
+<script>
+
+import useCreate from './createValidate';
+import { useRouter } from "vue-router";
+import useSchema from '../../../../compositions/useModelSchema'
+
+
+export default {
+    setup(){ 
+        const {validate, errors, values} = useCreate();
+        const router = useRouter();
+        const {usersLoading, usersError, addSchema} = useSchema();
+       
+        const save = () => {
+            validate().then(validateSuccess => {
+                !validateSuccess.valid && console.log("formu kontrol ediniz.", errors.value) 
+                if(validateSuccess.valid){
+                    addSchema({...values}).then(response => {
+                        router.push(`/schema/detail/${response.id}`)
+                    })
+                }
+            }).catch(validateError => {
+                console.log(validateError);
+            }) 
+        }
+
+        return {
+            ...useCreate(),
+            save,
+        }
+    }
+}
+</script>
