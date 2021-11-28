@@ -8,8 +8,8 @@ export default function () {
     const { errors, validate, values } = useForm({
         validationSchema: 
         yup.object({
-          searchText: yup.string().required().min(4).max(32)
-      })
+          searchText: yup.string()
+        })
     })
 
 

@@ -118,8 +118,34 @@ const createTable = async (table_name, secJson) => {
             let componentFormCreateR   = await afs.replaceFile(componentFormCreate, 'schema', table_name);
                 componentFormCreateR   = await afs.replaceFile(componentFormCreateR, 'Schema', table_nameUF);
 
+            let deneleteNline = await afs.replaceFile(componentFormCreateR, '\n', '');
+
+
+            let ustArr = deneleteNline.matchAll(RegExp(/<!--form-->(.*?)<!--#form-->/, 'g'));
+            console.log([...ustArr][0][0]);
+
+            /*
             let componentFormCreateValidateR   = await afs.replaceFile(componentFormCreateValidate, 'schema', table_name);
                 componentFormCreateValidateR   = await afs.replaceFile(componentFormCreateValidateR, 'Schema', table_nameUF);
+            */
+
+
+            //console.log("componentFormCreateValidateR", componentFormCreateValidateR);
+            let validationString = "";
+            let validationString2 = "";
+            let validationString3 = "";
+            secJson.map(i => {
+              const iUF = i.charAt(0).toUpperCase() + i.slice(1);
+              validationString += i+'Text: yup.string().required(),\n            ';
+              validationString2 += i + 'Text,\n        ';
+              validationString3 += "const { value: "+i+"Text, errorMessage: error"+iUF+"Text} = useField('"+i+"Text')\n    ";
+
+            })
+
+            let componentFormCreateValidateR   = await afs.replaceFile(componentFormCreateValidate, "schemaText: yup.string\\(\\).required\\(\\),", validationString); 
+            componentFormCreateValidateR   = await afs.replaceFile(componentFormCreateValidateR, "const { value: schemaText, errorMessage: errorSchemaText} = useField\\('schemaText'\\)", validationString3);
+            componentFormCreateValidateR   = await afs.replaceFile(componentFormCreateValidateR, 'schemaText,', validationString2);
+            componentFormCreateValidateR   = await afs.replaceFile(componentFormCreateValidateR, 'errorSchemaText,', "");
 
             let componentFormSearchR   = await afs.replaceFile(componentFormSearch, 'schema', table_name);
                 componentFormSearchR   = await afs.replaceFile(componentFormSearchR, 'Schema', table_nameUF);
@@ -131,9 +157,12 @@ const createTable = async (table_name, secJson) => {
             let componentFormUpdateR   = await afs.replaceFile(componentFormUpdate, 'schema', table_name);
                 componentFormUpdateR   = await afs.replaceFile(componentFormUpdateR, 'Schema', table_nameUF);
 
-            let componentFormUpdateValidateR   = await afs.replaceFile(componentFormUpdateValidate, 'schema', table_name);
-                componentFormUpdateValidateR   = await afs.replaceFile(componentFormUpdateValidateR, 'Schema', table_nameUF);
 
+
+            let componentFormUpdateValidateR   = await afs.replaceFile(componentFormUpdateValidate, "schemaText: yup.string\\(\\).required\\(\\),", validationString); 
+              componentFormUpdateValidateR   = await afs.replaceFile(componentFormUpdateValidateR, "const { value: schemaText, errorMessage: errorSchemaText} = useField\\('schemaText'\\)", validationString3);
+              componentFormUpdateValidateR   = await afs.replaceFile(componentFormUpdateValidateR, 'schemaText,', validationString2);
+              componentFormUpdateValidateR   = await afs.replaceFile(componentFormUpdateValidateR, 'errorSchemaText,', "");
 
 
             await writeFile(copyComponents + "content/" + table_name + '/form/create.vue', componentFormCreateR);
