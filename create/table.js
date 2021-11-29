@@ -288,16 +288,16 @@ const createTable = async (table_name, secJson) => {
             
             //add role
             const role   = await afs.readFile(pwd + '/src/utils/roles.js'); 
-            const roleString = '"' + table_nameUF + 'Home": [2,3],\n' + 
-                               '    "' + table_nameUF + 'Create": [1,2,3], \n' +
-                               '    "' + table_nameUF + 'Update": [2,3], \n' +
-                               '    "' + table_nameUF + 'Detail": [2,3], \n' +
-                               '    "' + table_nameUF + 'List": [2,3], \n' +
-                               '    "' + table_nameUF + 'Search": [2,3], \n' +
-                               '    "empty": [],';
+            const roleString = '' + table_nameUF + 'Home: [2, 3],\n' + 
+                               '  ' + table_nameUF + 'Create: [1, 2, 3], \n' +
+                               '  ' + table_nameUF + 'Update: [2, 3], \n' +
+                               '  ' + table_nameUF + 'Detail: [2, 3], \n' +
+                               '  ' + table_nameUF + 'List: [2, 3], \n' +
+                               '  ' + table_nameUF + 'Search: [2, 3], \n' +
+                               '  empty: []';
                                
                                
-            let roleR    = await afs.replaceFile(role, '"empty": \\[]', roleString);
+            let roleR    = await afs.replaceFile(role, 'empty: \\[]', roleString);
             await writeFile(pwd + '/src/utils/roles.js', roleR);
           
           }
