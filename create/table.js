@@ -1,5 +1,4 @@
 const fs    = require('fs');
-const _     = require('lodash');
 const afs   = require('../afs.js');
 const slash = require('slash');
 var clc     = require("cli-color");

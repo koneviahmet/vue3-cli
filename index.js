@@ -2,7 +2,6 @@
 var clc           = require("cli-color");
 const { program } = require('commander');
 const fs          = require('fs');
-const _           = require('lodash');
 
 const tprojeCreate = require('./create/proje.js');
 
@@ -38,9 +37,10 @@ if(program.install){
     const table_name = process.argv[3];
     console.log(clc.green("[" + table_name+"] Tablo oluşturuluyor"));
 
-    /* index tableye git gerekli seçme işlemlerini yaptır */
+    /* index tableye git gerekli seçme işlemlerini yaptır  */
     const ins = require('./index-table');
     let sec = ins.create(table_name);
+    
 
   }
 

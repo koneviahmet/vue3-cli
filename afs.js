@@ -1,5 +1,4 @@
 const fs = require('fs');
-const _  = require('lodash');
 var ncp = require('ncp').ncp;
 
 

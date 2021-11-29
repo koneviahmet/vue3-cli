@@ -1,6 +1,5 @@
 /* dosya işlemleri modulunu entegre edelim */
 const fs          = require('fs');
-const _           = require('lodash');
 const prompts     = require('prompts');
 const tableCreate = require('./create/table.js');
 const slash       = require('slash');
@@ -24,7 +23,7 @@ const sor = (table_name) => {
         type: 'number',
         name: 'dbAdet',
         message: 'Tablo kaç satırdan oluşacak olacak?',
-        validate: value => value > 1 ||  value < 50 ? true: `Nightclub is 18+ only`
+        validate: value => value > 1 ||  value < 50 ? true: `Tablo kaç satırdan oluşacak olacak?`
       });
 
 
@@ -51,10 +50,10 @@ const sor = (table_name) => {
 
 
 
-/* exportlar içinde bir promise yapalım  kanka */
+/* exportlar içinde bir promise yapalım  */
 async function olustur(table_name){
   /* tablo adını küçültelim */
-  table_name = _.toLower(table_name);
+  table_name = table_name.charAt(0).toUpperCase() + table_name.slice(1);
   return await sor(table_name);
 }
 
