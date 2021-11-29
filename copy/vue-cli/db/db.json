@@ -1,5 +1,28 @@
 {
-  "users": [],
-  "schema": [],
+  "users": [
+    {
+      "email": "asdasd@asd.com",
+      "name": "Ahmet d",
+      "lastName": "Şık",
+      "password": "asdasd",
+      "role":2,
+      "id": 1
+    },
+    {
+      "email": "asdasd@asd.com",
+      "name": "asdasd",
+      "lastName": "asdasd",
+      "password": "asdasd",
+      "token": 6,
+      "role": 2,
+      "id": 2
+    }
+  ],
+  "schema": [
+    {
+      "schemaText": "assdasd",
+      "id": 1
+    }
+  ],
   "empty": []
 }

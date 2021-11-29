@@ -7,7 +7,7 @@ var ls = new SecureLS({ isCompression: false });
 export default createStore({
   state: {
     user: null,
-    saltKey: "haydaHobbaGizliKey!456?"
+    saltKey: "haydaHobbaGizliKey!456?",
   },
   mutations: {
     setUser(state, user) {
@@ -16,27 +16,27 @@ export default createStore({
     },
     logoutUser(state) {
       state.user = null;
-    }
+    },
   },
   getters: {
-    _isAuthenticated: state => state.user !== null,
+    _isAuthenticated: (state) => state.user !== null,
     _getCurrentUser(state) {
       const user = state.user;
 
       delete user?.password;
       return user;
     },
-    _currentUserId: state => state?.user?.id,
-    _getCurrentRole: state => state?.user?.role,
-    _saltKey: state => state.saltKey
+    _currentUserId: (state) => state?.user?.id,
+    _getCurrentRole: (state) => state?.user?.role,
+    _saltKey: (state) => state.saltKey,
   },
   plugins: [
     createPersistedState({
       storage: {
-        getItem: key => ls.get(key),
+        getItem: (key) => ls.get(key),
         setItem: (key, value) => ls.set(key, value),
-        removeItem: key => ls.remove(key)
-      }
-    })
-  ]
+        removeItem: (key) => ls.remove(key),
+      },
+    }),
+  ],
 });

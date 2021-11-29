@@ -45,7 +45,7 @@ export default {
        
         const save = () => {
             validate().then(validateSuccess => {
-                !validateSuccess.valid && console.log("formu kontrol ediniz.", errors.value) 
+                !validateSuccess.valid && console.log("Check the form.", errors.value) 
                 if(validateSuccess.valid){
                     addSchema({...values}).then(response => {
                         router.push(`/schema/detail/${response.id}`)

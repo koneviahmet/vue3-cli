@@ -1,97 +1,98 @@
 import Swal from "sweetalert2";
-import 'sweetalert2/dist/sweetalert2.min.css';
-
+import "sweetalert2/dist/sweetalert2.min.css";
 
 const Alert = {
-  showError (message, callback = null) {
+  showError(message, callback = null) {
     return new Promise((resolve, reject) => {
       Swal.fire({
-        title: 'Hata mesajı!',
+        title: "Error Messages!",
         html: message,
-        icon: 'error',
-        confirmButtonText: 'Tamam'
+        icon: "error",
+        confirmButtonText: "OK",
       })
-        .then(value => resolve(value))
-        .catch(error => reject(error))
-    })
+        .then((value) => resolve(value))
+        .catch((error) => reject(error));
+    });
   },
-  showInfo (message) {
+  showInfo(message) {
     return new Promise((resolve, reject) => {
       Swal.fire({
-        title: 'Bilgi mesajı!',
+        title: "Info Messages!",
         html: message,
-        icon: 'info',
-        confirmButtonText: 'Tamam'
+        icon: "info",
+        confirmButtonText: "OK",
       })
-        .then(value => resolve(value))
-        .catch(error => reject(error))
-    })
+        .then((value) => resolve(value))
+        .catch((error) => reject(error));
+    });
   },
-  showSuccess (message) {
+  showSuccess(message) {
     return new Promise((resolve, reject) => {
       Swal.fire({
-        title: 'Başarı mesajı!',
+        title: "Success!",
         html: message,
-        icon: 'success',
-        confirmButtonText: 'Tamam'
-      }).then(value => resolve(value))
-        .catch(reason => reject(reason))
-    })
-  },
-  showWarning (message) {
-    return new Promise((resolve, reject) => {
-      Swal.fire({
-        title: 'Uyarı mesajı!',
-        html: message,
-        icon: 'warning',
-        confirmButtonText: 'Tamam'
+        icon: "success",
+        confirmButtonText: "OK",
       })
-        .then(value => resolve(value))
-        .catch(error => reject(error))
-    })
+        .then((value) => resolve(value))
+        .catch((reason) => reject(reason));
+    });
   },
-  showPrompt (message, buttons = null) {
+  showWarning(message) {
+    return new Promise((resolve, reject) => {
+      Swal.fire({
+        title: "Warning!",
+        html: message,
+        icon: "warning",
+        confirmButtonText: "OK",
+      })
+        .then((value) => resolve(value))
+        .catch((error) => reject(error));
+    });
+  },
+  showPrompt(message, buttons = null) {
     if (!buttons) {
       buttons = {
-        confirmText: 'Evet',
-        cancelText: 'Hayır'
-      }
+        confirmText: "Yes",
+        cancelText: "No",
+      };
     }
     return new Promise((resolve, reject) => {
       Swal.fire({
-        title: 'Dikkat!',
+        title: "Note!",
         html: message,
-        icon: 'warning',
+        icon: "warning",
         showCancelButton: true,
         focusCancel: true,
-        cancelButtonColor: '#d33',
+        cancelButtonColor: "#d33",
         confirmButtonText: buttons.confirmText,
-        cancelButtonText: buttons.cancelText
-      }).then(value => resolve(value))
-        .catch(reason => reject(reason))
-    })
+        cancelButtonText: buttons.cancelText,
+      })
+        .then((value) => resolve(value))
+        .catch((reason) => reject(reason));
+    });
   },
-  showInput (message) {
+  showInput(message) {
     return new Promise((resolve, reject) => {
       Swal.fire({
-        title: 'Dikkat!',
+        title: "Note!",
         html: message,
-        icon: 'warning',
+        icon: "warning",
         showCancelButton: true,
         focusConfirm: false,
-        input: 'text',
-        confirmButtonText: 'Tamam',
-        cancelButtonColor: '#d33',
-        cancelButtonText: 'İptal'
+        input: "text",
+        confirmButtonText: "Ok",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Cancel",
       })
         .then((value) => {
-          resolve(value)
+          resolve(value);
         })
-        .catch(reason => {
-          reject(reason)
-        })
-    })
-  }
-}
+        .catch((reason) => {
+          reject(reason);
+        });
+    });
+  },
+};
 
-export default Alert
+export default Alert;
