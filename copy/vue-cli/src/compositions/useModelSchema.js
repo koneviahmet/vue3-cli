@@ -4,20 +4,20 @@ import SchemaServices from "../services/SchemaServices";
 export default function () {
   const loading = ref(false);
   const data = reactive({ list: [] });
-  const error = ref(null);
+  const error = ref(false);
 
-  const setLoading = () => (loading.value = !loading.value);
 
   const getItems = async () => {
+    loading.value = true;
     return new Promise(async (resolve, reject) => {
       await SchemaServices.getItems()
         .then((response) => {
-          setLoading();
+          loading.value = false;
           data.list = [...response];
           resolve([...response]);
         })
         .catch((error) => {
-          setLoading();
+          loading.value = false;
           error.value = error;
           reject(error);
         });
@@ -25,15 +25,16 @@ export default function () {
   };
 
   const searchItems = async (obj) => {
+    loading.value = true;
     return new Promise(async (resolve, reject) => {
       await SchemaServices.searchItems(obj)
         .then((response) => {
-          setLoading();
+          loading.value = false;
           data.list = [...response];
           resolve([...response]);
         })
         .catch((error) => {
-          setLoading();
+          loading.value = false;
           error.value = error;
           reject(error);
         });
@@ -41,15 +42,16 @@ export default function () {
   };
 
   const getItem = async (obj) => {
+    loading.value = true;
     return new Promise(async (resolve, reject) => {
       await SchemaServices.getItem(obj)
         .then((response) => {
-          setLoading();
+          loading.value = false;
           data.list = { ...response };
           resolve({ ...response });
         })
         .catch((error) => {
-          setLoading();
+          loading.value = false;
           error.value = error;
           reject(error);
         });
@@ -58,6 +60,7 @@ export default function () {
 
   // add new user
   const addItem = async (obj) => {
+    loading.value = true;
     return new Promise(async (resolve, reject) => {
       const extraData = {
         extra: "extra info",
@@ -65,12 +68,12 @@ export default function () {
 
       await SchemaServices.addItem({ ...obj, ...extraData })
         .then((response) => {
-          setLoading();
+          loading.value = false;
           data.list = [...data.list, response];
           resolve({ ...response });
         })
         .catch((error) => {
-          setLoading();
+          loading.value = false;
           error.value = error;
           reject(error);
         });
@@ -78,15 +81,17 @@ export default function () {
   };
 
   const updateItem = async (id, obj) => {
+    loading.value = true;
     return new Promise(async (resolve, reject) => {
+      obj.role = 2
       await SchemaServices.updateItem(id, obj)
         .then((response) => {
-          setLoading();
+          loading.value = false;
           //data.list = [...response]
           resolve({ ...response });
         })
         .catch((error) => {
-          setLoading();
+          loading.value = false;
           error.value = error;
           reject(error);
         });
@@ -94,15 +99,16 @@ export default function () {
   };
 
   const deleteItem = async (obj) => {
+    loading.value = true;
     return new Promise(async (resolve, reject) => {
       await SchemaServices.deleteItem(obj)
         .then((response) => {
-          setLoading();
+          loading.value = false;
           data.list = [...data.list.filter((i) => i.id != obj.id)];
           resolve([...data.list.filter((i) => i.id != obj.id)]);
         })
         .catch((error) => {
-          setLoading();
+          loading.value = false;
           error.value = error;
           reject(error);
         });

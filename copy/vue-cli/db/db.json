@@ -2,26 +2,23 @@
   "users": [
     {
       "email": "asdasd@asd.com",
-      "name": "Ahmet d",
-      "lastName": "Şık",
+      "name": "Ahmet",
+      "lastName": "Şıkss",
       "password": "asdasd",
-      "role":2,
-      "id": 1
-    },
-    {
-      "email": "asdasd@asd.com",
-      "name": "asdasd",
-      "lastName": "asdasd",
-      "password": "asdasd",
-      "token": 6,
       "role": 2,
-      "id": 2
+      "id": 1
     }
   ],
   "schema": [
     {
-      "schemaText": "assdasd",
+      "schemaText": "sassdasd",
+      "role": 2,
       "id": 1
+    },
+    {
+      "schemaText": "asd",
+      "extra": "extra info",
+      "id": 2
     }
   ],
   "empty": []

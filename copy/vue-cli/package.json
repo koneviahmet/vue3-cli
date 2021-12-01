@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "@heroicons/vue": "^1.0.5",
+    "@tailwindcss/typography": "^0.4.1",
     "axios": "^0.24.0",
+    "daisyui": "^1.16.2",
     "notyf": "^3.10.0",
     "secure-ls": "^1.2.6",
     "sweetalert2": "^11.1.10",

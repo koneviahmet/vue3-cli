@@ -1,179 +1,53 @@
 <template>
-  <MainMenu v-can="'isAuth'" />
 
-  <div class="container bg-white shadow-md min-h-screen rounded p-4">
-    <div class="block w-full overflow-x-auto">
-      <table class="items-center bg-transparent w-full border-collapse">
-        <thead>
-          <tr>
-            <th
-              class="
-                px-6
-                bg-blueGray-50
-                text-blueGray-500
-                align-middle
-                border border-solid border-blueGray-100
-                py-3
-                text-xs
-                uppercase
-                border-l-0 border-r-0
-                whitespace-nowrap
-                font-semibold
-                text-left
-              "
-            >
-              Name - Last Name
-            </th>
-            <th
-              class="
-                px-6
-                bg-blueGray-50
-                text-blueGray-500
-                align-middle
-                border border-solid border-blueGray-100
-                py-3
-                text-xs
-                uppercase
-                border-l-0 border-r-0
-                whitespace-nowrap
-                font-semibold
-                text-left
-              "
-            >
-              Email
-            </th>
-            <th
-              class="
-                px-6
-                bg-blueGray-50
-                text-blueGray-500
-                align-middle
-                border border-solid border-blueGray-100
-                py-3
-                text-xs
-                uppercase
-                border-l-0 border-r-0
-                whitespace-nowrap
-                font-semibold
-                text-left
-              "
-            >
-              Password
-            </th>
-            <th
-              class="
-                px-6
-                bg-blueGray-50
-                text-blueGray-500
-                align-middle
-                border border-solid border-blueGray-100
-                py-3
-                text-xs
-                uppercase
-                border-l-0 border-r-0
-                whitespace-nowrap
-                font-semibold
-                text-left
-              "
-            >
-              Options
-            </th>
-          </tr>
-        </thead>
+  
+  <div class="my-24 mx-3 bg-base-100 min-h-screen shadow-sm rounded-md p-5">
+  <Skeletor :loading="usersLoading" :length="4"/>
 
-        <tbody>
-          <tr v-for="user in usersData" :key="user.id">
-            <th
-              class="
-                border-t-0
-                px-6
-                align-middle
-                border-l-0 border-r-0
-                text-xs
-                whitespace-nowrap
-                p-4
-                text-left text-blueGray-700
-              "
-            >
-              {{ user.name }} {{ user.lastName }}
-            </th>
-            <td
-              class="
-                border-t-0
-                px-6
-                align-middle
-                border-l-0 border-r-0
-                text-xs
-                whitespace-nowrap
-                p-4
-              "
-            >
-              {{ user.email }}
-            </td>
-            <td
-              class="
-                border-t-0
-                px-6
-                align-center
-                border-l-0 border-r-0
-                text-xs
-                whitespace-nowrap
-                p-4
-              "
-            >
-              {{ user.password }}
-            </td>
-            <td
-              class="
-                border-t-0
-                px-6
-                align-middle
-                border-l-0 border-r-0
-                text-xs
-                whitespace-nowrap
-                p-4
-              "
-            >
-              <i class="fas fa-arrow-up text-emerald-500 mr-4"></i>
-              <router-link
-                class="
-                  inline-block
-                  border
-                  rounded
-                  py-1
-                  px-3
-                  mr-2
-                  cursor-pointer
-                "
-                :to="`/user/detail/${user.id}`"
-                >Select</router-link
-              >
-              <a
-                class="
-                  inline-block
-                  border
-                  rounded
-                  py-1
-                  px-3
-                  mr-2
-                  cursor-pointer
-                "
-                @click="userDelete(user.id)"
-                >Delete</a
-              >
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="alert alert-error my-4" v-if="usersError">
+    <div class="flex-1">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-6 h-6 mx-2 stroke-current">    
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>                      
+      </svg> 
+      <label>{{usersError}}</label>
     </div>
+  </div>
+
+  <div class="overflow-x-auto" v-if="!usersLoading">
+    <table class="table w-full">
+      <thead>
+        <tr>
+          <th></th> 
+          <th>NAME - LAST NAME</th> 
+          <th>EMAIL</th> 
+          <th>PASSWORD</th>
+          <th>OPTIONS</th>
+        </tr>
+      </thead> 
+      <tbody>
+        <tr v-for="user in usersData" :key="user.id">
+          <th>{{user.id}}</th> 
+          <td>{{ user.name }} {{ user.lastName }}</td> 
+          <td>{{ user.email }}</td> 
+          <td>{{ user.password }}</td> 
+          <td class="flex space-x-1">
+            <router-link :to="`/user/detail/${user.id}`" class="btn btn-sm">Select</router-link>
+            <a class="btn btn-error btn-sm" @click="userDelete(user.id)" :class="usersLoading && 'loading btn-disabled'">Delete</a>    
+          </td> 
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
   </div>
 </template>
 
 <script setup>
 import { getCurrentInstance, reactive, onMounted } from "vue";
 const app = getCurrentInstance();
-import MainMenu from "../../components/content/user/menu/MainMenu.vue";
 import { notyfError, notyfSuccess } from "../../utils/notyf.js";
+import Skeletor from "../../utils/skeletor/skeletor1.vue"
 
 import useUser from "../../compositions/useModelUser";
 const { usersLoading, usersData, usersError, getUsers, deleteUser } = useUser();

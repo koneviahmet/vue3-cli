@@ -1,190 +1,82 @@
 <template>
-  <div class="m-4">
-    <form class="w-full max-w-sm">
-      <div class="md:flex md:items-center mb-6">
-        <div class="md:w-1/3">
-          <label
-            class="
-              block
-              text-gray-500
-              font-bold
-              md:text-right
-              mb-1
-              md:mb-0
-              pr-4
-            "
-            for="inline-full-name1"
-          >
-            Name
+
+  <div class="hero min-h-screen bg-base-200 rounded-box">
+    <div class="flex-col justify-center hero-content lg:flex-row">
+      <div class="text-center lg:text-left px-5">
+        <h1 class="mb-5 text-5xl font-bold">
+              Hello there
+        </h1> 
+        <p class="mb-5">
+              Provident cupiditate voluptatem et in.eleniti eaque aut repudiandae et a id nisi.
+        </p>
+      </div> 
+
+      <div class="card flex-shrink-0 w-full max-w-sm shadow-lg bg-base-100">
+        <div class="card-body">
+
+          <div class="alert alert-error my-4" v-if="usersError">
+            <div class="flex-1">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-6 h-6 mx-2 stroke-current">    
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>                      
+              </svg> 
+              <label>{{usersError}}</label>
+            </div>
+          </div>
+
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Name</span>
+            </label> 
+            <input type="text" placeholder="name" v-model="name" class="input input-bordered">
+            <label class="label">
+              <span class="label-text-alt text-red-400">{{ errorName }}</span>
+            </label>
+          </div> 
+          
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Last Name</span>
+            </label> 
+            <input type="text" placeholder="Last Name" v-model="lastName" class="input input-bordered">
+            <label class="label">
+              <span class="label-text-alt text-red-400">{{ errorLastName }}</span>
+            </label>
+          </div> 
+
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Email</span>
+            </label> 
+            <input type="text" placeholder="email" v-model="email" class="input input-bordered">
+            <label class="label">
+              <span class="label-text-alt text-red-400">{{ errorEmail }}</span>
+            </label>
+          </div> 
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Password</span>
+            </label> 
+            <input type="password" placeholder="password" v-model="password" class="input input-bordered"> 
+            
+            <label class="label">
+              <span class="label-text-alt text-red-400">{{ errorPassword }}</span>
+            </label>
+
+          <label class="label">
+            <router-link to="/user/logIn" class="label-text-alt text-red-500">login</router-link>
           </label>
-        </div>
-        <div class="md:w-2/3">
-          <input
-            class="
-              appearance-none
-              border-2
-              rounded
-              w-full
-              py-2
-              px-4
-              text-gray-700
-              leading-tight
-              focus:outline-none focus:bg-white focus:border-purple-500
-            "
-            id="inline-full-name"
-            type="text"
-            placeholder="Name"
-            v-model="name"
-          />
-          <p class="text-red-500 text-xs">{{ errorName }}</p>
+          </div> 
+          <div class="form-control mt-6">
+            <a @click="save" class="btn btn-primary" :class="usersLoading && 'loading btn-disabled'">Save</a>
+          </div>
         </div>
       </div>
 
-      <div class="md:flex md:items-center mb-6">
-        <div class="md:w-1/3">
-          <label
-            class="
-              block
-              text-gray-500
-              font-bold
-              md:text-right
-              mb-1
-              md:mb-0
-              pr-4
-            "
-            for="inline-full-name2"
-          >
-            Last Name
-          </label>
-        </div>
-        <div class="md:w-2/3">
-          <input
-            autocomplete="nope"
-            class="
-              appearance-none
-              border-2
-              rounded
-              w-full
-              py-2
-              px-4
-              text-gray-700
-              leading-tight
-              focus:outline-none focus:bg-white focus:border-purple-500
-            "
-            id="inline-full-name2"
-            type="text"
-            placeholder="Last Name"
-            v-model="lastName"
-          />
-          <p class="text-red-500 text-xs">{{ errorLastName }}</p>
-        </div>
-      </div>
-
-      <div class="md:flex md:items-center mb-6">
-        <div class="md:w-1/3">
-          <label
-            class="
-              block
-              text-gray-500
-              font-bold
-              md:text-right
-              mb-1
-              md:mb-0
-              pr-4
-            "
-            for="inline-full-name3"
-          >
-            Email
-          </label>
-        </div>
-        <div class="md:w-2/3">
-          <input
-            autocomplete="nope"
-            class="
-              appearance-none
-              border-2
-              rounded
-              w-full
-              py-2
-              px-4
-              text-gray-700
-              leading-tight
-              focus:outline-none focus:bg-white focus:border-purple-500
-            "
-            id="inline-full-name3"
-            type="text"
-            placeholder="Email"
-            v-model="email"
-          />
-          <p class="text-red-500 text-xs">{{ errorEmail }}</p>
-        </div>
-      </div>
-
-      <div class="md:flex md:items-center mb-6">
-        <div class="md:w-1/3">
-          <label
-            class="
-              block
-              text-gray-500
-              font-bold
-              md:text-right
-              mb-1
-              md:mb-0
-              pr-4
-            "
-            for="inline-password"
-          >
-            Password
-          </label>
-        </div>
-        <div class="md:w-2/3">
-          <input
-            autocomplete="nope"
-            class="
-              appearance-none
-              border-2
-              rounded
-              w-full
-              py-2
-              px-4
-              text-gray-700
-              leading-tight
-              focus:outline-none focus:bg-white focus:border-purple-500
-            "
-            id="inline-password"
-            type="password"
-            placeholder="******************"
-            v-model="password"
-          />
-          <p class="text-red-500 text-xs">{{ errorPassword }}</p>
-        </div>
-      </div>
-
-      <div class="md:flex md:items-center">
-        <div class="md:w-1/3"></div>
-        <div class="md:w-2/3">
-          <button
-            @click="save"
-            class="
-              shadow
-              mr-3
-              bg-purple-500
-              hover:bg-purple-400
-              focus:shadow-outline focus:outline-none
-              text-white
-              font-bold
-              py-2
-              px-4
-              rounded
-            "
-            type="button"
-          >
-            Save
-          </button>
-        </div>
-      </div>
-    </form>
+    </div>
   </div>
+
+
+
 </template>
 
 
@@ -218,6 +110,8 @@ export default {
     return {
       ...useUserCreate(),
       save,
+      usersLoading,
+      usersError
     };
   },
 };

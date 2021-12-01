@@ -1,29 +1,31 @@
 <template> 
   <div class="m-4">
     <form class="w-full max-w-sm">
-      <!--form-->
-      <div class="md:flex md:items-center mb-6">
-        <div class="md:w-1/3">
-          <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name1">
-            Schema Text
-          </label>
-        </div>
-        <div class="md:w-2/3">
-          <input class="appearance-none border-2  rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name" type="text" placeholder="schemaText" v-model="schemaText">
-          <p class="text-red-500 text-xs">{{errorSchemaText}}</p>
+      <div class="alert alert-error my-4" v-if="schemaError">
+        <div class="flex-1">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-6 h-6 mx-2 stroke-current">    
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>                      
+          </svg> 
+          <label>{{schemaError}}</label>
         </div>
       </div>
+
+      <!--form-->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Schema Text</span>
+          </label> 
+          <input type="text" placeholder="schemaText" v-model="schemaText" class="input input-bordered">
+          <label class="label">
+            <span class="label-text-alt text-red-400">{{ errorSchemaText }}</span>
+          </label>
+        </div>
       <!--#form-->
 
       <!--add-->
 
-      <div class="md:flex md:items-center">
-        <div class="md:w-1/3"></div>
-        <div class="md:w-2/3">
-            <button @click="save" class="shadow mr-3 bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
-                Save
-            </button>
-        </div>
+      <div class="form-control mt-6">
+        <a @click="save" class="btn btn-primary" :class="schemaLoading && 'loading btn-disabled'">save</a>
       </div>
     </form>    
   </div>   
@@ -59,6 +61,8 @@ export default {
         return {
             ...useCreate(),
             save,
+            schemaLoading,
+            schemaError
         }
     }
 }

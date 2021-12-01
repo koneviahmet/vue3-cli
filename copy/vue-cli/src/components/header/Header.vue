@@ -1,25 +1,67 @@
 <template>
-  <div class="bg-gray-500 border-b">
-    <div class="container mx-auto flex py-3 justify-between">
-      <ul class="flex space-x-2 text-white">
-        <li
-          v-for="(url, i) in urlArr"
-          :key="i"
-          class="bg-gray-600 rounded border-0 h-8"
-        >
-          <router-link
-            class="inline-block py-1 px-3"
-            :class="
-              route.fullPath == url.to &&
-              'border-0 rounded text-black bg-gray-50'
-            "
-            :to="url.to"
-            >{{ url.title }}</router-link
-          >
+    <div class="navbar fixed w-full shadow bg-primary text-primary-content z-50">
+    <div class="flex-none flex lg:hidden" v-if="menu">
+      <label for="my-drawer-2" class="btn btn-square btn-ghost drawer-button">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"  class="inline-block w-6 h-6 stroke-current">           
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>               
+        </svg>
+      </label>
+    </div> 
+    <div class="flex-1 flex px-2 mx-2">
+      <span class="text-lg font-bold">
+          daisyUI
+      </span>
+    </div> 
+  
+    
+    <div class="flex-none" v-if="!isAuthenticated">
+      <router-link to="/user/login" class="btn btn-ghost btn-sm rounded-btn">
+          <UserCircleIcon class="h-5 w-5 mr-1" />
+          Log In  
+      </router-link> 
+    </div>
+
+    <div class="flex-none" v-if="!isAuthenticated">
+      <router-link to="/user/signIn" class="btn btn-sm rounded-btn">
+          <UserCircleIcon class="h-5 w-5 mr-1" />
+          Sign Up  
+      </router-link> 
+    </div> 
+
+
+
+
+    <div class="flex-none" v-if="isAuthenticated">
+      <div class="dropdown dropdown-end">
+      <div tabindex="0" class="m-1 btn btn-sm">{{user?.name}} {{user?.lastName}}</div> 
+      <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
+        <li>
+          <router-link to="/user/detail/1" >
+            <UserCircleIcon class="h-5 w-5 mr-1" />
+            Profile
+            </router-link>
+        </li>  
+        <li>
+          <router-link to="/user/update/1" >
+            <UserCircleIcon class="h-5 w-5 mr-1" />
+            Edit Profile
+            </router-link>
+        </li>
+        <li>
+          <a @click="logOut">
+            <UserCircleIcon class="h-5 w-5 mr-1" />
+            Sign Out  
+          </a> 
         </li>
       </ul>
+    </div>
+    </div>
+  </div>
 
-      <ul class="flex space-x-1" v-if="store.getters._isAuthenticated">
+  <div class="bg-gray-500 border-b hidden">
+    <div class="container mx-auto flex py-3 justify-between">
+
+      <ul class="flex space-x-1" v-if="isAuthenticated">
         <div
           class="
             flex
@@ -69,38 +111,28 @@
 
 
 <script setup>
-import { getCurrentInstance, ref, computed } from "vue";
+import { getCurrentInstance, ref, computed, defineProps } from "vue";
 const app = getCurrentInstance();
 const store = app.appContext.config.globalProperties.$store;
+const props = defineProps(["menu"]);
 
-import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import { UserCircleIcon } from "@heroicons/vue/solid";
+const router = useRouter();
 
 const logOut = () => {
   store.commit("logoutUser");
+  router.push({name: "HomePage"})
 };
 
 const user = computed(() => {
   return store.getters._getCurrentUser;
 });
 
-const route = useRoute();
-const urlArr = ref([
-  {
-    to: "/",
-    title: "Home Page",
-  },
-  {
-    to: "/user",
-    title: "User",
-  },
-  {
-    to: "/schema",
-    title: "Schema",
-  },
-  {
-    to: "/error",
-    title: "Error",
-  },
-]);
+
+const isAuthenticated = computed(() => {
+  return store.getters._isAuthenticated;
+});
+
+
 </script>

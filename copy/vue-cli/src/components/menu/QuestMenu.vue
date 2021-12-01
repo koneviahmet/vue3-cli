@@ -2,7 +2,7 @@
   <div class="bg-base-200">
     <ul class="menu py-3  min-w-full w-64 rounded-md">
       <li class="menu-title">
-        <span> Menu Title </span>
+        <span> Quest Menu </span>
       </li>
       <li v-for="(url, i) in urlArr" :key="i">
         <router-link
@@ -54,16 +54,20 @@ const urlArr = ref([
     title: "Home Page",
   },
   {
-    to: "/user",
-    title: "User",
+    to: "/user/login",
+    title: "Log In",
   },
   {
-    to: "/schema",
-    title: "Schema",
+    to: "/user/signIn",
+    title: "Sign Up",
   },
   {
-    to: "/error",
-    title: "Error",
+    to: "/tos",
+    title: "Terms of Service",
+  },
+  {
+    to: "/privacy",
+    title: "Privacy Policy",
   },
 ]);
 </script>

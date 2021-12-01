@@ -7,19 +7,18 @@ export default function () {
   const data = reactive({ list: [] });
   const error = ref(null);
 
-  const setLoading = () => (loading.value = !loading.value);
-
   /* get all users */
   const getUsers = async () => {
+    loading.value = true;
     return new Promise(async (resolve, reject) => {
       await UsersServices.getUsers()
         .then((response) => {
-          setLoading();
+          loading.value = false;
           data.list = [...response];
           resolve([...response]);
         })
         .catch((error) => {
-          setLoading();
+          loading.value = false;
           error.value = error;
           reject(error);
         });
@@ -27,15 +26,16 @@ export default function () {
   };
 
   const searchUsers = async (obj) => {
+    loading.value = true;
     return new Promise(async (resolve, reject) => {
       await UsersServices.searchUsers(obj)
         .then((response) => {
-          setLoading();
+          loading.value = false;
           data.list = [...response];
           resolve([...response]);
         })
         .catch((error) => {
-          setLoading();
+          loading.value = false;
           error.value = error;
           reject(error);
         });
@@ -44,15 +44,16 @@ export default function () {
 
   // get user with id
   const getUser = async (obj) => {
+    loading.value = true;
     return new Promise(async (resolve, reject) => {
       await UsersServices.getUser(obj)
         .then((response) => {
-          setLoading();
+          loading.value = false;
           data.list = { ...response };
           resolve({ ...response });
         })
         .catch((error) => {
-          setLoading();
+          loading.value = false;
           error.value = error;
           reject(error);
         });
@@ -60,16 +61,17 @@ export default function () {
   };
 
   const loginUser = async (obj) => {
+    loading.value = true;
     return new Promise(async (resolve, reject) => {
       await UsersServices.getUser(obj)
         .then((response) => {
-          setLoading();
+          loading.value = false;
           data.list = { ...response };
           resolve({ ...response });
           store.commit("setUser", response);
         })
         .catch((error) => {
-          setLoading();
+          loading.value = false;
           error.value = error;
           reject(error);
         });
@@ -78,6 +80,7 @@ export default function () {
 
   // add new user
   const addUser = async (obj) => {
+    loading.value = true;
     return new Promise(async (resolve, reject) => {
       const extraData = {
         token: Math.floor(Math.random() * 10),
@@ -86,12 +89,12 @@ export default function () {
 
       await UsersServices.addUser({ ...obj, ...extraData })
         .then((response) => {
-          setLoading();
+          loading.value = false;
           data.list = [...data.list, response];
           resolve({ ...response });
         })
         .catch((error) => {
-          setLoading();
+          loading.value = false;
           error.value = error;
           reject(error);
         });
@@ -99,15 +102,16 @@ export default function () {
   };
 
   const updateUser = async (id, obj) => {
+    loading.value = true;
     return new Promise(async (resolve, reject) => {
       await UsersServices.updateUser(id, obj)
         .then((response) => {
-          setLoading();
+          loading.value = false;
           //data.list = [...response]
           resolve({ ...response });
         })
         .catch((error) => {
-          setLoading();
+          loading.value = false;
           error.value = error;
           reject(error);
         });
@@ -115,15 +119,16 @@ export default function () {
   };
 
   const deleteUser = async (obj) => {
+    loading.value = true;
     return new Promise(async (resolve, reject) => {
       await UsersServices.deleteUser(obj)
         .then((response) => {
-          setLoading();
+          loading.value = false;
           data.list = [...data.list.filter((i) => i.id != obj.id)];
           resolve([...data.list.filter((i) => i.id != obj.id)]);
         })
         .catch((error) => {
-          setLoading();
+          loading.value = false;
           error.value = error;
           reject(error);
         });

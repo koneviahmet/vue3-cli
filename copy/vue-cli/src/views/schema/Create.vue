@@ -1,6 +1,6 @@
 <template>
-  <MainMenu v-can="'isAuth'" />
-  <div class="container bg-white shadow-md min-h-screen rounded p-4">
+  <div class="my-24 mx-3  bg-base-100 min-h-screen shadow-sm rounded-md">
+    <MainMenu v-can="'isAuth'" />
     <formCreate />
   </div>
 </template>

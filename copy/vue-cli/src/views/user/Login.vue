@@ -1,11 +1,12 @@
 <template>
-  <MainMenu v-can="'isAuth'" />
-  <formUserLogin />
+  <div class="my-24 mx-3">   
+
+    <formUserLogin />
+  </div> 
 </template>
 
 
 <script setup>
-import MainMenu from "../../components/content/user/menu/MainMenu.vue";
 import formUserLogin from "../../components/content/user/form/userLogin.vue";
 </script>
 

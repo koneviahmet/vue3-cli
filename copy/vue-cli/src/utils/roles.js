@@ -14,6 +14,8 @@ const rolePageArr = {
   HomePage: [1, 2, 3],
   ErrorPage: [1, 2, 3],
   Error404: [1, 2, 3],
+  TosPage: [1, 2, 3],
+  PrivacyPage: [1, 2, 3],
   UserHome: [2, 3],
   UserSignIn: [1, 2, 3],
   UserUpdate: [2, 3],

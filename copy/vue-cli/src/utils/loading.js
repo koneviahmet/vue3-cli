@@ -15,7 +15,6 @@ import loading14 from "./loading/loading14.vue";
 import loading15 from "./loading/loading15.vue";
 import loading16 from "./loading/loading16.vue";
 import loading17 from "./loading/loading17.vue";
-import loading18 from "./loading/loading18.vue";
 
 export default {};
 export {

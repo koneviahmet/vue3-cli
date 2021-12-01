@@ -1,16 +1,11 @@
 <template>
-  <div v-for="i in length" :key="i">
-    <Skeletor />
-  </div>
+  <BeakerIcon v-if="loading" class="h-5 w-5 text-blue-500 animate-pulse" />
 </template>
 
 <script setup>
-import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
+import { BeakerIcon, AdjustmentsIcon } from "@heroicons/vue/solid";
 import { defineProps } from "vue";
-import "vue-skeletor/dist/vue-skeletor.css";
-import { Skeletor } from "vue-skeletor";
 const props = defineProps({
   loading: { type: Boolean, default: false },
-  length: { type: Number, default: 2 },
 });
 </script>

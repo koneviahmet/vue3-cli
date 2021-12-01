@@ -233,11 +233,11 @@ const createTable = async (table_name, secJson) => {
 
 
             //sourceComponents add menu item in header
-            const headerMenu   = await afs.readFile(copyComponents + 'header/Header.vue');
+            const headerMenu   = await afs.readFile(copyComponents + 'menu/Menu.vue');
 
             const headerMenuString = 'title: "Error" \n        },\n        {\n            to: "/'+table_name+'",\n            title: "'+table_nameUF+'"';
             let headerMenuR    = await afs.replaceFile(headerMenu, 'title: "Error"', headerMenuString);
-            await writeFile(copyComponents + 'header/Header.vue', headerMenuR);
+            await writeFile(copyComponents + 'menu/Menu.vue', headerMenuR);
             
 
             /* compositions */

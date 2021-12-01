@@ -1,5 +1,5 @@
 <template>
-  <div class="py-3">
+  <div class="p-3">
     <ul class="flex">
       <li class="mr-2" v-for="url in urlArr" :key="url.id">
         <router-link

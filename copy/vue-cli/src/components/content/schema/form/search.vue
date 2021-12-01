@@ -1,37 +1,30 @@
 <template> 
-  <div class="container bg-white shadow-md min-h-screen rounded p-4">
 
   {{schemaData}}
 
-  <div class="m-4">
-    <form class="w-full max-w-sm">
-
-      <div class="md:flex md:items-center mb-6">
-        <div class="md:w-1/3">
-          <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name3">
-            Search
-          </label>
-          
-        </div>
-        <div class="md:w-2/3">
-          <input autocomplete="nope" class="appearance-none border-2 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name3" type="text" placeholder="Search" v-model="searchText">
-          <p class="text-red-500 text-xs">{{errorSearchText}}</p>
+    <div class="p-10">
+      <div class="alert alert-error my-4" v-if="schemaError">
+        <div class="flex-1">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-6 h-6 mx-2 stroke-current">    
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>                      
+          </svg> 
+          <label>{{schemaError}}</label>
         </div>
       </div>
 
+      <div class="form-control">
+        <input type="text" placeholder="searchText" v-model="searchText" class="input input-bordered">
+         <label class="label">
+          <span class="label-text-alt text-red-400">{{errorSearchText}}</span>
+        </label>
+      </div> 
 
-
-      <div class="md:flex md:items-center">
-        <div class="md:w-1/3"></div>
-        <div class="md:w-2/3">
-          <button @click="search" class="shadow mr-3 bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
-            Search
-          </button>
-        </div>
+      <div class="form-control mt-6">
+          <a @click="search" class="btn btn-primary" :class="schemaLoading && 'loading btn-disabled'">search</a>
       </div>
-    </form>    
-  </div>
-  </div>
+    </div>
+
+
 </template>
 
 
@@ -69,7 +62,9 @@ export default {
         return {
             ...useSearch(),
             search,
-            schemaData
+            schemaData,
+            schemaLoading,
+            schemaError
         }
     }
 }
