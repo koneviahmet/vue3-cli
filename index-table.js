@@ -53,7 +53,8 @@ const sor = (table_name) => {
 /* exportlar içinde bir promise yapalım  */
 async function olustur(table_name){
   /* tablo adını küçültelim */
-  table_name = table_name.charAt(0).toUpperCase() + table_name.slice(1);
+  //table_name = table_name.charAt(0).toUpperCase() + table_name.slice(1);
+  table_name = table_name.toLowerCase();
   return await sor(table_name);
 }
 
