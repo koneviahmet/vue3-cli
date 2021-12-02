@@ -41,5 +41,53 @@ Projenin çalışma mantığını anlamak için basit bir film sitesi uygulamas�
 
 **json-server** (https://github.com/typicode/json-server) reposunu kullanıyoruz.  Film sitesini oluşturduktan sonra backendimizin çalışması için json-serverın kutulması gerekmektedir. Kurulum için yukarıdaki linki ziyaret edebilirsiniz.
 
+## Örnek proje kurulum aşamaları
+
+* Terminali açın ve uygun bir klasöre gidiniz.
+
+* > vue-cli --install film_sitesi 
+  >
+  > #film sitesi adında bir proje oluşturduk
+
+* > cd film_sitesi 
+  >
+  > #projenin bulunduğu klasöre girdik
+
+* > npm i 
+  >
+  > #film sitesinin bağımlılıklarını kurduk
+
+* > npm run dev 
+  >
+  > #projeyi başlattık
+
+* > npm run db
+  >
+  > #sahte backendi ayağa kaldırdık.
+
+* SignUp diyerek kaydolabilir ve login diyerek sisteme giriş yapabilirsiniz.
+
+![](images/signup.png)
+
+* Şimdi fil sitesi için gerekli olan tabloyu oluşturalım
+
+* > vue-cli --table filmler
+  > #filmler isminde bir tablo oluşturduk
+
+  ![](images/tablo_satir.png)
+
+* Tablomuzun kaç satırdan oluşacağını ve isimlerinin ne olacağını sıracak. örneğin **adi** ve **turu** şeklinde iki satırdan oluştuğunu var sayalım. Tablo kaç satırdan oluşacak sorusuna iki cevabını veriyoruz. ve sonraki sorulan sorulara da adi ve turu cevaplarını veriyoruz. Bizim için uygun kurulumu yapacaktır.
+
+   ![](images/filmler.png)
+
+* Yulkarıdaki resimde olduğu gibi filmler menusü oluşturuldu. Filmler menüsünden neler yapabiliriz ?
+  * Filimler ana sayfası. (http://localhost:3000/#/filimler) bu kısmı projenizin durumuna göre düzenleyebilsiniz.
+  * Filimler ekleme sayfası (http://localhost:3000/#/filimler/create)
+  * Eklenen filimleri düzenleme sayfası (http://localhost:3000/#/filimler/update/1)
+  * Eklenen filimleri listeleme sayfası (http://localhost:3000/#/filimler/list)
+  * Filimlerin detayını görebileceğiniz detay sayfası (http://localhost:3000/#/filimler/detail/1)
+  * Filimleri arayabileceğiniz arama sayfası (http://localhost:3000/#/filimler/search)
 
 
+
+**Önemli Not**: Backend sahte api ile oluşturulduğu içn giriş, arama vb. sayfalarda kriterlere uygun davranılmamıştır. Bu kısımlar gerçek api kullanırken apinin ihtiyaçlarına göre düzenlenmelidir.
