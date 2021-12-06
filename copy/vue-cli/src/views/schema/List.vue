@@ -25,7 +25,7 @@
         <tr v-for="item in schemaData" :key="item.id">
           <th>{{item.id}}</th> 
           <td class="flex space-x-1">
-            <router-link :to="`/user/detail/${item.id}`" class="btn btn-sm">Select</router-link>
+            <router-link :to="`/schema/detail/${item.id}`" class="btn btn-sm">Select</router-link>
             <a class="btn btn-error btn-sm" @click="itemDelete(item.id)" :class="schemaLoading && 'loading btn-disabled'">Delete</a>    
           </td> 
         </tr>
