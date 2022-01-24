@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import MainMenu from "../../components/content/user/menu/MainMenu.vue";
+import MainMenu from "./components/menu/MainMenu.vue";
 </script>
 
 

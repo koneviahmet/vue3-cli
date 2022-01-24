@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import MainMenu from "../../components/content/user/menu/MainMenu.vue";
-import FormUserSearch from "../../components/content/user/form/userSearch.vue";
+import MainMenu from "./components/menu/MainMenu.vue";
+import FormUserSearch from "./components/form/userSearch.vue";
 </script>
 

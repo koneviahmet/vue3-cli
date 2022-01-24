@@ -11,14 +11,15 @@ dir = dir.replace("/create", "");
 const pwd = process.env.PWD;
 
 const sourceViews           = dir + '/copy/vue-cli/src/views/';
-const sourceComponents      = dir + '/copy/vue-cli/src/components/';
+const sourceComponents      = dir + '/copy/vue-cli/src/views/';
 const sourceRouter          = dir + '/copy/vue-cli/src/router/';
 const sourceServices        = dir + '/copy/vue-cli/src/services/';
 const sourceCompositions    = dir + '/copy/vue-cli/src/compositions/';
 
 const copyViews           = pwd + '/src/views/';
 const copyRouter          = pwd + '/src/router/';
-const copyComponents      = pwd + '/src/components/';
+const copyComponents      = pwd + '/src/views/';
+const copyGlobalComponents= pwd + '/src/components/';
 const copyServices        = pwd + '/src/services/';
 const copyCompositions    = pwd + '/src/compositions/';
 
@@ -52,8 +53,8 @@ const createTable = async (table_name, secJson) => {
           // tablo daha önce oluşturulmuş mu ona bakalım 
           let model_durum  = await afs.isFile('src/router/routers/'+table_name+'.js');
           //let model_durum  = false;
-          //if(model_durum && 1==2){
-          if(model_durum){
+          if(model_durum && 1==2){
+          //if(model_durum){
             console.log(clc.red("tablo daha önce eklenmiş."));
           }else{
             // her şey yolunda değişimleri yapabilirsin
@@ -100,15 +101,15 @@ const createTable = async (table_name, secJson) => {
 
 
             /* components form */
-            await afs.createPage(copyComponents+'content/'+table_name);
-            await afs.createPage(copyComponents+'content/'+table_name + "/form");
-            await afs.createPage(copyComponents+'content/'+table_name + "/menu");
-            const componentFormCreate  = await afs.readFile(sourceComponents + 'content/schema/form/create.vue');
-            const componentFormCreateValidate  = await afs.readFile(sourceComponents + 'content/schema/form/createValidate.js');
-            const componentFormSearch  = await afs.readFile(sourceComponents + 'content/schema/form/search.vue');
-            const componentFormSearchValidate  = await afs.readFile(sourceComponents + 'content/schema/form/searchValidate.js');
-            const componentFormUpdate  = await afs.readFile(sourceComponents + 'content/schema/form/update.vue');
-            const componentFormUpdateValidate  = await afs.readFile(sourceComponents + 'content/schema/form/updateValidate.js');
+            await afs.createPage(copyComponents + table_name + "/components");
+            await afs.createPage(copyComponents + table_name + "/components/form");
+            await afs.createPage(copyComponents + table_name + "/components/menu");
+            const componentFormCreate  = await afs.readFile(sourceComponents + 'schema/components/form/create.vue');
+            const componentFormCreateValidate  = await afs.readFile(sourceComponents + 'schema/components/form/createValidate.js');
+            const componentFormSearch  = await afs.readFile(sourceComponents + 'schema/components/form/search.vue');
+            const componentFormSearchValidate  = await afs.readFile(sourceComponents + 'schema/components/form/searchValidate.js');
+            const componentFormUpdate  = await afs.readFile(sourceComponents + 'schema/components/form/update.vue');
+            const componentFormUpdateValidate  = await afs.readFile(sourceComponents + 'schema/components/form/updateValidate.js');
 
             let secJsonFirstUF = secJson[0].charAt(0).toUpperCase() + secJson[0].slice(1);
             let componentFormCreateR   = await afs.replaceFile(componentFormCreate, 'Schema Text', secJson[0]);  
@@ -215,29 +216,29 @@ const createTable = async (table_name, secJson) => {
 
 
 
-            await writeFile(copyComponents + "content/" + table_name + '/form/create.vue', componentFormCreateR);
-            await writeFile(copyComponents + "content/" + table_name + '/form/createValidate.js', componentFormCreateValidateR);
-            await writeFile(copyComponents + "content/" + table_name + '/form/search.vue', componentFormSearchR);
-            await writeFile(copyComponents + "content/" + table_name + '/form/searchValidate.js', componentFormSearchValidateR);
-            await writeFile(copyComponents + "content/" + table_name + '/form/update.vue', componentFormUpdateR);
-            await writeFile(copyComponents + "content/" + table_name + '/form/updateValidate.js', componentFormUpdateValidateR);
+            await writeFile(copyComponents  + table_name + '/components/form/create.vue', componentFormCreateR);
+            await writeFile(copyComponents  + table_name + '/components/form/createValidate.js', componentFormCreateValidateR);
+            await writeFile(copyComponents  + table_name + '/components/form/search.vue', componentFormSearchR);
+            await writeFile(copyComponents  + table_name + '/components/form/searchValidate.js', componentFormSearchValidateR);
+            await writeFile(copyComponents  + table_name + '/components/form/update.vue', componentFormUpdateR);
+            await writeFile(copyComponents  + table_name + '/components/form/updateValidate.js', componentFormUpdateValidateR);
             
             /* components menu */
-            await afs.createPage(copyComponents+'content/'+table_name + "/menu");
-            const componentMenuMain = await afs.readFile(sourceComponents + 'content/schema/menu/MainMenu.vue');
+            await afs.createPage(copyComponents + table_name + "/components/menu");
+            const componentMenuMain = await afs.readFile(sourceComponents + 'schema/components/menu/MainMenu.vue');
 
             let componentMenuMainR   = await afs.replaceFile(componentMenuMain, 'schema', table_name);
                 componentMenuMainR   = await afs.replaceFile(componentMenuMainR, 'Schema', table_nameUF);
 
-            await writeFile(copyComponents + "content/" + table_name + '/menu/MainMenu.vue', componentMenuMainR);
+            await writeFile(copyComponents + table_name + '/components/menu/MainMenu.vue', componentMenuMainR);
 
 
             //sourceComponents add menu item in header
-            const headerMenu   = await afs.readFile(copyComponents + 'menu/Menu.vue');
+            const headerMenu   = await afs.readFile(copyGlobalComponents + 'menu/Menu.vue');
 
             const headerMenuString = 'title: "Error" \n        },\n        {\n            to: "/'+table_name+'",\n            title: "'+table_nameUF+'"';
             let headerMenuR    = await afs.replaceFile(headerMenu, 'title: "Error"', headerMenuString);
-            await writeFile(copyComponents + 'menu/Menu.vue', headerMenuR);
+            await writeFile(copyGlobalComponents + 'menu/Menu.vue', headerMenuR);
             
 
             /* compositions */

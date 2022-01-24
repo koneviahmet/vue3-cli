@@ -40,7 +40,7 @@
 <script setup>
 import { getCurrentInstance, reactive, onMounted } from "vue";
 const app = getCurrentInstance();
-import MainMenu from "../../components/content/schema/menu/MainMenu.vue";
+import MainMenu from "./components/menu/MainMenu.vue";
 import { notyfError, notyfSuccess } from "../../utils/notyf.js";
 import Skeletor from "../../utils/skeletor/skeletor1.vue"
 

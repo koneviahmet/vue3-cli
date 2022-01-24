@@ -14,8 +14,26 @@ export default function () {
       await UsersServices.getUsers()
         .then((response) => {
           loading.value = false;
-          data.list = [...response];
-          resolve([...response]);
+
+          if (response && !response?.error) {
+            data.list = [...response];
+            resolve([...response]);
+          }else{
+            if(response?.error){
+              error.value = response.error;
+              reject(response.error);
+            }else{
+              const systemError = "Sistemden kaynaklanan bir hata oldu";
+              if (response?.error){
+                error.value = response.error;
+                reject(response.error);
+              }
+              
+              error.value = systemError;
+              reject(systemError)
+            }
+          }
+
         })
         .catch((error) => {
           loading.value = false;
@@ -31,8 +49,27 @@ export default function () {
       await UsersServices.searchUsers(obj)
         .then((response) => {
           loading.value = false;
-          data.list = [...response];
-          resolve([...response]);
+
+          if (response && !response?.error) {
+            data.list = [...response];
+            resolve([...response]);
+          }else{
+            if(response?.error){
+              error.value = response.error;
+              reject(response.error);
+            }else{
+              const systemError = "Sistemden kaynaklanan bir hata oldu";
+              if (response?.error){
+                error.value = response.error;
+                reject(response.error);
+              }
+              
+              error.value = systemError;
+              reject(systemError)
+            }
+          }
+
+
         })
         .catch((error) => {
           loading.value = false;
@@ -49,8 +86,26 @@ export default function () {
       await UsersServices.getUser(obj)
         .then((response) => {
           loading.value = false;
-          data.list = { ...response };
-          resolve({ ...response });
+
+          if (response && !response?.error) {
+            data.list = { ...response };
+            resolve({ ...response });
+          }else{
+            if(response?.error){
+              error.value = response.error;
+              reject(response.error);
+            }else{
+              const systemError = "Sistemden kaynaklanan bir hata oldu";
+              if (response?.error){
+                error.value = response.error;
+                reject(response.error);
+              }
+              
+              error.value = systemError;
+              reject(systemError)
+            }
+          }
+
         })
         .catch((error) => {
           loading.value = false;
@@ -66,9 +121,27 @@ export default function () {
       await UsersServices.getUser(obj)
         .then((response) => {
           loading.value = false;
-          data.list = { ...response };
-          resolve({ ...response });
-          store.commit("setUser", response);
+
+          if (response && !response?.error) {
+            data.list = { ...response };
+            resolve({ ...response });
+            store.commit("setUser", response);
+          }else{
+            if(response?.error){
+              error.value = response.error;
+              reject(response.error);
+            }else{
+              const systemError = "Sistemden kaynaklanan bir hata oldu";
+              if (response?.error){
+                error.value = response.error;
+                reject(response.error);
+              }
+              
+              error.value = systemError;
+              reject(systemError)
+            }
+          }
+
         })
         .catch((error) => {
           loading.value = false;
@@ -90,8 +163,27 @@ export default function () {
       await UsersServices.addUser({ ...obj, ...extraData })
         .then((response) => {
           loading.value = false;
-          data.list = [...data.list, response];
-          resolve({ ...response });
+
+
+          if (response && !response?.error) {
+            data.list = [...data.list, response];
+            resolve({ ...response });
+          }else{
+            if(response?.error){
+              error.value = response.error;
+              reject(response.error);
+            }else{
+              const systemError = "Sistemden kaynaklanan bir hata oldu";
+              if (response?.error){
+                error.value = response.error;
+                reject(response.error);
+              }
+              
+              error.value = systemError;
+              reject(systemError)
+            }
+          }
+
         })
         .catch((error) => {
           loading.value = false;
@@ -107,8 +199,26 @@ export default function () {
       await UsersServices.updateUser(id, obj)
         .then((response) => {
           loading.value = false;
-          //data.list = [...response]
-          resolve({ ...response });
+
+          if (response && !response?.error) {
+            //data.list = [...response]
+            resolve({ ...response });
+          }else{
+            if(response?.error){
+              error.value = response.error;
+              reject(response.error);
+            }else{
+              const systemError = "Sistemden kaynaklanan bir hata oldu";
+              if (response?.error){
+                error.value = response.error;
+                reject(response.error);
+              }
+              
+              error.value = systemError;
+              reject(systemError)
+            }
+          }
+
         })
         .catch((error) => {
           loading.value = false;
@@ -124,8 +234,26 @@ export default function () {
       await UsersServices.deleteUser(obj)
         .then((response) => {
           loading.value = false;
-          data.list = [...data.list.filter((i) => i.id != obj.id)];
-          resolve([...data.list.filter((i) => i.id != obj.id)]);
+
+          if (response && !response?.error) {
+            data.list = [...data.list.filter((i) => i.id != obj.id)];
+            resolve([...data.list.filter((i) => i.id != obj.id)]);
+          }else{
+            if(response?.error){
+              error.value = response.error;
+              reject(response.error);
+            }else{
+              const systemError = "Sistemden kaynaklanan bir hata oldu";
+              if (response?.error){
+                error.value = response.error;
+                reject(response.error);
+              }
+              
+              error.value = systemError;
+              reject(systemError)
+            }
+          }
+
         })
         .catch((error) => {
           loading.value = false;

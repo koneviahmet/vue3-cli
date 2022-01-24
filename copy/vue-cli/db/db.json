@@ -7,11 +7,20 @@
       "password": "asdasd",
       "role": 2,
       "id": 1
+    },
+    {
+      "email": "asdasd@asd.com",
+      "name": "asd",
+      "lastName": "asd",
+      "password": "asdasd",
+      "token": 9,
+      "role": 2,
+      "id": 2
     }
   ],
   "schema": [
     {
-      "schemaText": "sassdasd",
+      "schemaText": "sassdasdx",
       "role": 2,
       "id": 1
     },
@@ -19,6 +28,11 @@
       "schemaText": "asd",
       "extra": "extra info",
       "id": 2
+    },
+    {
+      "schemaText": "add",
+      "extra": "extra info",
+      "id": 3
     }
   ],
   "empty": []

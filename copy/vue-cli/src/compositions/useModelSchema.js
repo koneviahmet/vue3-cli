@@ -7,14 +7,31 @@ export default function () {
   const error = ref(false);
 
 
+
   const getItems = async () => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
       await SchemaServices.getItems()
         .then((response) => {
           loading.value = false;
-          data.list = [...response];
-          resolve([...response]);
+          if (response && !response?.error) {
+              data.list = [...response];
+              resolve([...response]); 
+          }else{
+            if(response?.error){
+              error.value = response.error;
+              reject(response.error);
+            }else{
+              const systemError = "Sistemden kaynaklanan bir hata oldu";
+              if (response?.error){
+                error.value = response.error;
+                reject(response.error);
+              }
+              
+              error.value = systemError;
+              reject(systemError)
+            }
+          }
         })
         .catch((error) => {
           loading.value = false;
@@ -30,8 +47,24 @@ export default function () {
       await SchemaServices.searchItems(obj)
         .then((response) => {
           loading.value = false;
-          data.list = [...response];
-          resolve([...response]);
+          if (response && !response?.error) {
+            data.list = [...response];
+            resolve([...response]); 
+        }else{
+          if(response?.error){
+            error.value = response.error;
+            reject(response.error);
+          }else{
+            const systemError = "Sistemden kaynaklanan bir hata oldu";
+            if (response?.error){
+              error.value = response.error;
+              reject(response.error);
+            }
+            
+            error.value = systemError;
+            reject(systemError)
+          }
+        }
         })
         .catch((error) => {
           loading.value = false;
@@ -47,8 +80,24 @@ export default function () {
       await SchemaServices.getItem(obj)
         .then((response) => {
           loading.value = false;
-          data.list = { ...response };
-          resolve({ ...response });
+          if (response && !response?.error) {
+            data.list = {...response};
+            resolve({...response}); 
+        }else{
+          if(response?.error){
+            error.value = response.error;
+            reject(response.error);
+          }else{
+            const systemError = "Sistemden kaynaklanan bir hata oldu";
+            if (response?.error){
+              error.value = response.error;
+              reject(response.error);
+            }
+            
+            error.value = systemError;
+            reject(systemError)
+          }
+        }
         })
         .catch((error) => {
           loading.value = false;
@@ -69,8 +118,25 @@ export default function () {
       await SchemaServices.addItem({ ...obj, ...extraData })
         .then((response) => {
           loading.value = false;
-          data.list = [...data.list, response];
-          resolve({ ...response });
+          if (response && !response?.error) {
+            data.list = [...data.list, response];
+            resolve({ ...response });
+          }else{
+            if(response?.error){
+              error.value = response.error;
+              reject(response.error);
+            }else{
+              const systemError = "Sistemden kaynaklanan bir hata oldu";
+              if (response?.error){
+                error.value = response.error;
+                reject(response.error);
+              }
+              
+              error.value = systemError;
+              reject(systemError)
+            }
+          }
+
         })
         .catch((error) => {
           loading.value = false;
@@ -87,8 +153,26 @@ export default function () {
       await SchemaServices.updateItem(id, obj)
         .then((response) => {
           loading.value = false;
-          //data.list = [...response]
-          resolve({ ...response });
+
+          if (response && !response?.error) {
+            //data.list = [...response]
+            resolve({ ...response });
+          }else{
+            if(response?.error){
+              error.value = response.error;
+              reject(response.error);
+            }else{
+              const systemError = "Sistemden kaynaklanan bir hata oldu";
+              if (response?.error){
+                error.value = response.error;
+                reject(response.error);
+              }
+              
+              error.value = systemError;
+              reject(systemError)
+            }
+          }
+
         })
         .catch((error) => {
           loading.value = false;
@@ -104,8 +188,26 @@ export default function () {
       await SchemaServices.deleteItem(obj)
         .then((response) => {
           loading.value = false;
-          data.list = [...data.list.filter((i) => i.id != obj.id)];
-          resolve([...data.list.filter((i) => i.id != obj.id)]);
+
+          if (response && !response?.error) {
+            data.list = [...data.list.filter((i) => i.id != obj.id)];
+            resolve([...data.list.filter((i) => i.id != obj.id)]);
+          }else{
+            if(response?.error){
+              error.value = response.error;
+              reject(response.error);
+            }else{
+              const systemError = "Sistemden kaynaklanan bir hata oldu";
+              if (response?.error){
+                error.value = response.error;
+                reject(response.error);
+              }
+              
+              error.value = systemError;
+              reject(systemError)
+            }
+          }
+
         })
         .catch((error) => {
           loading.value = false;

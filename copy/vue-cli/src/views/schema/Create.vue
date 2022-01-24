@@ -7,7 +7,7 @@
 
 
 <script setup>
-import MainMenu from "../../components/content/schema/menu/MainMenu.vue";
-import formCreate from "../../components/content/schema/form/create.vue";
+import MainMenu from "./components/menu/MainMenu.vue";
+import formCreate from "./components/form/create.vue";
 </script>
 

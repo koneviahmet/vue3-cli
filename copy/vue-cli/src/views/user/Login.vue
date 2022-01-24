@@ -7,6 +7,6 @@
 
 
 <script setup>
-import formUserLogin from "../../components/content/user/form/userLogin.vue";
+import formUserLogin from "./components/form/userLogin.vue";
 </script>
 

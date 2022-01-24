@@ -6,6 +6,6 @@
 
 
 <script setup>
-import formUserUpdate from "../../components/content/user/form/userUpdate.vue";
+import formUserUpdate from "./components/form/userUpdate.vue";
 </script>
 

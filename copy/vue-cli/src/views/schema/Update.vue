@@ -7,7 +7,7 @@
 
 
 <script setup>
-import MainMenu from "../../components/content/schema/menu/MainMenu.vue";
-import formUpdate from "../../components/content/schema/form/update.vue";
+import MainMenu from "./components/menu/MainMenu.vue";
+import formUpdate from "./components/form/update.vue";
 </script>
 

@@ -6,7 +6,7 @@
 
 
 <script setup>
-import MainMenu from "../../components/content/user/menu/MainMenu.vue";
-import formUserCreate from "../../components/content/user/form/userCreate.vue";
+import MainMenu from "./components/menu/MainMenu.vue";
+import formUserCreate from "./components/form/userCreate.vue";
 </script>
 
