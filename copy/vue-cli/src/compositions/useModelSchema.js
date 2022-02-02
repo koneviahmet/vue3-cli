@@ -1,12 +1,16 @@
-import { ref, reactive, computed, toRefs } from "vue";
+import { ref, reactive, watch, toRefs, computed } from "vue";
 import SchemaServices from "../services/SchemaServices";
+import store from "../store/index.js";
 
 export default function () {
   const loading = ref(false);
   const data = reactive({ list: [] });
   const error = ref(false);
 
-
+  watch(data, () => {
+    store.commit("addSchema", [...data.list])
+    //console.log("changed",store.getters._getSchema);
+  })
 
   const getItems = async () => {
     loading.value = true;
@@ -81,7 +85,7 @@ export default function () {
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
-            data.list = {...response};
+            //data.list = {...response};
             resolve({...response}); 
         }else{
           if(response?.error){
@@ -111,15 +115,12 @@ export default function () {
   const addItem = async (obj) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      const extraData = {
-        extra: "extra info",
-      };
 
-      await SchemaServices.addItem({ ...obj, ...extraData })
+      await SchemaServices.addItem(obj)
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
-            data.list = [...data.list, response];
+            addStoreData(response)
             resolve({ ...response });
           }else{
             if(response?.error){
@@ -149,13 +150,15 @@ export default function () {
   const updateItem = async (id, obj) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      obj.role = 2
+
       await SchemaServices.updateItem(id, obj)
         .then((response) => {
           loading.value = false;
 
           if (response && !response?.error) {
             //data.list = [...response]
+            updateStoreData(response)
+
             resolve({ ...response });
           }else{
             if(response?.error){
@@ -190,7 +193,7 @@ export default function () {
           loading.value = false;
 
           if (response && !response?.error) {
-            data.list = [...data.list.filter((i) => i.id != obj.id)];
+            deleteStoreData(obj.id)
             resolve([...data.list.filter((i) => i.id != obj.id)]);
           }else{
             if(response?.error){
@@ -217,10 +220,31 @@ export default function () {
     });
   };
 
+  
+  const addStoreData = (item) => {
+    data.list = [...getStoreData.value, item]
+  } 
+
+
+  const updateStoreData = (item) => {
+    const index = getStoreData.value.map(i => i.id).indexOf(item.id);
+    getStoreData.value[index] = item;
+    data.list = getStoreData.value;
+  }
+
+  const deleteStoreData = (id) => {
+    data.list = [...getStoreData.value.filter((i) => i.id != id)];
+  }
+
+  const getStoreData = computed(() => {
+    return store.getters._getSchema;
+  })
+
   return {
     schemaError: error,
     schemaLoading: loading,
-    schemaData: toRefs(data).list,
+    //schemaData: toRefs(data).list,
+    schemaData: getStoreData,
     getSchema: getItem,
     searchSchemas: searchItems,
     getSchemas: getItems,

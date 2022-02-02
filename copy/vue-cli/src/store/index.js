@@ -8,6 +8,7 @@ export default createStore({
   state: {
     user: null,
     saltKey: "haydaHobbaGizliKey!456?",
+    schema: [],
   },
   mutations: {
     setUser(state, user) {
@@ -16,6 +17,9 @@ export default createStore({
     },
     logoutUser(state) {
       state.user = null;
+    },
+    addSchema(state, schema) {
+      state.schema = [...schema];
     },
   },
   getters: {
@@ -27,8 +31,9 @@ export default createStore({
       return user;
     },
     _currentUserId: (state) => state?.user?.id,
-    _getCurrentRole: (state) => state?.user?.role,
+    _getCurrentRole: (state) => parseInt(state?.user?.role),
     _saltKey: (state) => state.saltKey,
+    _getSchema: (state) => state?.schema,
   },
   plugins: [
     createPersistedState({

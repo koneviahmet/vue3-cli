@@ -1,8 +1,10 @@
 import axios from "axios";
 import store from "../store/index";
+import opt from "../utils/opt"
+
 //${store.getters?._getCurrentUser?.token}
 const http = axios.create({
-  baseURL: "http://localhost:3004",
+  baseURL: opt.baseURL,
   withCredentials: true,
 });
 
