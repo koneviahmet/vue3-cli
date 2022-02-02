@@ -53,8 +53,8 @@ const createTable = async (table_name, secJson) => {
           // tablo daha önce oluşturulmuş mu ona bakalım 
           let model_durum  = await afs.isFile('src/router/routers/'+table_name+'.js');
           //let model_durum  = false;
-          if(model_durum && 1==2){
-          //if(model_durum){
+          //if(model_durum && 1==2){
+          if(model_durum){
             console.log(clc.red("tablo daha önce eklenmiş."));
           }else{
             // her şey yolunda değişimleri yapabilirsin
@@ -299,7 +299,22 @@ const createTable = async (table_name, secJson) => {
                                
             let roleR    = await afs.replaceFile(role, 'empty: \\[]', roleString);
             await writeFile(pwd + '/src/utils/roles.js', roleR);
-          
+
+
+            //edit store
+            const store   = await afs.readFile(pwd + '/src/store/index.js'); 
+            const storeString = 'schema: \[], \n ' + table_name + ': \[],';
+            let newStore  = await afs.replaceFile(store, 'schema: \\[],', storeString);
+            
+
+            const storeString2 = '_get'+table_nameUF+': (state) => state?.'+table_name+', \n _getSchema';
+            newStore  = await afs.replaceFile(newStore, '_getSchema', storeString2);
+            
+            const storeString3 = 'add'+table_nameUF+'(state, '+table_name+') { \n state.'+table_name+' = [...'+table_name+']; \n}, \n addSchema';
+            newStore  = await afs.replaceFile(newStore, 'addSchema', storeString3);
+
+            await writeFile(pwd + '/src/store/index.js', newStore);
+
           }
         } 
       }
