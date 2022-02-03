@@ -1,6 +1,8 @@
 import { ref, reactive, watch, toRefs, computed } from "vue";
 import SchemaServices from "../services/SchemaServices";
 import store from "../store/index.js";
+import Alert from "../utils/alert.js";
+import { notyfError, notyfSuccess } from "../utils/notyf.js";
 
 export default function () {
   const loading = ref(false);
@@ -44,6 +46,9 @@ export default function () {
         });
     });
   };
+
+
+
 
   const searchItems = async (obj) => {
     loading.value = true;
@@ -147,11 +152,11 @@ export default function () {
     });
   };
 
-  const updateItem = async (id, obj) => {
+  const updateItem = async (obj) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
 
-      await SchemaServices.updateItem(id, obj)
+      await SchemaServices.updateItem(obj)
         .then((response) => {
           loading.value = false;
 
@@ -185,7 +190,21 @@ export default function () {
     });
   };
 
+
+  const confirmDelete = (obj) => {
+    return new Promise(async () => {
+      Alert.showPrompt("Are you sure you want to delete?").then((res) => {
+        if(!res.isConfirmed){
+          notyfError("you gave up")
+        }else{
+          deleteItem(obj)
+        }
+      });
+    })
+  }
+
   const deleteItem = async (obj) => {
+   
     loading.value = true;
     return new Promise(async (resolve, reject) => {
       await SchemaServices.deleteItem(obj)
@@ -193,6 +212,7 @@ export default function () {
           loading.value = false;
 
           if (response && !response?.error) {
+            notyfSuccess("Delete success")
             deleteStoreData(obj.id)
             resolve([...data.list.filter((i) => i.id != obj.id)]);
           }else{
@@ -250,6 +270,6 @@ export default function () {
     getSchemas: getItems,
     addSchema: addItem,
     updateSchema: updateItem,
-    deleteSchema: deleteItem,
+    deleteSchema: confirmDelete,
   };
 }

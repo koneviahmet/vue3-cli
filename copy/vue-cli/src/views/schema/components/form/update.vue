@@ -50,6 +50,7 @@ export default {
         getSchema({id:route.params.id})
           .then(response => {
               values.schemaText = response.schemaText
+              console.log(values.schemaText);
           })
 
 
@@ -57,7 +58,7 @@ export default {
             validate().then(validateSuccess => {
                 !validateSuccess.valid && console.log("formu kontrol ediniz.", errors.value) 
                 if(validateSuccess.valid){
-                    updateSchema(route.params.id, {...values}).then(response => {
+                    updateSchema({id:route.params.id,...values}).then(response => {
                         router.push(`/schema/detail/${response.id}`)
                     })
                 }

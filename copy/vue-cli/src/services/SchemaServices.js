@@ -25,9 +25,9 @@ const SchemaServices = {
       return response?.data;
     } catch (e) {}
   },
-  updateItem: async (id, obj) => {
+  updateItem: async (obj) => {
     try {
-      const response = await http.put(`/schema/${id}`, obj);
+      const response = await http.put(`/schema/${obj.id}`, obj);
       return response?.data;
     } catch (e) {}
   },

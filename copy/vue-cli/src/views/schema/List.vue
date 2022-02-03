@@ -26,7 +26,7 @@
           <th>{{item.id}}</th> 
           <td class="flex space-x-1">
             <router-link :to="`/schema/detail/${item.id}`" class="btn btn-sm">Select</router-link>
-            <a class="btn btn-error btn-sm" @click="itemDelete(item.id)" :class="schemaLoading && 'loading btn-disabled'">Delete</a>    
+            <a class="btn btn-error btn-sm" @click="itemDelete(item)" :class="schemaLoading && 'loading btn-disabled'">Delete</a>    
           </td> 
         </tr>
       </tbody>
@@ -45,18 +45,13 @@ import { notyfError, notyfSuccess } from "../../utils/notyf.js";
 import Skeletor from "../../utils/skeletor/skeletor1.vue"
 
 import useSchema from "../../compositions/useModelSchema";
-const { schemaLoading, schemaData, schemaError, getSchemas, deleteSchema } =
-  useSchema();
+const { schemaLoading, schemaData, schemaError, getSchemas, deleteSchema } = useSchema();
 onMounted(() => getSchemas());
 
 import Alert from "../../utils/alert.js";
 
-const itemDelete = (id) => {
-  Alert.showPrompt("Are you sure you want to delete?").then((res) => {
-    !res.isConfirmed && notyfError("you gave up");
-    res.isConfirmed &&
-      deleteSchema({ id }).then(() => notyfSuccess("delete success"));
-  });
+const itemDelete = (item) => {
+  deleteSchema(item)
 };
 </script>
 
