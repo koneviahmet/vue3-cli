@@ -1,0 +1,8 @@
+{
+    "users": ["user_id", "user_name", "user_email", "user_password", "user_created_at", "user_updated_at"],
+    "books": ["book_id", "book_title", "book_author", "book_created_at", "book_updated_at"],
+    "categories": ["category_id", "category_name", "category_created_at", "category_updated_at"],
+    "authors": ["author_id", "author_name", "author_created_at", "author_updated_at"],
+    "publishers": ["publisher_id", "publisher_name", "publisher_created_at", "publisher_updated_at"],
+    "languages": ["language_id", "language_name", "language_created_at", "language_updated_at"]
+} 

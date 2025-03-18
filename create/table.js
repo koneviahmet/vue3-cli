@@ -32,6 +32,8 @@ const createTable = async (table_name, secJson) => {
       //const table_nameUF = _.upperFirst(table_name);
       const table_nameUF = table_name.charAt(0).toUpperCase() + table_name.slice(1);
 
+      // writeFile fonksiyonunu afs modülünden alalım
+      const writeFile = afs.writeFile;
 
       /*
       _.join(str,'/') //implode
