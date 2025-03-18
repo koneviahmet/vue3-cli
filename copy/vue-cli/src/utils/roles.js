@@ -6,7 +6,7 @@ const roles = [
 
 const roleArr = {
   notAuth: [1],
-  isAuth: [2, 3],
+  isAuth: [1, 2, 3],
 };
 
 /* role pages */
@@ -16,19 +16,19 @@ const rolePageArr = {
   Error404: [1, 2, 3],
   TosPage: [1, 2, 3],
   PrivacyPage: [1, 2, 3],
-  UserHome: [2, 3],
+  UserHome: [1, 2, 3],
   UserSignIn: [1, 2, 3],
-  UserUpdate: [2, 3],
-  UserDetail: [2, 3],
-  UserList: [2, 3],
-  UserSearch: [2, 3],
+  UserUpdate: [1, 2, 3],
+  UserDetail: [1, 2, 3],
+  UserList: [1, 2, 3],
+  UserSearch: [1, 2, 3],
   UserLogin: [1, 2, 3],
-  SchemaHome: [2, 3],
+  SchemaHome: [1, 2, 3],
   SchemaCreate: [1, 2, 3],
-  SchemaUpdate: [2, 3],
-  SchemaDetail: [2, 3],
-  SchemaList: [2, 3],
-  SchemaSearch: [2, 3],
+  SchemaUpdate: [1, 2, 3],
+  SchemaDetail: [1, 2, 3],
+  SchemaList: [1, 2, 3],
+  SchemaSearch: [1, 2, 3],
   empty: [],
 };
 
