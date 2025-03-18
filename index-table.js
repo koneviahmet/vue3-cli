@@ -22,8 +22,8 @@ const sor = (table_name) => {
       const response = await prompts({
         type: 'number',
         name: 'dbAdet',
-        message: 'Tablo kaç satırdan oluşacak olacak?',
-        validate: value => value > 1 ||  value < 50 ? true: `Tablo kaç satırdan oluşacak olacak?`
+        message: 'Tabloya kaydedilecek sutunların  sayısı kaçtır? örnek: kitaplar tablosu için kitap_adi, kitap_yazari olmak üzere 2 sutun ekleyebilirsiniz.',
+        validate: value => value > 1 ||  value < 50 ? true: message
       });
 
 
@@ -33,7 +33,7 @@ const sor = (table_name) => {
         const sorSutun = await prompts({
           type: 'text',
           name: 'satirAdi',
-          message: i + '. Satırın adını yazınız.'
+          message: i + '. sutunun adını yazınız. ör: kitap_adi'
         });
 
 
