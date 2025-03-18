@@ -1,26 +1,24 @@
 <template>
   <Header :menu="menu" v-if="header && header == 'userHeader'"/>
 
-
-  <div class="drawer drawer-mobile">
+  <div class="drawer drawer-mobile bg-base-100 dark:bg-neutral text-base-content dark:text-neutral-content min-h-screen">
     <input id="my-drawer-2" type="checkbox" class="drawer-toggle"> 
-    <div class="flex flex-col  drawer-content" style="max-height: none">
-      <div class="flex flex-col w-full">
+    <div class="drawer-content flex flex-col">
+      <div class="flex flex-col w-full p-4 pt-20">
           <router-view></router-view>  
       </div>
     </div> 
 
-    <div class="drawer-side mt-1 pt-20">
+    <div class="drawer-side pt-20">
       <label for="my-drawer-2" class="drawer-overlay"></label> 
-      <Menu v-if="menu && menu == 'userMenu'"/>
-      <QuestMenu v-if="menu && menu == 'questMenu'"/>
+      <div class="w-80 bg-base-200 dark:bg-neutral-800 h-full">
+        <Menu v-if="menu && menu == 'userMenu'"/>
+        <QuestMenu v-if="menu && menu == 'questMenu'"/>
+      </div>
     </div>
-
   </div>
   <Footer v-if="footer && footer == 'globalFooter'"/>
 </template>
-
-
 
 <script setup>
 import Header from "./components/header/Header.vue";
@@ -47,8 +45,5 @@ watch(route, (route) => {
     header.value = direction[0].header;
     footer.value = direction[0].footer;
   }
-
-})
-
-
+});
 </script>
