@@ -15,4 +15,12 @@ bu projede kendi geliştirdiğim vue-cli yapısını kullanıyorum. sana mantı�
 routers dosyasının içinde yeni bir yol eklemiş isen;
  -- eklediğin yol ile ilgili bilgileri utils klasöründe bulunan roles.js ve direction.js dosyalarını kaydetmelisin.
  -- direction.js dosyasında eklediğin yolun menü, header ve footer bilgilerini eklemelisin.
- -- roles.js dosyasında eklediğin yolun rol bilgilerini eklemelisin.
+ -- roles.js dosyasına eklediğin yolun rol bilgilerini eklemelisin. (örneğin: "UserHome: [1, 2, 3]" gibi)   
+
+  Tasarım yaparken dikket etmen gereken hususlar.
+ -tasarımlarda tailwindcss kullan.
+ -tasarımlarında daisyui kullanabilirsin.
+
+
+backand istekleri için axios kullanabilirsin. axios bağlantılarını kurmak için dikkat etmen gereken hususlar.
+-axios bağlantıların için src/compositions klasöründe bulunan model dosyalarını kullan.
