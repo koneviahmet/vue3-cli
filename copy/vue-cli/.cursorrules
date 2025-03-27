@@ -17,10 +17,61 @@ routers dosyasının içinde yeni bir yol eklemiş isen;
  -- direction.js dosyasında eklediğin yolun menü, header ve footer bilgilerini eklemelisin.
  -- roles.js dosyasına eklediğin yolun rol bilgilerini eklemelisin. (örneğin: "UserHome: [1, 2, 3]" gibi)   
 
-  Tasarım yaparken dikket etmen gereken hususlar.
+ Tasarım yaparken dikket etmen gereken hususlar.
  -tasarımlarda tailwindcss kullan.
  -tasarımlarında daisyui kullanabilirsin.
 
 
-backand istekleri için axios kullanabilirsin. axios bağlantılarını kurmak için dikkat etmen gereken hususlar.
--axios bağlantıların için src/compositions klasöründe bulunan model dosyalarını kullan.
+bu projede kendi geliştirdiğim vue-cli yapısını kullanıyorum. sana mantığını anlatacağım gerekirse kullanabilirsin.
+-- bu cli yapısı ile kendine hazır tablolar oluşturabilirsin. 
+    --- oluşturduğun tabloların, api bağlantıları ve roouter sayfaları otomatik oluşturulur.
+    --- vue-cli --tjson ./books.json -> terminal kodunu oluşturarak toplu tablolar oluşturabilirsin.
+    --- bunun için ana dizinde bir json dosyası oluşturmalı ve aşağıdaki json yapısına benzer bir kod eklemeli ve "vue-cli --tjson ./books.json" kodunu terminalde çağırmalısın.
+    --- tablolarda "users" isimini kullanma bunu yerine başka bir isim kullanabilirsin.
+    --- tüm tabloların id isimleri id olarak otomatik olarak oluşturulur. tekrardan eklenmesine gerek yoktur.
+    {
+        "books": ["book_title", "book_author", "book_created_at", "book_updated_at"],
+        "categories": ["category_name", "category_created_at", "category_updated_at"],
+        "authors": ["author_name", "author_created_at", "author_updated_at"],
+        "publishers": ["publisher_name", "publisher_created_at", "publisher_updated_at"],
+        "languages": ["language_name", "language_created_at", "language_updated_at"]
+    }
+    -- json dosyasını oluşturduktan sonra terminalde "vue-cli --tjson ./books.json" kodunu çalıştır.
+    --- giriş yapmış kullanıcının bilgilerini store den alabilirsin. aşağıdaki fonksiyonda olduğu gibi.
+        const user = computed(() => {
+            return store.getters._getCurrentUser;
+        });
+
+routers dosyasının içinde yeni bir yol eklemiş isen;
+ -- eklediğin yol ile ilgili bilgileri utils klasöründe bulunan roles.js ve direction.js dosyalarını kaydetmelisin.
+ -- direction.js dosyasında eklediğin yolun menü, header ve footer bilgilerini eklemelisin.
+ -- roles.js dosyasına eklediğin yolun rol bilgilerini eklemelisin. (örneğin: "UserHome: [1, 2, 3]" gibi)   
+
+ Tasarım yaparken dikket etmen gereken hususlar.
+ -tasarımlarda tailwindcss kullan.
+ -tasarımlarında daisyui kullanabilirsin.
+
+
+api bağlantıları için src/compositions dosyasında bulunan api pağlantına ait compositionsları kullanabilirsin.
+- örnek kullanım için src/compositions/useModelSchema.js dosyasını inceleyebilirsin.
+- buradaki şemayı doğrudan projende kullanma.  src/compositions dosyasında bulunan uygun şemayı kullan.
+- src/compositions/useModelSchema.js dosyasında api işlemlerinin nasıl yapıldığını incelemek için;
+    - src/views/schema klasürnde bulunan dosyaları inceleyebilirsin inceleyebilirsin.
+    - src/views/schema/Home.vue -> schema tablosuna ait ana sayfa
+    - src/views/schema/Create.vue -> schema tablosuna ait ekleme sayfası
+    - src/views/schema/Update.vue -> schema tablosuna ait güncelleme sayfası.
+    - src/views/schema/Detail.vue -> schema tablosuna ait detay sayfası. Burada seçilen bir kayıt listeleniyor. 
+    - src/views/schema/List.vue -> schema tablosuna ait tüm kayıtların listelendiği sayfa. 
+
+
+
+vue yazarken kullanılacak olan yapılar.
+- <template> şeklinde yaz.
+- <script setup> şeklinde yaz.
+- <style scoped> şeklinde yaz.
+
+
+-back and için sahte  bir  rest api kullanan json-server kullanıyorum.
+    - bunun için db/db.json dosyasını kullanıyorum.
+    - json-server dökümanlarını https://github.com/typicode/json-server/tree/v0?tab=readme-ov-file adresinden inceleeyebilirsin
+    - projede ihtiyaç duyduğun api bağlantılarını src/services/ klasörü altında bulunan ilgili .js dosyasına tanımlayarak servisi src/compositions klasöründe bulunan ilgili compositions dosyasına tanımlayarak kullanabilirsin.
