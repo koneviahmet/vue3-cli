@@ -57,7 +57,7 @@
 import useCreate from './createValidate';
 import { useRouter } from "vue-router";
 import useSchema from '../../../../compositions/useModelSchema'
-
+import { onMounted } from "vue";
 
 export default {
     setup(){ 
@@ -65,6 +65,13 @@ export default {
         const router = useRouter();
         const {loading: schemaLoading, error: schemaError, addItem: addSchema} = useSchema();
        
+        onMounted(() => {
+          const now = new Date().toISOString();
+          setValues({author_created_at:now})
+          setValues({author_updated_at:now})
+        })
+
+
         const save = () => {
             validate().then(validateSuccess => {
                 !validateSuccess.valid && console.log("Check the form.", errors.value) 

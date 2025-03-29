@@ -263,7 +263,8 @@ export default function () {
   return {
     error,
     loading,
-    data: toRefs(data).list,
+    // data: toRefs(data).list,
+    data: data.list,
     getStoreData,
     getItem,
     searchItems,
