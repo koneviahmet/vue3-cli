@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import roles from "../utils/roles";
 import store from "../store/index.js";
 
@@ -7,19 +7,30 @@ import { infoRouters } from "./routers/info.js";
 import { userRouters } from "./routers/user.js";
 import { schemaRouters } from "./routers/schema.js";
 import { errorRouters } from "./routers/error.js";
+import { contactsRouters } from "./routers/contacts.js"
+import { adminRouters } from "./routers/admin.js"
+import { tasksRouters } from "./routers/tasks.js"
+import { kanbanRouters } from "./routers/kanban.js"
+import { calendarRouters } from "./routers/calendar.js"
 //import
 
 const router = createRouter({ 
     routes: [
         ...homeRouters,
+        ...contactsRouters,
         ...infoRouters,
         ...userRouters,
         ...schemaRouters,
+        ...adminRouters,
+        ...tasksRouters,
+        ...kanbanRouters,
+        ...calendarRouters,
         ...errorRouters
     ],
 
     // use url #
-    history: createWebHashHistory() 
+    //history: createWebHashHistory() 
+    history: createWebHistory()
 
 })
 

@@ -8,7 +8,7 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
       </svg>
     </div>
-    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+    <ul tabindex="0" class="dropdown-content z-[1] max-h-96 menu p-2 shadow bg-base-100 rounded-box min-w-max">
       <li v-for="theme in themes" :key="theme">
         <a @click="setTheme(theme)" :class="{ 'active': currentTheme === theme }">
           {{ formatThemeName(theme) }}
@@ -21,7 +21,7 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 
-const themes = ["light", "dark", "bumblebee", "corporate", "night"];
+const themes = ["light", "dark", "bumblebee", "corporate", "night", "cupcake", "emerald", "synthwave", "retro", "cyberpunk", "valentine", "halloween", "garden", "forest", "aqua", "lofi", "pastel", "fantasy", "wireframe", "luxury", "dracula", "cmyk", "autumn", "business", "acid", "lemonade", "winter"];
 const currentTheme = ref('');
 
 function formatThemeName(theme) {

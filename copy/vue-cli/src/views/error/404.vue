@@ -1,15 +1,15 @@
 <template>
-<div class="hero min-h-screen" style="background-image: url(&quot;https://cdn.pixabay.com/photo/2013/11/15/13/57/road-210913_960_720.jpg&quot;);">
-  <div class="hero-overlay bg-opacity-60"></div> 
-  <div class="text-center hero-content text-neutral-content">
-    <div class="max-w-md">
-      <h1 class="mb-5 text-5xl font-bold">
-            404
-          </h1> 
-            <p class="mb-5">
-            Sorry, that page can't be found.
-          </p> 
-      <router-link to="/" class="btn btn-primary">Home Page</router-link>
+<div class="min-h-screen flex items-center justify-center">
+  <div class="card w-96 bg-base-100 shadow-xl">
+    <figure class="px-10 pt-10">
+      <div class="text-9xl font-bold text-primary">404</div>
+    </figure>
+    <div class="card-body items-center text-center">
+      <h2 class="card-title text-2xl">Kaybolmuş gibisin!</h2>
+      <p class="text-lg mb-4">Aradığın sayfa ya tatile çıktı ya da hiç var olmadı. Belki de bir paralel evrende hala yaşıyordur?</p>
+      <div class="card-actions">
+        <router-link to="/" class="btn btn-primary">Ana Sayfaya Dön</router-link>
+      </div>
     </div>
   </div>
 </div>

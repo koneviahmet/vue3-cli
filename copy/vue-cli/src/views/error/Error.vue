@@ -1,15 +1,19 @@
 <template>
-<div class="hero min-h-screen" style="background-image: url(&quot;https://cdn.pixabay.com/photo/2020/02/23/12/22/river-4873198_960_720.jpg&quot;);">
-  <div class="hero-overlay bg-opacity-60"></div> 
-  <div class="text-center hero-content text-neutral-content">
-    <div class="max-w-md">
-      <h1 class="mb-5 text-5xl font-bold">
-            Error
-          </h1> 
-            <p class="mb-5">
-            Sorry, You Are Not Allowed to Access This Page.
-          </p> 
-      <router-link to="/" class="btn btn-primary">Home Page</router-link>
+<div class="min-h-screen flex items-center justify-center">
+  <div class="card w-96 bg-base-100 shadow-xl">
+    <figure class="px-10 pt-10">
+      <div class="flex justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 text-error" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+      </div>
+    </figure>
+    <div class="card-body items-center text-center">
+      <h2 class="card-title text-2xl">Oops! Erişim Engeli</h2>
+      <p class="text-lg mb-4">Bu sayfaya girebilmek için özel güçlere sahip olman gerekiyor. Yoksa süper kahramanlık başvurun reddedildi mi?</p>
+      <div class="card-actions">
+        <router-link to="/" class="btn btn-primary">Ana Sayfaya Dön</router-link>
+      </div>
     </div>
   </div>
 </div>

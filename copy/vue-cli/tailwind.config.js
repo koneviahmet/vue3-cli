@@ -12,7 +12,7 @@ module.exports = {
     require('daisyui'),
   ],
   daisyui: {
-    themes: ["light", "dark", "bumblebee", "corporate", "night"],
+    themes: ["light", "dark", "bumblebee", "corporate", "night", "cupcake", "emerald", "synthwave", "retro", "cyberpunk", "valentine", "halloween", "garden", "forest", "aqua", "lofi", "pastel", "fantasy", "wireframe", "luxury", "dracula", "cmyk", "autumn", "business", "acid", "lemonade", "winter"],
     darkTheme: "dark",
     base: true,
     styled: true,

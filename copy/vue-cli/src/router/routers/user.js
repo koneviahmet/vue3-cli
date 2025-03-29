@@ -38,4 +38,9 @@ export const userRouters = [
     path: `/${defaultPath}/login`,
     component: () => import(`../../views/${defaultPath}/Login.vue`),
   },
+  {
+    name: `${defaultPathName}ForgotPassword`,
+    path: `/${defaultPath}/forgot-password`,
+    component: () => import(`../../views/${defaultPath}/ForgotPassword.vue`),
+  },
 ];

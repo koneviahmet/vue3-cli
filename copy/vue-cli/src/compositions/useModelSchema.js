@@ -261,15 +261,15 @@ export default function () {
   })
 
   return {
-    schemaError: error,
-    schemaLoading: loading,
-    //schemaData: toRefs(data).list,
-    schemaData: getStoreData,
-    getSchema: getItem,
-    searchSchemas: searchItems,
-    getSchemas: getItems,
-    addSchema: addItem,
-    updateSchema: updateItem,
-    deleteSchema: confirmDelete,
+    error,
+    loading,
+    data: toRefs(data).list,
+    getStoreData,
+    getItem,
+    searchItems,
+    getItems,
+    addItem,
+    updateItem,
+    confirmDelete,
   };
 }

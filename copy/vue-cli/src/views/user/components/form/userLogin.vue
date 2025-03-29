@@ -1,61 +1,60 @@
 <template>
+  <div class="bg-base-100 rounded-lg shadow">
+    <div class="card-body p-6">
+      <div class="alert alert-error mb-4" v-if="usersError">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>{{ usersError }}</span>
+      </div>
 
-  <div class="hero min-h-screen bg-base-200 rounded-box">
-  <div class="flex-col justify-center hero-content lg:flex-row">
-    <div class="text-center lg:text-left px-5">
-      <h1 class="mb-5 text-5xl font-bold">
-            Hello there
-      </h1> 
-      <p class="mb-5">
-            Provident cupiditate voluptatem et in.eleniti eaque aut repudiandae et a id nisi.
-      </p>
-    </div> 
-
-    <div class="card flex-shrink-0 w-full max-w-sm shadow-lg bg-base-100">
-      <div class="card-body">
-        <div class="alert alert-error my-4" v-if="usersError">
-          <div class="flex-1">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-6 h-6 mx-2 stroke-current">    
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>                      
-            </svg> 
-            <label>{{usersError}}</label>
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text font-medium text-gray-700">Email</span>
+        </label> 
+        <input type="email" placeholder="Enter your email" v-model="email" class="input input-bordered bg-gray-50">
+        <label class="label" v-if="errorEmail">
+          <span class="label-text-alt text-error">{{ errorEmail }}</span>
+        </label>
+      </div> 
+      
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text font-medium text-gray-700">Password</span>
+        </label> 
+        <input type="password" placeholder="Enter your password" v-model="password" class="input input-bordered bg-gray-50"> 
+        <label class="label" v-if="errorPassword">
+          <span class="label-text-alt text-error">{{ errorPassword }}</span>
+        </label>
+        
+        <div class="flex justify-between items-center mt-2">
+          <div class="form-control">
+            <label class="cursor-pointer label justify-start gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm checkbox-primary">
+              <span class="label-text text-sm">Remember me</span>
+            </label>
           </div>
-        </div>
-
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">Email</span>
-          </label> 
-          <input type="text" placeholder="email" v-model="email" class="input input-bordered">
-          <label class="label">
-            <span class="label-text-alt text-red-400">{{ errorEmail }}</span>
-          </label>
-        </div> 
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">Password</span>
-          </label> 
-          <input type="password" placeholder="password" v-model="password" class="input input-bordered"> 
-          
-          <label class="label">
-            <span class="label-text-alt text-red-400">{{ errorPassword }}</span>
-          </label>
-
-          <label class="label">
-            <router-link to="/user/signIn" class="label-text-alt text-red-500">sign up</router-link>
-          </label>
-        </div> 
-        <div class="form-control mt-6">
-          <a @click="login" class="btn btn-primary" :class="usersLoading && 'loading btn-disabled'">Login</a>
+          <router-link to="/user/forgot-password" class="text-sm text-primary hover:underline">Forgot password?</router-link>
         </div>
       </div>
+      
+      <div class="form-control mt-6">
+        <button @click="login" class="btn btn-primary w-full" :class="usersLoading && 'loading btn-disabled'">
+          Login
+        </button>
+      </div>
+      
+      <div class="divider text-gray-400 text-sm">OR</div>
+      
+      <div class="text-center">
+        <p class="text-sm text-gray-600 mb-2">Don't have an account?</p>
+        <router-link to="/user/signIn" class="text-primary hover:underline font-medium">
+          Create new account
+        </router-link>
+      </div>
     </div>
-
   </div>
-</div>
-
 </template>
-
 
 <script>
 import useUserLogin from "./userLoginValidate";
@@ -64,7 +63,7 @@ import useUser from "../../../../compositions/useModelUser";
 
 export default {
   setup() {
-    const { validate, errors, values } = useUserLogin();
+    const { validate, errors, values, setValues} = useUserLogin();
     const router = useRouter();
     const route = useRoute();
 

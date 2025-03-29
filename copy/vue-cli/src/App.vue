@@ -1,10 +1,10 @@
 <template>
   <Header :menu="menu" v-if="header && header == 'userHeader'"/>
 
-  <div class="drawer drawer-mobile bg-base-100 dark:bg-neutral text-base-content dark:text-neutral-content min-h-screen">
+  <div class="drawer drawer-mobile bg-base-200 dark:bg-neutral text-base-content dark:text-neutral-content min-h-screen">
     <input id="my-drawer-2" type="checkbox" class="drawer-toggle"> 
     <div class="drawer-content flex flex-col">
-      <div class="flex flex-col w-full p-4 pt-20">
+      <div class="flex flex-col w-full p-4">
           <router-view></router-view>  
       </div>
     </div> 
@@ -18,6 +18,7 @@
     </div>
   </div>
   <Footer v-if="footer && footer == 'globalFooter'"/>
+  <CookieConsent />
 </template>
 
 <script setup>
@@ -25,6 +26,8 @@ import Header from "./components/header/Header.vue";
 import Footer from "./components/footer/Footer.vue";
 import Menu from "./components/menu/Menu.vue";
 import QuestMenu from "./components/menu/QuestMenu.vue";
+import CookieConsent from "./components/CookieConsent.vue";
+import { useSeo } from './compositions/useSeo'
 
 import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
@@ -34,8 +37,15 @@ const menu  = ref(false);
 const header  = ref(false);
 const footer  = ref(false);
 
+useSeo();
 watch(route, (route) => {
   const dir = direction.filter(i => i.page == route.name)[0]
+
+    // Sayfayı en üste kaydır
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    window.scrollTo(0, 0);
+
   if(dir){
     menu.value = typeof dir.menu === "undefined" ? direction[0].menu : dir.menu; 
     header.value = typeof dir.header === "undefined" ? direction[0].header : dir.header; 

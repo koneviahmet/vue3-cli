@@ -8,7 +8,7 @@ export default function () {
   const { value: lastName, errorMessage: errorLastName } = useField("lastName");
   const { value: password, errorMessage: errorPassword } = useField("password");
 
-  const { errors, validate, values } = useForm({
+  const { errors, validate, values, setValues } = useForm({
     validationSchema: yup.object({
       email: yup
         .string()
@@ -21,6 +21,7 @@ export default function () {
   });
 
   return {
+    setValues,
     email,
     name,
     lastName,

@@ -9,4 +9,14 @@ export const infoRouters = [
     path: "/privacy",
     component: () => import("../../views/info/Privacy.vue"),
   },
+  {
+    name: "ContactPage",
+    path: "/contact",
+    component: () => import("../../views/info/Contact.vue"),
+  },
+  {
+    name: "CookiePolicyPage",
+    path: "/cookie-policy",
+    component: () => import("../../views/info/CookiePolicy.vue"),
+  },
 ];

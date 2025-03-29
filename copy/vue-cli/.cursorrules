@@ -2,20 +2,24 @@ bu projede kendi geliştirdiğim vue-cli yapısını kullanıyorum. sana mantı�
 -- bu cli yapısı ile kendine hazır tablolar oluşturabilirsin. 
     --- oluşturduğun tabloların, api bağlantıları ve roouter sayfaları otomatik oluşturulur.
     --- vue-cli --tjson ./books.json -> terminal kodunu oluşturarak toplu tablolar oluşturabilirsin.
-    --- bunun için ana dizinde bir json dosyası oluşturmalı ve aşağıdaki json yapısına benzer bir kod eklemeli ve "vue-cli --tjson ./books.json" kodunu terminalde çağırmalısın.
-    --- tablolarda "users" isimini kullanma bunu yerine başka bir isim kullanabilirsin.
+    --- bunun için ana dizinde bir json dosyası oluşturmalı ve aşağıdaki json yapısına benzer bir kod eklemeli ve vue-cli --tjson ./books.json kodunu terminalde çağırmalısın.
+    --- tablolarda users isimini kullanma bunu yerine başka bir isim kullanabilirsin.
     {
-        "books": ["book_id", "book_title", "book_author", "book_created_at", "book_updated_at"],
-        "categories": ["category_id", "category_name", "category_created_at", "category_updated_at"],
-        "authors": ["author_id", "author_name", "author_created_at", "author_updated_at"],
-        "publishers": ["publisher_id", "publisher_name", "publisher_created_at", "publisher_updated_at"],
-        "languages": ["language_id", "language_name", "language_created_at", "language_updated_at"]
+        books: [book_id, book_title, book_author, book_created_at, book_updated_at],
+        categories: [category_id, category_name, category_created_at, category_updated_at],
+        authors: [author_id, author_name, author_created_at, author_updated_at],
+        publishers: [publisher_id, publisher_name, publisher_created_at, publisher_updated_at],
+        languages: [language_id, language_name, language_created_at, language_updated_at]
     }
+    --- giriş yapmış kullanıcının bilgilerini store den alabilirsin. aşağıdaki fonksiyonda olduğu gibi.
+        const user = computed(() => {
+            return store.getters._getCurrentUser;
+        });
 
 routers dosyasının içinde yeni bir yol eklemiş isen;
  -- eklediğin yol ile ilgili bilgileri utils klasöründe bulunan roles.js ve direction.js dosyalarını kaydetmelisin.
  -- direction.js dosyasında eklediğin yolun menü, header ve footer bilgilerini eklemelisin.
- -- roles.js dosyasına eklediğin yolun rol bilgilerini eklemelisin. (örneğin: "UserHome: [1, 2, 3]" gibi)   
+ -- roles.js dosyasına eklediğin yolun rol bilgilerini eklemelisin. (örneğin: UserHome: [1, 2, 3] gibi)   
 
  Tasarım yaparken dikket etmen gereken hususlar.
  -tasarımlarda tailwindcss kullan.
@@ -26,26 +30,23 @@ bu projede kendi geliştirdiğim vue-cli yapısını kullanıyorum. sana mantı�
 -- bu cli yapısı ile kendine hazır tablolar oluşturabilirsin. 
     --- oluşturduğun tabloların, api bağlantıları ve roouter sayfaları otomatik oluşturulur.
     --- vue-cli --tjson ./books.json -> terminal kodunu oluşturarak toplu tablolar oluşturabilirsin.
-    --- bunun için ana dizinde bir json dosyası oluşturmalı ve aşağıdaki json yapısına benzer bir kod eklemeli ve "vue-cli --tjson ./books.json" kodunu terminalde çağırmalısın.
-    --- tablolarda "users" isimini kullanma bunu yerine başka bir isim kullanabilirsin.
+    --- bunun için ana dizinde bir json dosyası oluşturmalı ve aşağıdaki json yapısına benzer bir kod eklemeli ve vue-cli --tjson ./books.json kodunu terminalde çağırmalısın.
+    --- tablolarda users isimini kullanma bunu yerine başka bir isim kullanabilirsin.
     --- tüm tabloların id isimleri id olarak otomatik olarak oluşturulur. tekrardan eklenmesine gerek yoktur.
     {
-        "books": ["book_title", "book_author", "book_created_at", "book_updated_at"],
-        "categories": ["category_name", "category_created_at", "category_updated_at"],
-        "authors": ["author_name", "author_created_at", "author_updated_at"],
-        "publishers": ["publisher_name", "publisher_created_at", "publisher_updated_at"],
-        "languages": ["language_name", "language_created_at", "language_updated_at"]
+        books: [book_title, book_author, book_created_at, book_updated_at],
+        categories: [category_name, category_created_at, category_updated_at],
+        authors: [author_name, author_created_at, author_updated_at],
+        publishers: [publisher_name, publisher_created_at, publisher_updated_at],
+        languages: [language_name, language_created_at, language_updated_at]
     }
-    -- json dosyasını oluşturduktan sonra terminalde "vue-cli --tjson ./books.json" kodunu çalıştır.
-    --- giriş yapmış kullanıcının bilgilerini store den alabilirsin. aşağıdaki fonksiyonda olduğu gibi.
-        const user = computed(() => {
-            return store.getters._getCurrentUser;
-        });
+    -- json dosyasını oluşturduktan sonra terminalde vue-cli --tjson ./books.json kodunu çalıştır.
+
 
 routers dosyasının içinde yeni bir yol eklemiş isen;
  -- eklediğin yol ile ilgili bilgileri utils klasöründe bulunan roles.js ve direction.js dosyalarını kaydetmelisin.
  -- direction.js dosyasında eklediğin yolun menü, header ve footer bilgilerini eklemelisin.
- -- roles.js dosyasına eklediğin yolun rol bilgilerini eklemelisin. (örneğin: "UserHome: [1, 2, 3]" gibi)   
+ -- roles.js dosyasına eklediğin yolun rol bilgilerini eklemelisin. (örneğin: UserHome: [1, 2, 3] gibi)   
 
  Tasarım yaparken dikket etmen gereken hususlar.
  -tasarımlarda tailwindcss kullan.
@@ -68,6 +69,7 @@ api bağlantıları için src/compositions dosyasında bulunan api pağlantına 
 vue yazarken kullanılacak olan yapılar.
 - <template> şeklinde yaz.
 - <script setup> şeklinde yaz.
+    - views/tabla_name/components/ klasöründe bulunan componentlerde değiştireceğin component <script setup> şeklinde ise bu şekilde kullan değilse <script> şeklinde kullan.
 - <style scoped> şeklinde yaz.
 
 
@@ -75,3 +77,46 @@ vue yazarken kullanılacak olan yapılar.
     - bunun için db/db.json dosyasını kullanıyorum.
     - json-server dökümanlarını https://github.com/typicode/json-server/tree/v0?tab=readme-ov-file adresinden inceleeyebilirsin
     - projede ihtiyaç duyduğun api bağlantılarını src/services/ klasörü altında bulunan ilgili .js dosyasına tanımlayarak servisi src/compositions klasöründe bulunan ilgili compositions dosyasına tanımlayarak kullanabilirsin.
+    - vue-cli 3001 portunda çalışıyor.başka porttan çalıştırmaya uğraşma. 
+
+    - json-server için örnek urller aşağıda listelenmiştir. Kullanım amacına uygun olacak şekilde sen lendin uygun service yazabilirsin.
+        http://localhost:3000/users -> Tüm kullanıcıları listeler.
+        http://localhost:3000/products -> Tüm ürünleri listeler.
+        http://localhost:3000/orders -> Tüm siparişleri listeler.
+        http://localhost:3000/posts -> Tüm gönderileri listeler.
+        http://localhost:3000/comments -> Tüm yorumları listeler.
+        http://localhost:3000/categories -> Tüm kategorileri listeler.
+        http://localhost:3000/books -> Tüm kitapları listeler.
+        http://localhost:3000/customers -> Tüm müşterileri listeler.
+        http://localhost:3000/employees -> Tüm çalışanları listeler.
+        http://localhost:3000/tasks -> Tüm görevleri listeler.
+        http://localhost:3000/users/1 -> 1 numaralı kullanıcıyı getirir.
+        http://localhost:3000/products/5 -> 5 numaralı ürünü getirir.
+        http://localhost:3000/orders/10 -> 10 numaralı siparişi getirir.
+        http://localhost:3000/posts/20 -> 20 numaralı gönderiyi getirir.
+        http://localhost:3000/comments/30 -> 30 numaralı yorumu getirir.
+        http://localhost:3000/categories/2 -> 2 numaralı kategoriyi getirir.
+        http://localhost:3000/books/8 -> 8 numaralı kitabı getirir.
+        http://localhost:3000/customers/15 -> 15 numaralı müşteriyi getirir.
+        http://localhost:3000/employees/25 -> 25 numaralı çalışanı getirir.
+        http://localhost:3000/tasks/40 -> 40 numaralı görevi getirir.
+        http://localhost:3000/users?name=John -> Adı John olan kullanıcıları getirir.
+        http://localhost:3000/products?category=electronics -> Kategorisi electronics olan ürünleri getirir.
+        http://localhost:3000/orders?status=pending -> Durumu pending olan siparişleri getirir.
+        http://localhost:3000/posts?author=Jane -> Yazarı Jane olan gönderileri getirir.
+        http://localhost:3000/comments?postId=1 -> postIdsi 1 olan yorumları getirir.
+        http://localhost:3000/categories?type=tech -> türü tech olan kategorileri getirir.
+        http://localhost:3000/books?genre=fiction -> türü fiction olan kitapları getirir.
+        http://localhost:3000/customers?city=Ankara -> Şehri Ankara olan müşterileri getirir.
+        http://localhost:3000/employees?department=sales -> Departmanı sales olan çalışanları getirir.
+        http://localhost:3000/tasks?completed=false -> tamamlanmamış görevleri getirir.
+        http://localhost:3000/products?_sort=price&_order=asc -> Ürünleri fiyata göre artan sırada sıralar.
+        http://localhost:3000/users?_sort=name&_order=desc -> Kullanıcıları ada göre azalan sırada sıralar.
+        http://localhost:3000/posts?_sort=date&_order=desc -> Gönderileri tarihe göre azalan sırada sıralar.
+        http://localhost:3000/orders?_sort=total&_order=asc -> Siparişleri toplama göre artan sırada sıralar.
+        http://localhost:3000/comments?_sort=likes&_order=desc -> Yorumları beğeni sayısına göre azalan sırada sıralar.
+        http://localhost:3000/categories?_sort=name&_order=asc -> Kategorileri isme göre artan sırada sıralar.
+        http://localhost:3000/books?_sort=rating&_order=desc -> Kitapları puana göre azalan sırada sıralar.
+        http://localhost:3000/customers?_sort=registrationDate&_order=asc -> Müşterileri kayıt tarihine göre artan sırada sıralar.
+        http://localhost:3000/employees?_sort=salary&_order=desc -> Çalışanları maaşa göre azalan sırada sıralar.
+        http://localhost:3000/tasks?_sort=dueDate&_order=asc -> Görevleri bitiş tarihine göre artan sırada sıralar.

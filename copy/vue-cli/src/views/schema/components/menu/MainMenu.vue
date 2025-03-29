@@ -1,10 +1,15 @@
 <template>
-    <div class="p-3">
-        <ul class="flex">
-        <li class="mr-2" v-for="url in urlArr" :key="url.id">
-            <router-link   class="inline-block border  rounded py-1 px-3 " :class='route.fullPath == url.to && "bg-blue-500 text-white"' :to="url.to">{{url.title}}</router-link>
-        </li>
-    </ul>
+    <div class="mb-6">
+        <div class="flex flex-col sm:flex-row items-center">
+            <div class="tabs tabs-boxed bg-base-200 p-1 flex-wrap justify-center mb-2 sm:mb-0">
+                <router-link v-for="url in urlArr" :key="url.id"
+                    :to="url.to"
+                    class="tab tab-sm sm:tab-md transition-all duration-200"
+                    :class="[route.fullPath == url.to ? 'tab-active bg-primary text-primary-content' : 'hover:bg-base-300']">
+                    {{url.title}}
+                </router-link>
+            </div>
+        </div>
     </div>
 </template>
 
