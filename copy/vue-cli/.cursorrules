@@ -120,3 +120,46 @@ vue yazarken kullanılacak olan yapılar.
         http://localhost:3000/customers?_sort=registrationDate&_order=asc -> Müşterileri kayıt tarihine göre artan sırada sıralar.
         http://localhost:3000/employees?_sort=salary&_order=desc -> Çalışanları maaşa göre azalan sırada sıralar.
         http://localhost:3000/tasks?_sort=dueDate&_order=asc -> Görevleri bitiş tarihine göre artan sırada sıralar.
+
+
+- projeyi planla dediğim zaman aşağıdaki gibi planlama yapmanı istiyorum.
+ - proje yönetiminde db/db.json dosyasında bulunan tasks bölümünü kullan. tasks bölümünün json yapısının örneği aşağıdaki gibidir.
+ - tasks için girdiğin içerikler türkçe olarak yaz.
+ - planlamanı detaylı bir şekilde yapmanı istiyorum.
+ - db/db.json dosyasını live-server ile http://localhost:5173/tasks adresinden takip edebiliyorum.
+ - kanban-tasks içinde taskların detaylarını yazabilirsin.
+ - proje için oluşturmayı düüşündüğün her tablo için ayrı bir task oluşturabilirsin.
+ - örnek tasks objesi aşağıdaki gibidir.
+     {
+      "id": 1,
+      "title": "books tablosu oluşturulacak",
+      "description": "books adında bir tablo vue-cli ile oluşturulacak",
+      "status": "pending",
+      "priority": "medium",
+      "due_date": "2025-03-04",
+      "notes": "buraya not eklenebilir",
+      "completed": false,
+      "tags": [],
+      "checklist": [
+        {
+          "id": 1743253320097,
+          "text": "views/books/home.vue sayfasını dashboar olacak şekilde tasarla.",
+          "completed": true
+        },
+        {
+          "id": 1743253323080,
+          "text": "views/books klasöründe bulunanan componentleri sitenin genel tasarımına uygun olacak şekilde tasarla.",
+          "completed": true
+        }
+      ],
+      "updated_at": "2025-03-29T13:44:30.053Z",
+      "created_at": "2025-03-29T13:01:22.670Z",
+      "assigned_to": 1
+    }
+ 
+
+ - projedeki taskları tamamla dediğim zaman aşağıdaki gibi taskları tamamla.
+    - db/db.json dosyasını live-server için kullanıyorum. http://localhost:5173/tasks adresinden takip edebiliyorum.
+    - taskları tamamla tamamlanmamış (completed: false) olan taskların tamlanmamış checklistlerini kontrol et.
+    - checklistleri sırasıyla tamamla ve completed: true yap.
+    - tasks içinde bütün checklistler completed: true yapıldığında task'ın completed: true yap.
