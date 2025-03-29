@@ -67,8 +67,8 @@ export default {
        
         onMounted(() => {
           const now = new Date().toISOString();
-          setValues({author_created_at:now})
-          setValues({author_updated_at:now})
+          setValues({schema_created_at:now})
+          setValues({schema_updated_at:now})
         })
 
 
