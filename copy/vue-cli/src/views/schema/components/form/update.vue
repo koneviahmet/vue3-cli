@@ -80,7 +80,7 @@ export default {
         onMounted(() => {
             getSchema({ id: route.params.id })
             .then(response => {
-                setValues({schemaText: response.schemaText})
+                setValues({schemaText:response.schemaText})
             })
             .catch(error => console.log(error))
         })

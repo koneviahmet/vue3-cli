@@ -118,14 +118,13 @@ export default function () {
   const loginUser = async (obj) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      await UsersServices.getUser(obj)
+      await UsersServices.loginUser(obj)
         .then((response) => {
           loading.value = false;
-
           if (response && !response?.error) {
-            data.list = { ...response };
-            resolve({ ...response });
-            store.commit("setUser", response);
+            // data.list = { ...response };
+            resolve({ ...response[0] });
+            store.commit("setUser", response[0]);
           }else{
             if(response?.error){
               error.value = response.error;

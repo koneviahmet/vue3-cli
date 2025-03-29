@@ -49,6 +49,10 @@ import { useRoute } from "vue-router";
 
 const route = useRoute();
 const urlArr = ref([
+  { to: "/admin", title: "Admin"},
+  { to: "/kanban", title: "Kanban"},
+  { to: "/calendar", title: "Takvim"},
+  { to: "/tasks", title: "Görevler"},
   {
     to: "/",
     title: "Home Page",

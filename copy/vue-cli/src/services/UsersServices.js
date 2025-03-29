@@ -19,6 +19,12 @@ const UsersServices = {
       return response?.data;
     } catch (e) {}
   },
+  loginUser: async (obj) => {
+    try {
+      const response = await http.get(`/users`, {params: obj});
+      return response?.data;
+    } catch (e) {}
+  },
   addUser: async (obj) => {
     try {
       const response = await http.post("/users", obj);

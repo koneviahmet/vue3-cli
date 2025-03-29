@@ -182,8 +182,13 @@ const createTable = async (table_name, secJson) => {
             secJson.map(i => {
               valueUpdateString += `setValues({${i}: response.${i}})\n              `;
             })
-
-            componentFormUpdateR  = await afs.replaceFile(componentFormUpdateR, 'setValues({schemaText: response.schemaText})', valueUpdateString);
+            
+            
+            componentFormUpdateR = await afs.replaceFile(
+              componentFormUpdateR,
+              new RegExp('setValues\\(\\{schemaText:response\\.schemaText\\}\\)', 'g'),
+              valueUpdateString
+          );
             componentFormUpdateR   = await afs.replaceFile(componentFormUpdateR, 'schemaText', secJson[0]);  
             componentFormUpdateR   = await afs.replaceFile(componentFormUpdateR, 'errorSchemaText', "error"+secJsonFirstUF);  
             componentFormUpdateR   = await afs.replaceFile(componentFormUpdateR, 'schema', table_name);

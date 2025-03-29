@@ -69,23 +69,22 @@ export default {
 
     const { usersLoading, usersError, loginUser } = useUser();
 
-    values.email = "koneviahmet@gmail.com";
-    values.password = "123456";
+    // values.email = "koneviahmet@gmail.com";
+    // values.password = "123456";
 
     const login = () => {
-      const newData = {
-        email: values.email,
-        password: values.password,
-      };
+
 
       validate()
         .then((validateSuccess) => {
           !validateSuccess.valid && console.log("Check the form.");
 
           if (validateSuccess.valid) {
-            loginUser({ id: 1 }).then(
-              (response) =>
-                response.id && router.push(`/user/detail/${response.id}`)
+            loginUser({ ...values }).then(
+              (response) =>            
+                {                  
+                  response.id && router.push(`/user/detail/${response.id}`)
+                }
             );
           }
         })

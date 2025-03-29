@@ -2,13 +2,10 @@
   "users": [
     {
       "email": "koneviahmet@gmail.com",
-      "name": "Ahmetx",
-      "lastName": "Şıkss",
+      "name": "Ahmet",
+      "lastName": "Şıks",
       "password": "123456",
-      "id": 1,
-      "role": 3,
-      "status": "active",
-      "lastLogin": "2023-09-15T14:23:45.678Z"
+      "id": 1
     },
     {
       "email": "asdasd@asd.com",
