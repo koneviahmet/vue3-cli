@@ -196,17 +196,13 @@ const getSecondHalfProperties = (data) => {
 
 // Confirm deletion
 const confirmDelete = () => {
-  Alert.showPrompt("Are you sure you want to delete this schema? This action cannot be undone.").then((res) => {
-    if (!res.isConfirmed) {
-      notyfError("Deletion cancelled");
-      return;
-    }
-    
     deleteSchema(selectData.value).then(() => {
       notyfSuccess("Schema deleted successfully");
       router.push('/schema/list');
+    }).catch(error => {
+      notyfError("Failed to delete schema");
+      console.error(error);
     });
-  });
 };
 </script>
 
