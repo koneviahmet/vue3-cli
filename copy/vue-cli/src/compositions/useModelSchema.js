@@ -6,11 +6,11 @@ import { notyfError, notyfSuccess } from "../utils/notyf.js";
 
 export default function () {
   const loading = ref(false);
-  const data = reactive({ list: [] });
+  const data = ref([]);
   const error = ref(false);
 
   watch(data, () => {
-    store.commit("addSchema", [...data.list])
+    store.commit("addSchema", [...data.value])
     //console.log("changed",store.getters._getSchema);
   })
 
@@ -21,7 +21,7 @@ export default function () {
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
-              data.list = [...response];
+              data.value = [...response];
               resolve([...response]); 
           }else{
             if(response?.error){
@@ -57,7 +57,7 @@ export default function () {
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
-            data.list = [...response];
+            data.value = [...response];
             resolve([...response]); 
         }else{
           if(response?.error){
@@ -90,7 +90,7 @@ export default function () {
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
-            //data.list = {...response};
+            //data = {...response};
             resolve({...response}); 
         }else{
           if(response?.error){
@@ -161,7 +161,7 @@ export default function () {
           loading.value = false;
 
           if (response && !response?.error) {
-            //data.list = [...response]
+            //data = [...response]
             updateStoreData(response)
 
             resolve({ ...response });
@@ -214,7 +214,7 @@ export default function () {
           if (response && !response?.error) {
             notyfSuccess("Delete success")
             deleteStoreData(obj.id)
-            resolve([...data.list.filter((i) => i.id != obj.id)]);
+            resolve([...data.filter((i) => i.id != obj.id)]);
           }else{
             if(response?.error){
               error.value = response.error;
@@ -242,18 +242,18 @@ export default function () {
 
   
   const addStoreData = (item) => {
-    data.list = [...getStoreData.value, item]
+    data.value = [...getStoreData.value, item]
   } 
 
 
   const updateStoreData = (item) => {
     const index = getStoreData.value.map(i => i.id).indexOf(item.id);
     getStoreData.value[index] = item;
-    data.list = getStoreData.value;
+    data.value = getStoreData.value;
   }
 
   const deleteStoreData = (id) => {
-    data.list = [...getStoreData.value.filter((i) => i.id != id)];
+    data.value = [...getStoreData.value.filter((i) => i.id != id)];
   }
 
   const getStoreData = computed(() => {
@@ -263,8 +263,7 @@ export default function () {
   return {
     error,
     loading,
-    // data: toRefs(data).list,
-    data: data.list,
+    data,
     getStoreData,
     getItem,
     searchItems,
