@@ -127,7 +127,7 @@ vue yazarken kullanılacak olan yapılar.
  - tasks için girdiğin içerikler türkçe olarak yaz.
  - planlamanı detaylı bir şekilde yapmanı istiyorum.
  - db/db.json dosyasını live-server ile http://localhost:5173/tasks adresinden takip edebiliyorum.
- - kanban-tasks içinde taskların detaylarını yazabilirsin.
+ - tasks içinde taskların detaylarını yazabilirsin.
  - proje için oluşturmayı düüşündüğün her tablo için ayrı bir task oluşturabilirsin.
  - örnek tasks objesi aşağıdaki gibidir.
      {
