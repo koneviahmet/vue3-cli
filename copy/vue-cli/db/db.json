@@ -311,12 +311,12 @@
     {
       "id": 1,
       "title": "Yapılacaklar",
-      "description": "Burada yapılacaklar olacak",
-      "status": "completed",
+      "description": "task ile ilgili açıklama ",
+      "status": "pending",
       "priority": "medium",
       "due_date": "2025-03-04",
-      "notes": "not ne notu",
-      "completed": true,
+      "notes": "task ile ilgili not ",
+      "completed": false,
       "tags": [
         "burada",
         "etiket",
@@ -325,21 +325,16 @@
       "checklist": [
         {
           "id": 1743253320097,
-          "text": "selam 2",
+          "text": "Yapılacaklar 1",
           "completed": true
         },
         {
           "id": 1743253323080,
-          "text": "selam 3",
-          "completed": true
-        },
-        {
-          "id": 1743255421848,
-          "text": "asdasd",
-          "completed": true
+          "text": "Yapılacaklar 2 s",
+          "completed": false
         }
       ],
-      "updated_at": "2025-03-29T13:44:30.053Z",
+      "updated_at": "2025-03-31T20:06:49.507Z",
       "created_at": "2025-03-29T13:01:22.670Z",
       "assigned_to": 1
     }
@@ -409,7 +404,7 @@
         }
       ],
       "assignedTo": 1,
-      "columnId": 3,
+      "columnId": 2,
       "created_at": "2025-03-29T13:01:22.670Z",
       "updated_at": "2025-03-29T13:14:51.128Z",
       "id": 1
@@ -442,7 +437,7 @@
           "completed": true
         }
       ],
-      "columnId": 2,
+      "columnId": 3,
       "assignedTo": 1,
       "created_at": "2025-03-29T13:01:22.670Z",
       "updated_at": "2025-03-29T13:13:37.064Z"

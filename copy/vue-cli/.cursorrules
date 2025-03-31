@@ -80,86 +80,86 @@ vue yazarken kullanılacak olan yapılar.
     - vue-cli 3001 portunda çalışıyor.başka porttan çalıştırmaya uğraşma. 
 
     - json-server için örnek urller aşağıda listelenmiştir. Kullanım amacına uygun olacak şekilde sen lendin uygun service yazabilirsin.
-        http://localhost:3000/users -> Tüm kullanıcıları listeler.
-        http://localhost:3000/products -> Tüm ürünleri listeler.
-        http://localhost:3000/orders -> Tüm siparişleri listeler.
-        http://localhost:3000/posts -> Tüm gönderileri listeler.
-        http://localhost:3000/comments -> Tüm yorumları listeler.
-        http://localhost:3000/categories -> Tüm kategorileri listeler.
-        http://localhost:3000/books -> Tüm kitapları listeler.
-        http://localhost:3000/customers -> Tüm müşterileri listeler.
-        http://localhost:3000/employees -> Tüm çalışanları listeler.
-        http://localhost:3000/tasks -> Tüm görevleri listeler.
-        http://localhost:3000/users/1 -> 1 numaralı kullanıcıyı getirir.
-        http://localhost:3000/products/5 -> 5 numaralı ürünü getirir.
-        http://localhost:3000/orders/10 -> 10 numaralı siparişi getirir.
-        http://localhost:3000/posts/20 -> 20 numaralı gönderiyi getirir.
-        http://localhost:3000/comments/30 -> 30 numaralı yorumu getirir.
-        http://localhost:3000/categories/2 -> 2 numaralı kategoriyi getirir.
-        http://localhost:3000/books/8 -> 8 numaralı kitabı getirir.
-        http://localhost:3000/customers/15 -> 15 numaralı müşteriyi getirir.
-        http://localhost:3000/employees/25 -> 25 numaralı çalışanı getirir.
-        http://localhost:3000/tasks/40 -> 40 numaralı görevi getirir.
-        http://localhost:3000/users?name=John -> Adı John olan kullanıcıları getirir.
-        http://localhost:3000/products?category=electronics -> Kategorisi electronics olan ürünleri getirir.
-        http://localhost:3000/orders?status=pending -> Durumu pending olan siparişleri getirir.
-        http://localhost:3000/posts?author=Jane -> Yazarı Jane olan gönderileri getirir.
-        http://localhost:3000/comments?postId=1 -> postIdsi 1 olan yorumları getirir.
-        http://localhost:3000/categories?type=tech -> türü tech olan kategorileri getirir.
-        http://localhost:3000/books?genre=fiction -> türü fiction olan kitapları getirir.
-        http://localhost:3000/customers?city=Ankara -> Şehri Ankara olan müşterileri getirir.
-        http://localhost:3000/employees?department=sales -> Departmanı sales olan çalışanları getirir.
-        http://localhost:3000/tasks?completed=false -> tamamlanmamış görevleri getirir.
-        http://localhost:3000/products?_sort=price&_order=asc -> Ürünleri fiyata göre artan sırada sıralar.
-        http://localhost:3000/users?_sort=name&_order=desc -> Kullanıcıları ada göre azalan sırada sıralar.
-        http://localhost:3000/posts?_sort=date&_order=desc -> Gönderileri tarihe göre azalan sırada sıralar.
-        http://localhost:3000/orders?_sort=total&_order=asc -> Siparişleri toplama göre artan sırada sıralar.
-        http://localhost:3000/comments?_sort=likes&_order=desc -> Yorumları beğeni sayısına göre azalan sırada sıralar.
-        http://localhost:3000/categories?_sort=name&_order=asc -> Kategorileri isme göre artan sırada sıralar.
-        http://localhost:3000/books?_sort=rating&_order=desc -> Kitapları puana göre azalan sırada sıralar.
-        http://localhost:3000/customers?_sort=registrationDate&_order=asc -> Müşterileri kayıt tarihine göre artan sırada sıralar.
-        http://localhost:3000/employees?_sort=salary&_order=desc -> Çalışanları maaşa göre azalan sırada sıralar.
-        http://localhost:3000/tasks?_sort=dueDate&_order=asc -> Görevleri bitiş tarihine göre artan sırada sıralar.
+        http://localhost:3004/users -> Tüm kullanıcıları listeler.
+        http://localhost:3004/products -> Tüm ürünleri listeler.
+        http://localhost:3004/orders -> Tüm siparişleri listeler.
+        http://localhost:3004/posts -> Tüm gönderileri listeler.
+        http://localhost:3004/comments -> Tüm yorumları listeler.
+        http://localhost:3004/categories -> Tüm kategorileri listeler.
+        http://localhost:3004/books -> Tüm kitapları listeler.
+        http://localhost:3004/customers -> Tüm müşterileri listeler.
+        http://localhost:3004/employees -> Tüm çalışanları listeler.
+        http://localhost:3004/tasks -> Tüm görevleri listeler.
+        http://localhost:3004/users/1 -> 1 numaralı kullanıcıyı getirir.
+        http://localhost:3004/products/5 -> 5 numaralı ürünü getirir.
+        http://localhost:3004/orders/10 -> 10 numaralı siparişi getirir.
+        http://localhost:3004/posts/20 -> 20 numaralı gönderiyi getirir.
+        http://localhost:3004/comments/30 -> 30 numaralı yorumu getirir.
+        http://localhost:3004/categories/2 -> 2 numaralı kategoriyi getirir.
+        http://localhost:3004/books/8 -> 8 numaralı kitabı getirir.
+        http://localhost:3004/customers/15 -> 15 numaralı müşteriyi getirir.
+        http://localhost:3004/employees/25 -> 25 numaralı çalışanı getirir.
+        http://localhost:3004/tasks/40 -> 40 numaralı görevi getirir.
+        http://localhost:3004/users?name=John -> Adı John olan kullanıcıları getirir.
+        http://localhost:3004/products?category=electronics -> Kategorisi electronics olan ürünleri getirir.
+        http://localhost:3004/orders?status=pending -> Durumu pending olan siparişleri getirir.
+        http://localhost:3004/posts?author=Jane -> Yazarı Jane olan gönderileri getirir.
+        http://localhost:3004/comments?postId=1 -> postIdsi 1 olan yorumları getirir.
+        http://localhost:3004/categories?type=tech -> türü tech olan kategorileri getirir.
+        http://localhost:3004/books?genre=fiction -> türü fiction olan kitapları getirir.
+        http://localhost:3004/customers?city=Ankara -> Şehri Ankara olan müşterileri getirir.
+        http://localhost:3004/employees?department=sales -> Departmanı sales olan çalışanları getirir.
+        http://localhost:3004/tasks?completed=false -> tamamlanmamış görevleri getirir.
+        http://localhost:3004/products?_sort=price&_order=asc -> Ürünleri fiyata göre artan sırada sıralar.
+        http://localhost:3004/users?_sort=name&_order=desc -> Kullanıcıları ada göre azalan sırada sıralar.
+        http://localhost:3004/posts?_sort=date&_order=desc -> Gönderileri tarihe göre azalan sırada sıralar.
+        http://localhost:3004/orders?_sort=total&_order=asc -> Siparişleri toplama göre artan sırada sıralar.
+        http://localhost:3004/comments?_sort=likes&_order=desc -> Yorumları beğeni sayısına göre azalan sırada sıralar.
+        http://localhost:3004/categories?_sort=name&_order=asc -> Kategorileri isme göre artan sırada sıralar.
+        http://localhost:3004/books?_sort=rating&_order=desc -> Kitapları puana göre azalan sırada sıralar.
+        http://localhost:3004/customers?_sort=registrationDate&_order=asc -> Müşterileri kayıt tarihine göre artan sırada sıralar.
+        http://localhost:3004/employees?_sort=salary&_order=desc -> Çalışanları maaşa göre azalan sırada sıralar.
+        http://localhost:3004/tasks?_sort=dueDate&_order=asc -> Görevleri bitiş tarihine göre artan sırada sıralar.
 
 
-- projeyi planla dediğim zaman aşağıdaki gibi planlama yapmanı istiyorum.
- - proje yönetiminde db/db.json dosyasında bulunan tasks bölümünü kullan. tasks bölümünün json yapısının örneği aşağıdaki gibidir.
- - tasks için girdiğin içerikler türkçe olarak yaz.
- - planlamanı detaylı bir şekilde yapmanı istiyorum.
- - db/db.json dosyasını live-server ile http://localhost:5173/tasks adresinden takip edebiliyorum.
- - tasks içinde taskların detaylarını yazabilirsin.
- - proje için oluşturmayı düüşündüğün her tablo için ayrı bir task oluşturabilirsin.
- - örnek tasks objesi aşağıdaki gibidir.
-     {
-      "id": 1,
-      "title": "books tablosu oluşturulacak",
-      "description": "books adında bir tablo vue-cli ile oluşturulacak",
-      "status": "pending",
-      "priority": "medium",
-      "due_date": "2025-03-04",
-      "notes": "buraya not eklenebilir",
-      "completed": false,
-      "tags": [],
-      "checklist": [
-        {
-          "id": 1743253320097,
-          "text": "views/books/home.vue sayfasını dashboar olacak şekilde tasarla.",
-          "completed": true
-        },
-        {
-          "id": 1743253323080,
-          "text": "views/books klasöründe bulunanan componentleri sitenin genel tasarımına uygun olacak şekilde tasarla.",
-          "completed": true
-        }
-      ],
-      "updated_at": "2025-03-29T13:44:30.053Z",
-      "created_at": "2025-03-29T13:01:22.670Z",
-      "assigned_to": 1
-    }
+; - projeyi planla dediğim zaman aşağıdaki gibi planlama yapmanı istiyorum.
+;  - proje yönetiminde db/db.json dosyasında bulunan tasks bölümünü kullan. tasks bölümünün json yapısının örneği aşağıdaki gibidir.
+;  - tasks için girdiğin içerikler türkçe olarak yaz.
+;  - planlamanı detaylı bir şekilde yapmanı istiyorum.
+;  - db/db.json dosyasını json-server ile http://localhost:5173/tasks adresinden takip edebiliyorum.
+;  - tasks içinde taskların detaylarını yazabilirsin.
+;  - proje için oluşturmayı düüşündüğün her tablo için ayrı bir task oluşturabilirsin.
+;  - örnek tasks objesi aşağıdaki gibidir.
+;      {
+;       "id": 1,
+;       "title": "books tablosu oluşturulacak",
+;       "description": "books adında bir tablo vue-cli ile oluşturulacak",
+;       "status": "pending",
+;       "priority": "medium",
+;       "due_date": "2025-03-04",
+;       "notes": "buraya not eklenebilir",
+;       "completed": false,
+;       "tags": [],
+;       "checklist": [
+;         {
+;           "id": 1743253320097,
+;           "text": "views/books/home.vue sayfasını dashboar olacak şekilde tasarla.",
+;           "completed": true
+;         },
+;         {
+;           "id": 1743253323080,
+;           "text": "views/books klasöründe bulunanan componentleri sitenin genel tasarımına uygun olacak şekilde tasarla.",
+;           "completed": true
+;         }
+;       ],
+;       "updated_at": "2025-03-29T13:44:30.053Z",
+;       "created_at": "2025-03-29T13:01:22.670Z",
+;       "assigned_to": 1
+;     }
  
 
- - projedeki taskları tamamla dediğim zaman aşağıdaki gibi taskları tamamla.
-    - db/db.json dosyasını live-server için kullanıyorum. http://localhost:5173/tasks adresinden takip edebiliyorum.
-    - taskları tamamla tamamlanmamış (completed: false) olan taskların tamlanmamış checklistlerini kontrol et.
-    - checklistleri sırasıyla tamamla ve completed: true yap.
-    - tasks içinde bütün checklistler completed: true yapıldığında task'ın completed: true yap.
+;  - projedeki taskları tamamla dediğim zaman aşağıdaki gibi taskları tamamla.
+;     - db/db.json dosyasını json-server için kullanıyorum. http://localhost:5173/tasks adresinden takip edebiliyorum.
+;     - taskları tamamla tamamlanmamış (completed: false) olan taskların tamlanmamış checklistlerini kontrol et.
+;     - checklistleri sırasıyla tamamla ve completed: true yap.
+;     - tasks içinde bütün checklistler completed: true yapıldığında task'ın completed: true yap.

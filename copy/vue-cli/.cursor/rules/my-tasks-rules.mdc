@@ -1,0 +1,63 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+projeyi planla dediğim zaman aşağıdaki gibi planlama yapmanı istiyorum.
+ - projede kullanacağın tablo isimlerini belirlemeni ve vue-cli ile kullanılmak üzere hazırlamanı istiyorum.
+ - tasks bölümünde işlemler yapabilmen için fake-json ( [mcp.json](mdc:.cursor/mcp.json) ) adında bir mcp oluşturdum. 
+ - Proje de yapılacakları bir task olarak planlamanı istiyorum aşağıdaki senin için bir task örneği verdim.
+ - task json verisi hazırlarken dikkat edeceğin hususları aşağıda detaylı anlatacağım. 
+ - tasks için girdiğin içerikler türkçe olarak yaz.
+ - planlamanı detaylı bir şekilde yapmanı istiyorum.
+ - projede oluşturmayı düşündüğün her tablo için ayrı bir task oluşturabilirsin
+ - yeni task oluşturmak için (url: http://localhost:3004/tasks) adresine oluşturduğun json dosyasını post edebilirsin.
+ - oluşturduğun taskda uygun bir başlık belirle
+ - yapacaklarını genel hatlarıyla özetleyen bir açıklama yazabilirsin
+ - task ile ilgil bir tavsiyen olursa notlar bölümüne ekleyebilirsin.
+ - taskda yapılacakları sırası ile checklist içine ekle. 
+ - task için kaydettiğin verileri db/db.json dosyasında bulunan tasks bölümüne kaydediliyor.
+ - db/db.json dosyası http://localhost:3004 adresi üzerinden json-server tarafından kontrol ediliyor. 
+ - Eklediğin bir tablo ile ilgili checkist oluştururken aşağıdaki görevleri varsayılan olarak eklemeni istiyorum.
+   - src/views/ klasörü altında eklediğin tablonun Create.vue, Update.vue ve Search.vue componentlerinde bulunan formları, diğer tablolar ile olan bağlantılarına dikkat ederek sitenin genel tasarımına uygun olacak şekilde düzenle.
+
+ - örnek tasks objesi aşağıdaki gibidir.
+     {
+      "id": 1,
+      "title": "",
+      "description": "b",
+      "status": "pending",
+      "priority": "medium",
+      "due_date": "2025-03-04",
+      "notes": "",
+      "completed": false,
+      "tags": [],
+      "checklist": [
+        {
+          "id": 1743253320097,
+          "text": "yapılacak 1",
+          "completed": false
+        },
+        {
+          "id": 1743253323080,
+          "text": "yapılacaklar 2",
+          "completed": false
+        }
+      ],
+      "updated_at": "2025-03-29T13:44:30.053Z",
+      "created_at": "2025-03-29T13:01:22.670Z",
+      "assigned_to": 1
+    }
+
+
+- sıradaki proje taskını tamamlamanı veya task tamamlamanı istediğim zaman aşağıdakileri yapabilirsin;
+ - fake-json [mcp.json](mdc:.cursor/mcp.json) mcp si kullanarak url: http://localhost:3004/tasks?completed=false&_start=0&_limit=1 istekte bulun. 
+ - bu url sana sıradaki tamamlanmamış taskı verecek. sonrada taskı ve tasktaa bulunan checklist i kontrol etmeni istiyorum. sonrada  ilgili checklistde verilen promptu projeye uyarlamanı istiyorum. chacklisti tamamladığın zaman completed alanını true yap. 
+ - bütün checklistlerin completed alanı true ise taskın completed alanını da true yap.
+
+
+ <!-- - projedeki taskları tamamla dediğim zaman aşağıdaki gibi taskları tamamla.
+    - db/db.json dosyasını json-server için kullanıyorum. http://localhost:5173/tasks adresinden takip edebiliyorum.
+    - taskları tamamla tamamlanmamış (completed: false) olan taskların tamlanmamış checklistlerini kontrol et.
+    - checklistleri sırasıyla tamamla ve completed: true yap.
+    - tasks içinde bütün checklistler completed: true yapıldığında task'ın completed: true yap. -->

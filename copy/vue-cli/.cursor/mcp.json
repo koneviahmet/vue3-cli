@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "fake-json": {
+      "name": "fake-json",
+      "description": "Fake JSON server",
+      "command": "node",
+      "args": ["./db/json/build/index.js"]
+    }
+  }
+}
+
+
+
