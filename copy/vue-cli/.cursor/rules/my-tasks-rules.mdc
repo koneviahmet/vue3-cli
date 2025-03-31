@@ -1,6 +1,11 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
 projeyi planla dediğim zaman aşağıdaki gibi planlama yapmanı istiyorum.
  - projede kullanacağın tablo isimlerini belirlemeni ve vue-cli ile kullanılmak üzere hazırlamanı istiyorum.
- - Proje de yapılacakları bir task olarak planlamanı istiyorum aşağıdaki senin için bir task örneği verdim.
+ - Proje de yapılacakları bir task olarak planlamanı istağıdaki senin için bir task örneği verdim.
  - task json verisi hazırlarken dikkat edeceğin hususları aşağıda detaylı anlatacağım. 
  - tasks için girdiğin içerikler türkçe olarak yaz.
  - planlamanı detaylı bir şekilde yapmanı istiyorum.
@@ -46,7 +51,7 @@ projeyi planla dediğim zaman aşağıdaki gibi planlama yapmanı istiyorum.
 
 - sıradaki proje taskını tamamlamanı veya task tamamlamanı istediğim zaman aşağıdakileri yapabilirsin;
  - tasks bölümünde işlemler yapabilmen için task-current-update.js adında bir dosya oluşturdum.
-    - mevcut taskı almak için terminalden "node task-current-update.js current-task" komutunu çalıştırabilirsin.
+    - mevcut taskı a terminalden "node task-current-update.js current-task" komutunu çalıştırabilirsin.
     - taskta bulunan bütün checklistleri bitirdikten sonra "node task-current-update.js update-task" komutunu çalıştırabilirsin.
 
 
