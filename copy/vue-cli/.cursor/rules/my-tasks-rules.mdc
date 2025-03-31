@@ -1,17 +1,11 @@
----
-description: 
-globs: 
-alwaysApply: true
----
 projeyi planla dediğim zaman aşağıdaki gibi planlama yapmanı istiyorum.
  - projede kullanacağın tablo isimlerini belirlemeni ve vue-cli ile kullanılmak üzere hazırlamanı istiyorum.
- - tasks bölümünde işlemler yapabilmen için fake-json ( [mcp.json](mdc:.cursor/mcp.json) ) adında bir mcp oluşturdum. 
  - Proje de yapılacakları bir task olarak planlamanı istiyorum aşağıdaki senin için bir task örneği verdim.
  - task json verisi hazırlarken dikkat edeceğin hususları aşağıda detaylı anlatacağım. 
  - tasks için girdiğin içerikler türkçe olarak yaz.
  - planlamanı detaylı bir şekilde yapmanı istiyorum.
  - projede oluşturmayı düşündüğün her tablo için ayrı bir task oluşturabilirsin
- - yeni task oluşturmak için (url: http://localhost:3004/tasks) adresine oluşturduğun json dosyasını post edebilirsin.
+ - yeni task oluşturmak için http://localhost:3004/tasks adresine oluşturduğun json dosyasını post edebilirsin.
  - oluşturduğun taskda uygun bir başlık belirle
  - yapacaklarını genel hatlarıyla özetleyen bir açıklama yazabilirsin
  - task ile ilgil bir tavsiyen olursa notlar bölümüne ekleyebilirsin.
@@ -51,9 +45,9 @@ projeyi planla dediğim zaman aşağıdaki gibi planlama yapmanı istiyorum.
 
 
 - sıradaki proje taskını tamamlamanı veya task tamamlamanı istediğim zaman aşağıdakileri yapabilirsin;
- - fake-json [mcp.json](mdc:.cursor/mcp.json) mcp si kullanarak url: http://localhost:3004/tasks?completed=false&_start=0&_limit=1 istekte bulun. 
- - bu url sana sıradaki tamamlanmamış taskı verecek. sonrada taskı ve tasktaa bulunan checklist i kontrol etmeni istiyorum. sonrada  ilgili checklistde verilen promptu projeye uyarlamanı istiyorum. chacklisti tamamladığın zaman completed alanını true yap. 
- - bütün checklistlerin completed alanı true ise taskın completed alanını da true yap.
+ - tasks bölümünde işlemler yapabilmen için task-current-update.js adında bir dosya oluşturdum.
+    - mevcut taskı almak için terminalden "node task-current-update.js current-task" komutunu çalıştırabilirsin.
+    - taskta bulunan bütün checklistleri bitirdikten sonra "node task-current-update.js update-task" komutunu çalıştırabilirsin.
 
 
  <!-- - projedeki taskları tamamla dediğim zaman aşağıdaki gibi taskları tamamla.
