@@ -69,39 +69,6 @@ async function fetchTasks(params = {}) {
   }
 }
 
-// Create a new task
-async function createTask(taskData) {
-  try {
-    // Set default values if not provided
-    const newTask = {
-      status: "pending",
-      priority: "medium",
-      due_date: getFormattedDate(7), // Default due date is 7 days from now
-      completed: false,
-      tags: [],
-      checklist: [],
-      updated_at: new Date().toISOString(),
-      created_at: new Date().toISOString(),
-      assigned_to: 1,
-      ...taskData
-    };
-
-    const response = await axiosWithRetry(() => 
-      axios.post(`${BASE_URL}/tasks`, newTask, {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        timeout: config.timeout
-      })
-    );
-    
-    return response.data;
-  } catch (error) {
-    handleAxiosError(error, 'create task');
-    throw new Error(`Failed to create task: ${error.message}`);
-  }
-}
-
 // Update a task
 async function updateTask(taskId, updatedTask) {
   try {
@@ -129,6 +96,65 @@ function getFormattedDate(daysFromNow = 0) {
   const date = new Date();
   date.setDate(date.getDate() + daysFromNow);
   return date.toISOString().split('T')[0]; // YYYY-MM-DD format
+}
+
+// Function to add a checklist item to the current task
+async function addChecklistItem(textOrArray) {
+  try {
+    // Get current task
+    const tasks = await fetchCurrentTask();
+    
+    if (!tasks || tasks.length === 0) {
+      console.log('No incomplete tasks found');
+      return null;
+    }
+    
+    const taskToUpdate = tasks[0];
+    const taskId = taskToUpdate.id;
+    
+    // Initialize checklist array if it doesn't exist
+    if (!taskToUpdate.checklist) {
+      taskToUpdate.checklist = [];
+    }
+    
+    let itemsToAdd = [];
+    
+    // Check if the input is a JSON array string
+    try {
+      const parsedArray = JSON.parse(textOrArray);
+      if (Array.isArray(parsedArray)) {
+        // If it's an array, create checklist items from each element
+        itemsToAdd = parsedArray.map(text => ({
+          id: Date.now() + Math.floor(Math.random() * 1000), // Add some randomness to avoid duplicate IDs
+          text: text,
+          completed: false
+        }));
+      } else {
+        // If it's a parsed object but not an array, treat it as a single item
+        itemsToAdd = [{
+          id: Date.now(),
+          text: textOrArray,
+          completed: false
+        }];
+      }
+    } catch (e) {
+      // If parsing fails, it's a regular string, treat it as a single item
+      itemsToAdd = [{
+        id: Date.now(),
+        text: textOrArray,
+        completed: false
+      }];
+    }
+    
+    // Add all the new items to the checklist
+    taskToUpdate.checklist.push(...itemsToAdd);
+    
+    // Update the task
+    return await updateTask(taskId, taskToUpdate);
+  } catch (error) {
+    console.error('Error adding checklist item:', error.message);
+    return null;
+  }
 }
 
 // Standardized error handling for axios errors
@@ -184,23 +210,154 @@ async function main() {
       console.log(JSON.stringify(tasks, null, 2));
     }
     
+    // Add note to current task command
+    else if (args.includes('add-note')) {
+      const note = args[1]; // Get the note from command line arguments
+      
+      if (!note) {
+        console.error('Please provide a note to add. Usage: node task-current-update.js add-note "your note"');
+        process.exit(1);
+      }
+
+      // Get current task
+      const tasks = await fetchCurrentTask();
+      
+      if (!tasks || tasks.length === 0) {
+        console.log('No incomplete tasks found');
+        return;
+      }
+
+      const taskToUpdate = tasks[0];
+      const taskId = taskToUpdate.id;
+
+      // Update the notes - append new note on a new line
+      taskToUpdate.notes = taskToUpdate.notes 
+        ? taskToUpdate.notes + '\n' + note 
+        : note;
+
+      console.log(`Adding note to task with ID: ${taskId}...`);
+      const updatedTask = await updateTask(taskId, taskToUpdate);
+      
+      console.log('Task updated successfully with new note:');
+      console.log(JSON.stringify(updatedTask, null, 2));
+    }
+    
+    // Add description to current task command
+    else if (args.includes('add-description')) {
+      const description = args[1]; // Get the description from command line arguments
+      
+      if (!description) {
+        console.error('Please provide a description to add. Usage: node task-current-update.js add-description "your description"');
+        process.exit(1);
+      }
+
+      // Get current task
+      const tasks = await fetchCurrentTask();
+      
+      if (!tasks || tasks.length === 0) {
+        console.log('No incomplete tasks found');
+        return;
+      }
+
+      const taskToUpdate = tasks[0];
+      const taskId = taskToUpdate.id;
+
+      // Update the description - append new description on a new line
+      taskToUpdate.description = taskToUpdate.description 
+        ? taskToUpdate.description + '\n' + description 
+        : description;
+
+      console.log(`Adding description to task with ID: ${taskId}...`);
+      const updatedTask = await updateTask(taskId, taskToUpdate);
+      
+      console.log('Task updated successfully with new description:');
+      console.log(JSON.stringify(updatedTask, null, 2));
+    }
+    
+    // Set note for current task command
+    else if (args.includes('set-note')) {
+      const note = args[1]; // Get the note from command line arguments
+      
+      if (!note) {
+        console.error('Please provide a note to set. Usage: node task-current-update.js set-note "your note"');
+        process.exit(1);
+      }
+
+      // Get current task
+      const tasks = await fetchCurrentTask();
+      
+      if (!tasks || tasks.length === 0) {
+        console.log('No incomplete tasks found');
+        return;
+      }
+
+      const taskToUpdate = tasks[0];
+      const taskId = taskToUpdate.id;
+
+      // Directly set the notes
+      taskToUpdate.notes = note;
+
+      console.log(`Setting note for task with ID: ${taskId}...`);
+      const updatedTask = await updateTask(taskId, taskToUpdate);
+      
+      console.log('Task updated successfully with new note:');
+      console.log(JSON.stringify(updatedTask, null, 2));
+    }
+    
+    // Set description for current task command
+    else if (args.includes('set-description')) {
+      const description = args[1]; // Get the description from command line arguments
+      
+      if (!description) {
+        console.error('Please provide a description to set. Usage: node task-current-update.js set-description "your description"');
+        process.exit(1);
+      }
+
+      // Get current task
+      const tasks = await fetchCurrentTask();
+      
+      if (!tasks || tasks.length === 0) {
+        console.log('No incomplete tasks found');
+        return;
+      }
+
+      const taskToUpdate = tasks[0];
+      const taskId = taskToUpdate.id;
+
+      // Directly set the description
+      taskToUpdate.description = description;
+
+      console.log(`Setting description for task with ID: ${taskId}...`);
+      const updatedTask = await updateTask(taskId, taskToUpdate);
+      
+      console.log('Task updated successfully with new description:');
+      console.log(JSON.stringify(updatedTask, null, 2));
+    }
+    
+    // Add checklist item command
+    else if (args.includes('add-checklist-item')) {
+      const text = args[1]; // Get the text from command line arguments
+      
+      if (!text) {
+        console.error('Please provide text for the checklist item. Usage: node task-current-update.js add-checklist-item "your checklist item" or node task-current-update.js add-checklist-item ["item1", "item2"]');
+        process.exit(1);
+      }
+      
+      const updatedTask = await addChecklistItem(text);
+      
+      if (updatedTask) {
+        console.log('Checklist item(s) added successfully:');
+        console.log('Updated task:');
+        console.log(JSON.stringify(updatedTask, null, 2));
+      }
+    }
+    
     // Get tasks with optional filtering
     else if (args.includes('get-tasks')) {
       // Extract filter parameters from stdin or use defaults
       const params = stdinData.params || {};
       const tasks = await fetchTasks(params);
       console.log(JSON.stringify(tasks, null, 2));
-    }
-    
-    // Create a new task
-    else if (args.includes('create-task')) {
-      if (Object.keys(stdinData).length === 0) {
-        console.error('No task data provided. Please provide task data via stdin.');
-        process.exit(1);
-      }
-      
-      const newTask = await createTask(stdinData);
-      console.log(JSON.stringify(newTask, null, 2));
     }
     
     // Update an existing task
@@ -260,9 +417,14 @@ async function main() {
     else {
       console.log('Available commands:');
       console.log('  current-task - Get the first incomplete task');
-      console.log('  get-tasks - Get tasks with optional filtering (provide params via stdin)');
-      console.log('  create-task - Create a new task (provide task data via stdin)');
+      console.log('  add-note "note" - Add a note to the current task');
+      console.log('  add-description "description" - Add a description to the current task');
+      console.log('  set-note "note" - Set the note for the current task (overwrites existing)');
+      console.log('  set-description "description" - Set the description for the current task (overwrites existing)');
+      console.log('  get-tasks - lists all tasks');
       console.log('  update-task - Update a task (provide task data via stdin)');
+      console.log('  add-checklist-item "item text" - Add a new checklist item to current task');
+      console.log('  add-checklist-item ["item1", "item2"] - Add multiple checklist items to current task');
     }
   } catch (error) {
     console.error('Error in execution:', error.message);

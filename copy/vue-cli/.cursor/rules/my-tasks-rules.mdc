@@ -1,11 +1,11 @@
 ---
 description: 
 globs: 
-alwaysApply: true
+alwaysApply: false
 ---
 projeyi planla dediğim zaman aşağıdaki gibi planlama yapmanı istiyorum.
  - projede kullanacağın tablo isimlerini belirlemeni ve vue-cli ile kullanılmak üzere hazırlamanı istiyorum.
- - Proje de yapılacakları bir task olarak planlamanı istağıdaki senin için bir task örneği verdim.
+ - Proje de yapılacakları bir task olarak planlamanı istiyorum aşağıdaki senin için bir task örneği verdim.
  - task json verisi hazırlarken dikkat edeceğin hususları aşağıda detaylı anlatacağım. 
  - tasks için girdiğin içerikler türkçe olarak yaz.
  - planlamanı detaylı bir şekilde yapmanı istiyorum.
@@ -51,12 +51,18 @@ projeyi planla dediğim zaman aşağıdaki gibi planlama yapmanı istiyorum.
 
 - sıradaki proje taskını tamamlamanı veya task tamamlamanı istediğim zaman aşağıdakileri yapabilirsin;
  - tasks bölümünde işlemler yapabilmen için task-current-update.js adında bir dosya oluşturdum.
-    - mevcut taskı a terminalden "node task-current-update.js current-task" komutunu çalıştırabilirsin.
+    - mevcut taskı almak için terminalden "node task-current-update.js current-task" komutunu çalıştırabilirsin.
     - taskta bulunan bütün checklistleri bitirdikten sonra "node task-current-update.js update-task" komutunu çalıştırabilirsin.
+    - "node task-current-update.js" in alabileceği diğer argumanları aşağıdaki gibidir.
+      * current-task - Get the first incomplete task
+      * add-note "note" - Add a note to the current task
+      * add-description "description" - Add a description to the current task
+      * set-note "note" - Set the note for the current task (overwrites existing)
+      * set-description "description" - Set the description for the current task (overwrites existing)
+      * get-tasks - lists all tasks
+      * update-task - Update a task (provide task data via stdin)
+      * add-checklist-item "item text" - Add a new checklist item to current task
+      * add-checklist-item ["item1", "item2"] - Add multiple checklist items to current task
 
 
- <!-- - projedeki taskları tamamla dediğim zaman aşağıdaki gibi taskları tamamla.
-    - db/db.json dosyasını json-server için kullanıyorum. http://localhost:5173/tasks adresinden takip edebiliyorum.
-    - taskları tamamla tamamlanmamış (completed: false) olan taskların tamlanmamış checklistlerini kontrol et.
-    - checklistleri sırasıyla tamamla ve completed: true yap.
-    - tasks içinde bütün checklistler completed: true yapıldığında task'ın completed: true yap. -->
+
