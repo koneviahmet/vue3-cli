@@ -86,7 +86,7 @@
 <script>
 import useUserSearch from "./userSearchValidate";
 import { useRouter, useRoute } from "vue-router";
-import useUser from "../../../../compositions/useModelUser";
+import useUsers from "../../../../compositions/useModelUsers";
 
 export default {
   setup() {
@@ -94,7 +94,7 @@ export default {
     const router = useRouter();
     const route = useRoute();
 
-    const { usersLoading, usersError, searchUsers, usersData } = useUser();
+    const { loading: usersLoading, error: usersError, searchItems: searchUsers, data: usersData } = useUsers();
 
     const search = () => {
       validate()

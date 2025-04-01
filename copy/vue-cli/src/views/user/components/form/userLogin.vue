@@ -59,7 +59,7 @@
 <script>
 import useUserLogin from "./userLoginValidate";
 import { useRouter, useRoute } from "vue-router";
-import useUser from "../../../../compositions/useModelUser";
+import useUsers from "../../../../compositions/useModelUsers";
 
 export default {
   setup() {
@@ -67,7 +67,7 @@ export default {
     const router = useRouter();
     const route = useRoute();
 
-    const { usersLoading, usersError, loginUser } = useUser();
+    const { loading: usersLoading, error: usersError, loginItem: loginUser } = useUsers();
 
     // values.email = "koneviahmet@gmail.com";
     // values.password = "123456";

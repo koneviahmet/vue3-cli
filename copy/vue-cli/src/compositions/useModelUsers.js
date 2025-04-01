@@ -4,19 +4,19 @@ import store from "../store/index.js";
 
 export default function () {
   const loading = ref(false);
-  const data = reactive({ list: [] });
+  const data = ref([]);
   const error = ref(null);
 
   /* get all users */
-  const getUsers = async () => {
+  const getItems = async () => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      await UsersServices.getUsers()
+      await UsersServices.getItems()
         .then((response) => {
           loading.value = false;
 
           if (response && !response?.error) {
-            data.list = [...response];
+            data.value = [...response];
             resolve([...response]);
           }else{
             if(response?.error){
@@ -43,15 +43,15 @@ export default function () {
     });
   };
 
-  const searchUsers = async (obj) => {
+  const searchItems = async (obj) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      await UsersServices.searchUsers(obj)
+      await UsersServices.searchItems(obj)
         .then((response) => {
           loading.value = false;
 
           if (response && !response?.error) {
-            data.list = [...response];
+            data.value = [...response];
             resolve([...response]);
           }else{
             if(response?.error){
@@ -80,15 +80,15 @@ export default function () {
   };
 
   // get user with id
-  const getUser = async (obj) => {
+  const getItem = async (obj) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      await UsersServices.getUser(obj)
+      await UsersServices.getItem(obj)
         .then((response) => {
           loading.value = false;
 
           if (response && !response?.error) {
-            data.list = { ...response };
+            data.value = { ...response };
             resolve({ ...response });
           }else{
             if(response?.error){
@@ -115,14 +115,14 @@ export default function () {
     });
   };
 
-  const loginUser = async (obj) => {
+  const loginItem = async (obj) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      await UsersServices.loginUser(obj)
+      await UsersServices.loginItem(obj)
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
-            // data.list = { ...response };
+            // data.value = { ...response };
             resolve({ ...response[0] });
             store.commit("setUser", response[0]);
           }else{
@@ -151,7 +151,7 @@ export default function () {
   };
 
   // add new user
-  const addUser = async (obj) => {
+  const addItem = async (obj) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
       const extraData = {
@@ -159,13 +159,13 @@ export default function () {
         role: 2,
       };
 
-      await UsersServices.addUser({ ...obj, ...extraData })
+      await UsersServices.addItem({ ...obj, ...extraData })
         .then((response) => {
           loading.value = false;
 
 
           if (response && !response?.error) {
-            data.list = [...data.list, response];
+            data.value = [...data.value, response];
             resolve({ ...response });
           }else{
             if(response?.error){
@@ -192,15 +192,15 @@ export default function () {
     });
   };
 
-  const updateUser = async (id, obj) => {
+  const updateItem = async (id, obj) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      await UsersServices.updateUser(id, obj)
+      await UsersServices.updateItem(id, obj)
         .then((response) => {
           loading.value = false;
 
           if (response && !response?.error) {
-            //data.list = [...response]
+            //data.value = [...response]
             resolve({ ...response });
           }else{
             if(response?.error){
@@ -227,16 +227,16 @@ export default function () {
     });
   };
 
-  const deleteUser = async (obj) => {
+  const deleteItem = async (obj) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      await UsersServices.deleteUser(obj)
+      await UsersServices.deleteItem(obj)
         .then((response) => {
           loading.value = false;
 
           if (response && !response?.error) {
-            data.list = [...data.list.filter((i) => i.id != obj.id)];
-            resolve([...data.list.filter((i) => i.id != obj.id)]);
+            data.value = [...data.value.filter((i) => i.id != obj.id)];
+            resolve([...data.value.filter((i) => i.id != obj.id)]);
           }else{
             if(response?.error){
               error.value = response.error;
@@ -263,15 +263,15 @@ export default function () {
   };
 
   return {
-    usersError: error,
-    usersLoading: loading,
-    usersData: toRefs(data).list,
-    getUser,
-    searchUsers,
-    getUsers,
-    addUser,
-    updateUser,
-    deleteUser,
-    loginUser,
+    error,
+    loading,
+    data,
+    getItem,
+    searchItems,
+    getItems,
+    addItem,
+    updateItem,
+    deleteItem,
+    loginItem,
   };
 }

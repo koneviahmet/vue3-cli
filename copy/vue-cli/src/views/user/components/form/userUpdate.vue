@@ -95,7 +95,7 @@
 <script>
 import useUserUpdate from "./userUpdateValidate";
 import { useRouter, useRoute } from "vue-router";
-import useUser from "../../../../compositions/useModelUser";
+import useUsers from "../../../../compositions/useModelUsers";
 
 export default {
   setup() {
@@ -103,7 +103,7 @@ export default {
     const router = useRouter();
     const route = useRoute();
 
-    const { usersLoading, usersError, updateUser, getUser } = useUser();
+    const { loading: usersLoading, error: usersError, updateItem: updateUser, getItem: getUser } = useUsers();
 
     getUser({ id: route.params.id }).then((response) => {
       setValues({

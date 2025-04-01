@@ -99,9 +99,9 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import useUser from "../../compositions/useModelUser";
+import useUsers from "../../compositions/useModelUsers";
 
-const { usersLoading, usersData, usersError, getUsers } = useUser();
+const { loading: usersLoading, data: usersData, error: usersError, getItems: getUsers } = useUsers();
 
 onMounted(() => {
   getUsers();

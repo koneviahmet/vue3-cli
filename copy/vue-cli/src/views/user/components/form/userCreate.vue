@@ -78,13 +78,13 @@
 <script>
 import useUserCreate from "./userCreateValidate";
 import { useRouter } from "vue-router";
-import useUser from "../../../../compositions/useModelUser";
+import useUsers from "../../../../compositions/useModelUsers";
 
 export default {
   setup() {
     const { validate, errors, values, setValues} = useUserCreate();
     const router = useRouter();
-    const { usersLoading, usersError, addUser } = useUser();
+    const { loading: usersLoading, error: usersError, addItem: addUser } = useUsers();
 
     const save = () => {
       validate()

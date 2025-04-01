@@ -1,4 +1,4 @@
-import http from "./http";
+import http from "./httpjson";
 
 const TasksServices = {
   getItems: async () => {

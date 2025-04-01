@@ -8,17 +8,6 @@
       "id": 1
     },
     {
-      "email": "asdasd@asd.com",
-      "name": "asd",
-      "lastName": "asd",
-      "password": "asdasd",
-      "token": 9,
-      "role": 2,
-      "id": 2,
-      "status": "active",
-      "lastLogin": "2023-09-12T08:45:12.345Z"
-    },
-    {
       "email": "rey@han.com",
       "name": "Reyhan",
       "lastName": "can",
@@ -307,38 +296,7 @@
     "diskUsage": 62
   },
   "empty": [],
-  "tasks": [
-    {
-      "id": 1,
-      "title": "Yapılacaklar",
-      "description": "task ile ilgili açıklama ",
-      "status": "pending",
-      "priority": "medium",
-      "due_date": "2025-03-04",
-      "notes": "task ile ilgili not ",
-      "completed": false,
-      "tags": [
-        "burada",
-        "etiket",
-        "yapcağız"
-      ],
-      "checklist": [
-        {
-          "id": 1743253320097,
-          "text": "Yapılacaklar 1",
-          "completed": true
-        },
-        {
-          "id": 1743253323080,
-          "text": "Yapılacaklar 2 s",
-          "completed": false
-        }
-      ],
-      "updated_at": "2025-03-31T20:06:49.507Z",
-      "created_at": "2025-03-29T13:01:22.670Z",
-      "assigned_to": 1
-    }
-  ],
+  "tasks": [],
   "kanban-boards": [
     {
       "id": 1,

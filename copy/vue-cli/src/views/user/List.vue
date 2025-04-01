@@ -132,10 +132,10 @@
 import { ref, computed, reactive, onMounted } from "vue";
 import { notyfError, notyfSuccess } from "../../utils/notyf.js";
 import Skeletor from "../../utils/skeletor/skeletor1.vue";
-import useUser from "../../compositions/useModelUser";
+import useUsers from "../../compositions/useModelUsers";
 import Alert from "../../utils/alert.js";
 
-const { usersLoading, usersData, usersError, getUsers, deleteUser } = useUser();
+const { loading: usersLoading, data: usersData, error: usersError, getItems: getUsers, deleteItem: deleteUser } = useUsers();
 
 onMounted(() => getUsers());
 

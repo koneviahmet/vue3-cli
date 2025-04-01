@@ -164,8 +164,8 @@ import Alert from "../../utils/alert.js";
 const route = useRoute();
 const router = useRouter();
 
-import useUser from "../../compositions/useModelUser";
-const { usersLoading, usersData, usersError, getUser, deleteUser } = useUser();
+import useUsers from "../../compositions/useModelUsers";
+const { loading: usersLoading, data: usersData, error: usersError, getItem: getUser, deleteItem: deleteUser } = useUsers();
 
 // Fetch user data when component is mounted
 getUser({ id: route.params.id });
