@@ -7,6 +7,7 @@ projeyi planla dediğim zaman aşağıdaki gibi planlama yapmanı istiyorum.
  - projede kullanacağın tablo isimlerini belirlemeni ve vue-cli ile kullanılmak üzere hazırlamanı istiyorum.
  - Proje de yapılacakları bir task olarak planlamanı istiyorum aşağıdaki senin için bir task örneği verdim.
  - Projeye yeni bir task oluşturmak için http://localhost:3004/tasks adresine ilgili task objesini POST edebilirsin. bunun için terminalden curl isteği yapabilirsin.
+ - Eğer bir tabloya örnek veri eklemen gerekiyor ise http://localhost:3004/ilgilitablo adresine ilgili tablo objesini POST edebilirsin. bunun için terminalden curl isteği yapabilirsin.
  - task json verisi hazırlarken dikkat edeceğin hususları aşağıda detaylı anlatacağım. 
  - tasks için girdiğin içerikler türkçe olarak yaz.
  - planlamanı detaylı bir şekilde yapmanı istiyorum.
@@ -19,6 +20,7 @@ projeyi planla dediğim zaman aşağıdaki gibi planlama yapmanı istiyorum.
  - task için kaydettiğin verileri db/db.json dosyasında bulunan tasks bölümüne kaydediliyor.
  - db/db.json dosyası http://localhost:3004 adresi üzerinden json-server tarafından kontrol ediliyor. 
  - Eklediğin bir tablo ile ilgili checkist oluştururken aşağıdaki görevleri varsayılan olarak eklemeni istiyorum.
+   - checklistin en başına "tablo için  veri en az 3 örnek veri ekle" şeklinde bir promt yazmanı istiyorum.
    - src/views/ klasörü altında eklediğin tablonun Create.vue, Update.vue ve Search.vue componentlerinde bulunan formları, diğer tablolar ile olan bağlantılarına dikkat ederek sitenin genel tasarımına uygun olacak şekilde düzenle.
 
  - örnek tasks objesi aşağıdaki gibidir.
