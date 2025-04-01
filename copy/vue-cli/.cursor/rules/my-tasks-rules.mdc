@@ -6,6 +6,7 @@ alwaysApply: false
 projeyi planla dediğim zaman aşağıdaki gibi planlama yapmanı istiyorum.
  - projede kullanacağın tablo isimlerini belirlemeni ve vue-cli ile kullanılmak üzere hazırlamanı istiyorum.
  - Proje de yapılacakları bir task olarak planlamanı istiyorum aşağıdaki senin için bir task örneği verdim.
+ - Projeye yeni bir task oluşturmak için http://localhost:3004/tasks adresine ilgili task objesini POST edebilirsin. bunun için terminalden curl isteği yapabilirsin.
  - task json verisi hazırlarken dikkat edeceğin hususları aşağıda detaylı anlatacağım. 
  - tasks için girdiğin içerikler türkçe olarak yaz.
  - planlamanı detaylı bir şekilde yapmanı istiyorum.
