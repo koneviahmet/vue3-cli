@@ -52,7 +52,9 @@ projeyi planla dediğim zaman aşağıdaki gibi planlama yapmanı istiyorum.
 - sıradaki proje taskını tamamlamanı veya task tamamlamanı istediğim zaman aşağıdakileri yapabilirsin;
  - tasks bölümünde işlemler yapabilmen için task-current-update.js adında bir dosya oluşturdum.
     - mevcut taskı almak için terminalden "node task-current-update.js current-task" komutunu çalıştırabilirsin.
+    - taskı bitirdikten sonra task için neler yaptığını anlatan bir not ekle. not eklemek için "node task-current-update.js add-note 'new note'" komutunu çalıştırabilirsin.
     - taskta bulunan bütün checklistleri bitirdikten sonra "node task-current-update.js update-task" komutunu çalıştırabilirsin.
+    - current-taskı aldıktan soran bütük checklistleri tamamlave sonrasında checllisti updata-task yap. 
     - "node task-current-update.js" in alabileceği diğer argumanları aşağıdaki gibidir.
       * current-task - Get the first incomplete task
       * add-note "note" - Add a note to the current task
