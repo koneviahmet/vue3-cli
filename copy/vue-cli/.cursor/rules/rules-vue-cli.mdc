@@ -19,10 +19,9 @@ bu projede kendi geliştirdiğim vue-cli yapısını kullanıyorum. sana mantı�
       
     --- tablolarda created, updated ve id sutunlarını eklemene gerek yoktur. bunlar otomatik olarak oluşturulur. Aşağıda proje ile ilgili ana dizine oluşturabileceğin bir tablo oluşturma json dosyası içeriği örneği var. (örneğin: books.json)
     {
-        books: [book_id, book_title, book_author],
-        categories: [category_id, category_name],
-        authors: [author_id, author_name],
-        publishers: [publisher_id, publisher_name],
-        languages: [language_id, language_name]
+        books: [book_title, book_author],
+        categories: [category_name],
+        authors: [author_name, author_email],
     }
+    --- önemli: sistem tarafından her tabloya "id" adında id sutunu eklenir. id değeri dışında created, updated stunları da eklenir. enin id, created ve updated değerlerini eklemene gerek yoktur.
 
