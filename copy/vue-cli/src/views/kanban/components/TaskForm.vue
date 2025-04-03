@@ -133,7 +133,7 @@
         <span class="label-text font-semibold">Assigned To</span>
       </label>
       <select class="select select-bordered w-full" v-model="form.assignedTo">
-        <option :value="user.id">{{ user.name }} {{ user.lastName }}</option>
+        <option :value="user.id">{{ user.name }} - {{ user?.userName }}</option>
       </select>
     </div>
     

@@ -58,8 +58,8 @@ const urlArr = ref([
     title: "Home Page",
   },
   {
-    to: "/user",
-    title: "User",
+    to: "/users",
+    title: "Users",
   },
   {
     to: "/schema",

@@ -124,7 +124,7 @@ const completedContacts = computed(() => contactsData.list.filter(item => item.c
 // Get recent contacts (latest 5)
 const recentContacts = computed(() => {
   return [...contactsData.list]
-    .sort((a, b) => new Date(b.contact_created_at) - new Date(a.contact_created_at))
+    .sort((a, b) => new Date(b.created) - new Date(a.created))
     .slice(0, 5);
 });
 

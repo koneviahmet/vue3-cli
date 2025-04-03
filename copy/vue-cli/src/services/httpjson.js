@@ -1,10 +1,9 @@
 import axios from "axios";
 import store from "../store/index";
-import opt from "../utils/opt"
 
 //${store.getters?._getCurrentUser?.token}
 const http = axios.create({
-  baseURL: opt.baseURLJson,
+  baseURL: import.meta.env.VITE_JSON_SERVER_URL,
   withCredentials: true,
 });
 

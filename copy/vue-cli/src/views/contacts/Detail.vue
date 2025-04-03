@@ -77,12 +77,12 @@
           
           <div class="stat">
             <div class="stat-title">Created At</div>
-            <div class="stat-value text-lg">{{ formatDate(selectData.contact_created_at) }}</div>
+            <div class="stat-value text-lg">{{ formatDate(selectData.created) }}</div>
           </div>
           
-          <div class="stat" v-if="selectData.contact_updated_at">
+          <div class="stat" v-if="selectData.updated">
             <div class="stat-title">Updated At</div>
-            <div class="stat-value text-lg">{{ formatDate(selectData.contact_updated_at) }}</div>
+            <div class="stat-value text-lg">{{ formatDate(selectData.updated) }}</div>
           </div>
         </div>
         
@@ -237,7 +237,7 @@ const updateStatus = async (newStatus) => {
     const updatedContact = {
       ...selectData.value,
       contact_status: newStatus,
-      contact_updated_at: new Date().toISOString()
+      updated: new Date().toISOString()
     };
     
     await updateItem(updatedContact);

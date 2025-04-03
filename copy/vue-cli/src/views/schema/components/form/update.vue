@@ -89,6 +89,7 @@ export default {
             validate().then(validateSuccess => {
                 !validateSuccess.valid && console.log("Check the form.", errors.value) 
                 if(validateSuccess.valid){
+                    values.updated = new Date().toISOString();
                     updateSchema({id: route.params.id, ...values}).then(response => {
                         router.push(`/schema/detail/${response.id}`)
                     })

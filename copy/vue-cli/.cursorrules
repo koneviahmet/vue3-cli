@@ -3,13 +3,14 @@ bu projede kendi geliştirdiğim vue-cli yapısını kullanıyorum. sana mantı�
     --- oluşturduğun tabloların, api bağlantıları ve roouter sayfaları otomatik oluşturulur.
     --- vue-cli --tjson ./books.json -> terminal kodunu oluşturarak toplu tablolar oluşturabilirsin.
     --- bunun için ana dizinde bir json dosyası oluşturmalı ve aşağıdaki json yapısına benzer bir kod eklemeli ve vue-cli --tjson ./books.json kodunu terminalde çağırmalısın.
-    --- tablolarda users isimini kullanma bunu yerine başka bir isim kullanabilirsin.
+    --- tablolarda users beya user isimini kullanma bunu yerine başka bir isim kullanabilirsin.
+    --- tablolarda created, updated ve id sutunlarını eklemene gerek yoktur. bunlar otomatik olarak oluşturulur.
     {
-        books: [book_id, book_title, book_author, book_created_at, book_updated_at],
-        categories: [category_id, category_name, category_created_at, category_updated_at],
-        authors: [author_id, author_name, author_created_at, author_updated_at],
-        publishers: [publisher_id, publisher_name, publisher_created_at, publisher_updated_at],
-        languages: [language_id, language_name, language_created_at, language_updated_at]
+        books: [book_id, book_title, book_author],
+        categories: [category_id, category_name],
+        authors: [author_id, author_name],
+        publishers: [publisher_id, publisher_name],
+        languages: [language_id, language_name]
     }
     --- giriş yapmış kullanıcının bilgilerini store den alabilirsin. aşağıdaki fonksiyonda olduğu gibi.
         const user = computed(() => {
@@ -74,7 +75,7 @@ vue yazarken kullanılacak olan yapılar.
 
 
 -back and için sahte  bir  rest api kullanan json-server kullanıyorum.
-    - bunun için db/db.json dosyasını kullanıyorum.
+    - bunun için src/data/db.json dosyasını kullanıyorum.
     - json-server dökümanlarını https://github.com/typicode/json-server/tree/v0?tab=readme-ov-file adresinden inceleeyebilirsin
     - projede ihtiyaç duyduğun api bağlantılarını src/services/ klasörü altında bulunan ilgili .js dosyasına tanımlayarak servisi src/compositions klasöründe bulunan ilgili compositions dosyasına tanımlayarak kullanabilirsin.
     - vue-cli 3001 portunda çalışıyor.başka porttan çalıştırmaya uğraşma. 
@@ -123,10 +124,10 @@ vue yazarken kullanılacak olan yapılar.
 
 
 ; - projeyi planla dediğim zaman aşağıdaki gibi planlama yapmanı istiyorum.
-;  - proje yönetiminde db/db.json dosyasında bulunan tasks bölümünü kullan. tasks bölümünün json yapısının örneği aşağıdaki gibidir.
+;  - proje yönetiminde src/data/db.json dosyasında bulunan tasks bölümünü kullan. tasks bölümünün json yapısının örneği aşağıdaki gibidir.
 ;  - tasks için girdiğin içerikler türkçe olarak yaz.
 ;  - planlamanı detaylı bir şekilde yapmanı istiyorum.
-;  - db/db.json dosyasını json-server ile http://localhost:5173/tasks adresinden takip edebiliyorum.
+;  - src/data/db.json dosyasını json-server ile http://localhost:5173/tasks adresinden takip edebiliyorum.
 ;  - tasks içinde taskların detaylarını yazabilirsin.
 ;  - proje için oluşturmayı düüşündüğün her tablo için ayrı bir task oluşturabilirsin.
 ;  - örnek tasks objesi aşağıdaki gibidir.
@@ -159,7 +160,7 @@ vue yazarken kullanılacak olan yapılar.
  
 
 ;  - projedeki taskları tamamla dediğim zaman aşağıdaki gibi taskları tamamla.
-;     - db/db.json dosyasını json-server için kullanıyorum. http://localhost:5173/tasks adresinden takip edebiliyorum.
+;     - src/data/db.json dosyasını json-server için kullanıyorum. http://localhost:5173/tasks adresinden takip edebiliyorum.
 ;     - taskları tamamla tamamlanmamış (completed: false) olan taskların tamlanmamış checklistlerini kontrol et.
 ;     - checklistleri sırasıyla tamamla ve completed: true yap.
 ;     - tasks içinde bütün checklistler completed: true yapıldığında task'ın completed: true yap.

@@ -1,8 +1,11 @@
 import { ref, reactive, watch, toRefs, computed } from "vue";
-import SchemaServices from "../services/SchemaServices";
+import Services from "../services/index";
+
 import store from "../store/index.js";
 import Alert from "../utils/alert.js";
 import { notyfError, notyfSuccess } from "../utils/notyf.js";
+
+const GlobalServices = (await Services.GlobalServices).default;
 
 export default function () {
   const loading = ref(false);
@@ -17,7 +20,7 @@ export default function () {
   const getItems = async () => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      await SchemaServices.getItems()
+      await GlobalServices.getItems('schema')
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
@@ -53,7 +56,7 @@ export default function () {
   const searchItems = async (obj) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      await SchemaServices.searchItems(obj)
+      await GlobalServices.searchItems('schema', obj)
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
@@ -86,7 +89,7 @@ export default function () {
   const getItem = async (obj) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      await SchemaServices.getItem(obj)
+      await GlobalServices.getItem('schema', obj)
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
@@ -121,7 +124,7 @@ export default function () {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
 
-      await SchemaServices.addItem(obj)
+      await GlobalServices.addItem('schema', obj)
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
@@ -156,7 +159,7 @@ export default function () {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
 
-      await SchemaServices.updateItem(obj)
+      await GlobalServices.updateItem('schema', obj)
         .then((response) => {
           loading.value = false;
 
@@ -207,7 +210,7 @@ export default function () {
    
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      await SchemaServices.deleteItem(obj)
+      await GlobalServices.deleteItem('schema', obj)
         .then((response) => {
           loading.value = false;
 

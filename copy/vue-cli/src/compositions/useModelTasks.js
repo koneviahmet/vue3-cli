@@ -1,8 +1,12 @@
 import { ref, reactive, watch, toRefs, computed } from "vue";
-import TasksServices from "../services/TasksServices";
+import Services from "../services/index";
 import store from "../store/index.js";
 import Alert from "../utils/alert.js";
 import { notyfError, notyfSuccess } from "../utils/notyf.js";
+
+
+const TasksServices = (await Services.TasksServices).default;
+
 
 export default function () {
   const loading = ref(false);

@@ -1,8 +1,11 @@
 import { ref, reactive, watch, toRefs, computed } from "vue";
-import ContactsServices from "../services/ContactsServices";
+import Services from "../services/index.js";
+
 import store from "../store/index.js";
 import Alert from "../utils/alert.js";
 import { notyfError, notyfSuccess } from "../utils/notyf.js";
+
+const GlobalServices = (await Services.GlobalServices).default;
 
 export default function useContacts() {
   const loading = ref(false);
@@ -18,7 +21,7 @@ export default function useContacts() {
     error.value = false;
     
     return new Promise(async (resolve, reject) => {
-      await ContactsServices.getItems()
+      await GlobalServices.getItems("contacts")
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
@@ -48,7 +51,7 @@ export default function useContacts() {
     error.value = false;
     
     return new Promise(async (resolve, reject) => {
-      await ContactsServices.searchItems(obj)
+      await GlobalServices.searchItems("contacts", obj)
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
@@ -78,7 +81,7 @@ export default function useContacts() {
     error.value = false;
     
     return new Promise(async (resolve, reject) => {
-      await ContactsServices.getItem(obj)
+      await GlobalServices.getItem("contacts", obj)
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
@@ -107,7 +110,7 @@ export default function useContacts() {
     error.value = false;
     
     return new Promise(async (resolve, reject) => {
-      await ContactsServices.addItem(obj)
+      await GlobalServices.addItem("contacts", obj)
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
@@ -138,7 +141,7 @@ export default function useContacts() {
     error.value = false;
     
     return new Promise(async (resolve, reject) => {
-      await ContactsServices.updateItem(obj)
+      await GlobalServices.updateItem("contacts", obj)
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
@@ -186,7 +189,7 @@ export default function useContacts() {
     error.value = false;
    
     return new Promise(async (resolve, reject) => {
-      await ContactsServices.deleteItem(obj)
+      await GlobalServices.deleteItem("contacts", obj)
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
@@ -234,6 +237,9 @@ export default function useContacts() {
   });
 
   return {
+    loading,
+    data,
+    error,
     contactsLoading: loading,
     contactsData: data,
     contactsError: error,

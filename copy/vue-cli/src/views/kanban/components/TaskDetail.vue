@@ -184,9 +184,9 @@ const completedItems = computed(() => {
 
 const assignedUserName = computed(() => {
   if (!props.task.assignedTo) return 'Unassigned';
-  
+
   const user = props.users.find(u => u.id === props.task.assignedTo);
-  return user ? `${user.name} ${user.lastName}` : `User #${props.task.assignedTo}`;
+  return user ? `${user.name} - ${user?.userName}` : `User #${props.task.assignedTo}`;
 });
 
 const updateChecklistItem = (index) => {

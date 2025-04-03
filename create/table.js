@@ -278,19 +278,18 @@ const createTable = async (table_name, secJson) => {
             await writeFile(copyRouter + 'index.js', routerIndexR);
 
 
-            /* services */
-            //await afs.copy_all_file(dir, '/copy/vue-cli/src/services/SchemaServices.js', "src/services/"+table_nameUF+"Services.js");
-            const services   = await afs.readFile(sourceServices + 'SchemaServices.js');
-            let servicesR    = await afs.replaceFile(services, 'schema', table_name);
-                servicesR    = await afs.replaceFile(servicesR, 'Schema', table_nameUF);
+            /* services -- şimdilik kapatalamı*/
+            // const services   = await afs.readFile(sourceServices + 'SchemaServices.js');
+            // let servicesR    = await afs.replaceFile(services, 'schema', table_name);
+            //     servicesR    = await afs.replaceFile(servicesR, 'Schema', table_nameUF);
 
-            await writeFile(copyServices +table_nameUF+'Services.js', servicesR);
+            // await writeFile(copyServices +table_nameUF+'Services.js', servicesR);
 
  
             // db düzenlemesi yapalım
-            const dbJson   = await afs.readFile(pwd + '/db/db.json'); 
+            const dbJson   = await afs.readFile(pwd + '/src/data/db.json'); 
             let dbJsonR    = await afs.replaceFile(dbJson, '"empty": \\[]', '"' + table_name + '": [], \n  "empty": []');
-            await writeFile(pwd + '/db/db.json', dbJsonR);
+            await writeFile(pwd + '/src/data/db.json', dbJsonR);
 
             
             //add role

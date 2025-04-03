@@ -10,15 +10,15 @@ const directionPageArr = [
       menu: false
   },
   {
-      page: "UserSignIn",
+      page: "UsersSignIn",
       menu: false
   },
   {
-      page: "UserLogin",
+      page: "UsersLogin",
       menu: false
   },
   {
-      page: "UserForgotPassword",
+      page: "UsersForgotPassword",
       menu: false
   },
   {

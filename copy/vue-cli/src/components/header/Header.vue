@@ -59,17 +59,19 @@
 
           <!-- Authentication -->
           <div v-if="!isAuthenticated" class="flex gap-1">
-            <router-link to="/user/login" class="btn btn-ghost btn-sm rounded-lg">
+            <router-link to="/users/login" class="btn btn-ghost btn-sm rounded-lg">
               <UserCircleIcon class="h-5 w-5 mr-1" />
               <span class="hidden sm:inline">Log In</span>
             </router-link>
-            <router-link to="/user/signIn" class="btn btn-primary btn-sm rounded-lg">
+            <router-link to="/users/signIn" class="btn btn-primary btn-sm rounded-lg">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
               </svg>
               <span class="hidden sm:inline">Sign Up</span>
             </router-link>
           </div>
+
+   
 
           <!-- User Dropdown -->
           <div v-if="isAuthenticated" class="dropdown dropdown-end">
@@ -89,7 +91,7 @@
                 <span>Account</span>
               </li>
               <li>
-                <router-link to="/user/detail/1" class="flex items-center p-3">
+                <router-link :to="`/users/detail/${user?.id}`" class="flex items-center p-3">
                   <UserCircleIcon class="h-5 w-5 mr-2" />
                   <div>
                     <div class="font-medium">My Profile</div>
@@ -98,7 +100,7 @@
                 </router-link>
               </li>
               <li>
-                <router-link to="/user/update/1" class="flex items-center p-3">
+                <router-link :to="`/users/update/${user?.id}`" class="flex items-center p-3">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                   </svg>
@@ -110,7 +112,7 @@
               </li>
               <div class="divider my-1"></div>
               <li>
-                <a @click="logOut" class="flex items-center p-3 text-error hover:bg-error/10">
+                <a @click="logOutFNC" class="flex items-center p-3 text-error hover:bg-error/10">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
                   </svg>
@@ -140,7 +142,7 @@
                 </div>
               </div>
               <div>
-                <div class="font-bold">{{ user?.name }} {{ user?.lastName }}</div>
+                <div class="font-bold">{{ user?.name }} {{ user?.userName }}</div>
                 <div class="text-sm opacity-60">{{ user?.email || 'User' }}</div>
               </div>
             </div>
@@ -197,16 +199,21 @@ import { getCurrentInstance, ref, computed, defineProps, onMounted, watch } from
 import ThemeToggle from "../ThemeToggle.vue";
 import { UserCircleIcon } from "@heroicons/vue/24/solid";
 import { useRouter, useRoute } from "vue-router";
+import  useModelUsers from "../../compositions/useModelUsers"
+
 
 const app = getCurrentInstance();
 const store = app.appContext.config.globalProperties.$store;
 const props = defineProps(["menu"]);
 const router = useRouter();
 const route = useRoute();
+const { logOut } = useModelUsers();
 
-const logOut = () => {
-  store.commit("logoutUser");
-  router.push({name: "HomePage"})
+const logOutFNC = () => {
+  logOut().then(() => {
+    store.commit("logoutUser");
+    router.push({name: "HomePage"})
+  })
 };
 
 const user = computed(() => {
@@ -219,7 +226,7 @@ const isAuthenticated = computed(() => {
 
 const userInitials = computed(() => {
   if (!user.value) return '';
-  return (user.value.name?.charAt(0) || '') + (user.value.lastName?.charAt(0) || '');
+  return (user.value.name?.charAt(0) || '') + (user.value.userName?.charAt(0) || '');
 });
 </script>
 

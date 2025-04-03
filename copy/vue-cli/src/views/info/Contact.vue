@@ -10,78 +10,7 @@
         <!-- Contact Form Section -->
         <div class="lg:col-span-7 p-6 lg:p-8 order-2 lg:order-1">
           <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-6">Bize Ulaşın</h2>
-          
-          <form @submit.prevent="submitForm" class="space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div class="form-control w-full">
-                <label class="label">
-                  <span class="label-text text-gray-700 dark:text-gray-300 font-medium">Adınız</span>
-                </label>
-                <input 
-                  type="text" 
-                  v-model="contactForm.contact_name" 
-                  class="input input-bordered w-full focus:border-primary focus:ring-2 focus:ring-primary/20 bg-white dark:bg-gray-700" 
-                  required
-                />
-              </div>
-              
-              <div class="form-control w-full">
-                <label class="label">
-                  <span class="label-text text-gray-700 dark:text-gray-300 font-medium">E-posta</span>
-                </label>
-                <input 
-                  type="email" 
-                  v-model="contactForm.contact_email" 
-                  class="input input-bordered w-full focus:border-primary focus:ring-2 focus:ring-primary/20 bg-white dark:bg-gray-700" 
-                  required
-                />
-              </div>
-            </div>
-            
-            <div class="form-control w-full">
-              <label class="label">
-                <span class="label-text text-gray-700 dark:text-gray-300 font-medium">Konu</span>
-              </label>
-              <input 
-                type="text" 
-                v-model="contactForm.contact_subject" 
-                class="input input-bordered w-full focus:border-primary focus:ring-2 focus:ring-primary/20 bg-white dark:bg-gray-700" 
-                required
-              />
-            </div>
-            
-            <div class="form-control w-full">
-              <label class="label">
-                <span class="label-text text-gray-700 dark:text-gray-300 font-medium">Mesajınız</span>
-              </label>
-              <textarea 
-                v-model="contactForm.contact_message" 
-                class="textarea textarea-bordered h-32 w-full focus:border-primary focus:ring-2 focus:ring-primary/20 bg-white dark:bg-gray-700" 
-                required
-              ></textarea>
-            </div>
-            
-            <div class="form-control w-full">
-              <button 
-                type="submit" 
-                class="btn btn-primary w-full"
-                :disabled="loading"
-              >
-                <span v-if="loading" class="loading loading-spinner loading-sm mr-2"></span>
-                {{ loading ? 'Gönderiliyor...' : 'Mesajı Gönder' }}
-              </button>
-            </div>
-          </form>
-          
-          <div v-if="submitted" class="mt-6">
-            <div class="alert alert-success shadow-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              <div>
-                <h3 class="font-bold">Teşekkürler!</h3>
-                <div class="text-sm">Mesajınız başarıyla gönderildi. En kısa sürede size dönüş yapacağız.</div>
-              </div>
-            </div>
-          </div>
+          <Contact />
         </div>
 
         <!-- Contact Information Section -->
@@ -180,18 +109,8 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
-import useModelContact from '../../compositions/useModelContact';
+import Contact from '../contacts/components/form/create.vue'
 
-const { contactForm, loading, submitted, submitContactForm, resetForm } = useModelContact();
-
-onMounted(() => {
-  resetForm();
-});
-
-const submitForm = async () => {
-  await submitContactForm();
-};
 </script>
 
 <style scoped>

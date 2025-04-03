@@ -17,8 +17,8 @@ projeyi planla dediğim zaman aşağıdaki gibi planlama yapmanı istiyorum.
  - yapacaklarını genel hatlarıyla özetleyen bir açıklama yazabilirsin
  - task ile ilgil bir tavsiyen olursa notlar bölümüne ekleyebilirsin.
  - taskda yapılacakları sırası ile checklist içine ekle. 
- - task için kaydettiğin verileri db/db.json dosyasında bulunan tasks bölümüne kaydediliyor.
- - db/db.json dosyası http://localhost:3004 adresi üzerinden json-server tarafından kontrol ediliyor. 
+ - task için kaydettiğin verileri src/data/db.json dosyasında bulunan tasks bölümüne kaydediliyor.
+ - src/data/db.json dosyası http://localhost:3004 adresi üzerinden json-server tarafından kontrol ediliyor. 
  - Eklediğin bir tablo ile ilgili checkist oluştururken aşağıdaki görevleri varsayılan olarak eklemeni istiyorum.
    - checklistin en başına "tablo için  veri en az 3 örnek veri ekle" şeklinde bir promt yazmanı istiyorum.
    - src/views/ klasörü altında eklediğin tablonun Create.vue, Update.vue ve Search.vue componentlerinde bulunan formları, diğer tablolar ile olan bağlantılarına dikkat ederek sitenin genel tasarımına uygun olacak şekilde düzenle.

@@ -1,6 +1,8 @@
 import { ref, reactive, computed, toRefs } from "vue";
-import UsersServices from "../services/UsersServices";
+import Services from "../services/index";
 import store from "../store/index.js";
+
+const UsersServices = (await Services.UsersServices).default;
 
 export default function () {
   const loading = ref(false);
@@ -123,8 +125,8 @@ export default function () {
           loading.value = false;
           if (response && !response?.error) {
             // data.value = { ...response };
-            resolve({ ...response[0] });
-            store.commit("setUser", response[0]);
+            store.commit("setUser", response);
+            resolve({ ...response });
           }else{
             if(response?.error){
               error.value = response.error;
@@ -135,7 +137,7 @@ export default function () {
                 error.value = response.error;
                 reject(response.error);
               }
-              
+            
               error.value = systemError;
               reject(systemError)
             }
@@ -154,16 +156,12 @@ export default function () {
   const addItem = async (obj) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      const extraData = {
-        token: Math.floor(Math.random() * 10),
-        role: 2,
-      };
 
-      await UsersServices.addItem({ ...obj, ...extraData })
+      await UsersServices.addItem({ ...obj })
         .then((response) => {
           loading.value = false;
-
-
+          console.log(response);
+          
           if (response && !response?.error) {
             data.value = [...data.value, response];
             resolve({ ...response });
@@ -201,6 +199,7 @@ export default function () {
 
           if (response && !response?.error) {
             //data.value = [...response]
+            store.commit("setUser", response);
             resolve({ ...response });
           }else{
             if(response?.error){
@@ -262,6 +261,23 @@ export default function () {
     });
   };
 
+
+  const logOut = async () => {
+    loading.value = true;
+    return new Promise(async (resolve, reject) => {
+      await UsersServices.logOut()
+        .then((response) => {
+          loading.value = false;
+          resolve(response);
+        })
+        .catch((error) => {
+          loading.value = false;
+          error.value = error;
+          reject(error);
+        });
+    });
+  };
+
   return {
     error,
     loading,
@@ -273,5 +289,6 @@ export default function () {
     updateItem,
     deleteItem,
     loginItem,
+    logOut
   };
 }

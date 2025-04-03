@@ -144,17 +144,17 @@
       </div>
 
       <!-- Hidden date fields that will be auto-filled -->
-      <input type="hidden" v-model="contact_created_at">
-      <input type="hidden" v-model="contact_updated_at">
+      <input type="hidden" v-model="created">
+      <input type="hidden" v-model="updated">
 
       <!-- Submit button -->
       <div class="flex justify-end gap-2 mt-8">
-        <router-link :to="`/contacts/detail/${route.params.id}`" class="btn btn-ghost">
+        <router-link :to="`/contacts/detail/${route?.params.id}`" class="btn btn-ghost">
           Cancel
         </router-link>
         <button 
           type="button" 
-          @click="save" 
+          @click="update" 
           class="btn btn-primary gap-2" 
           :class="contactsLoading && 'loading btn-disabled'"
         >
@@ -169,44 +169,58 @@
 </template>
 
 
-<script setup>
+
+<script>
+
 import { useRoute, useRouter } from "vue-router";
 import { ref, onMounted } from 'vue';
 import useUpdate from './updateValidate';
 import useContacts from '../../../../compositions/useModelContacts';
 
-const { validate, errors, values, setValues } = useUpdate();
-const route = useRoute();
-const router = useRouter();
-const { contactsLoading, contactsError, updateItem, getItem } = useContacts();
-const loading = ref(true);
+export default {
+    setup(){ 
+        const route = useRoute();
+        const {validate, errors, values, setValues} = useUpdate();
+        const router = useRouter();
+        const {loading: contactsLoading, error: contactsError, updateItem: updateContacts, getItem: getContacts, data: contactsData} = useContacts();
+        
+        onMounted(() => {
+            getContacts({ id: route.params.id })
+            .then(response => {
+                setValues({contact_name:response.contact_name})
+                setValues({contact_email:response.contact_email})
+                setValues({contact_subject:response.contact_subject})
+                setValues({contact_message:response.contact_message})
+                setValues({contact_status:response.contact_status})
+                setValues({created:response.created})
+                setValues({updated:response.updated})
+            })
+            .catch(error => console.log(error))
+        })
+       
+        const update = () => {
+            validate().then(validateSuccess => {
+                !validateSuccess.valid && console.log("Check the form.", errors.value) 
+                if(validateSuccess.valid){
+                    updateContacts({id: route.params.id, ...values}).then(response => {
+                        router.push(`/contacts/detail/${response.id}`)
+                    })
+                }
+            }).catch(validateError => {
+                console.log(validateError);
+            }) 
+        }
 
-// Fetch contact data and populate form
-onMounted(async () => {
-  try {
-    const response = await getItem({ id: route.params.id });
-    setValues(response);
-    loading.value = false;
-  } catch (error) {
-    console.error('Error fetching contact', error);
-    loading.value = false;
-  }
-});
-
-const save = () => {
-  setValues({ contact_updated_at: new Date().toISOString() });
-  
-  validate().then(validateSuccess => {
-    if(!validateSuccess.valid) {
-      console.log("Check the form.", errors.value);
-      return;
+        return {
+            ...useUpdate(),
+            update,
+            contactsLoading,
+            contactsError,
+            route,
+            loading: contactsLoading,
+        }
     }
-      
-    updateItem({...values}).then(() => {
-      router.push(`/contacts/detail/${route.params.id}`);
-    });
-  }).catch(validateError => {
-    console.log(validateError);
-  }); 
-};
+}
 </script>
+
+

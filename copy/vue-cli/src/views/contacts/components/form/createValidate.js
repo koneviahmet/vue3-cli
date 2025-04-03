@@ -7,8 +7,8 @@ export default function () {
     const { value: contact_subject, errorMessage: errorContact_subject} = useField('contact_subject')
     const { value: contact_message, errorMessage: errorContact_message} = useField('contact_message')
     const { value: contact_status, errorMessage: errorContact_status} = useField('contact_status')
-    const { value: contact_created_at, errorMessage: errorContact_created_at} = useField('contact_created_at')
-    const { value: contact_updated_at, errorMessage: errorContact_updated_at} = useField('contact_updated_at')
+    const { value: created, errorMessage: errorcreated} = useField('created')
+    const { value: updated, errorMessage: errorupdated} = useField('updated')
     
 
     
@@ -20,8 +20,8 @@ export default function () {
             contact_subject: yup.string().required(),
             contact_message: yup.string().required(),
             contact_status: yup.string().required(),
-            contact_created_at: yup.string().required(),
-            contact_updated_at: yup.string().required(),
+            created: yup.string().required(),
+            updated: yup.string().required(),
             
         })
     })
@@ -33,8 +33,8 @@ export default function () {
         contact_subject,
         contact_message,
         contact_status,
-        contact_created_at,
-        contact_updated_at,
+        created,
+        updated,
         
         validate,
         errors,
@@ -43,8 +43,8 @@ export default function () {
         errorContact_subject,
         errorContact_message,
         errorContact_status,
-        errorContact_created_at,
-        errorContact_updated_at,
+        errorcreated,
+        errorupdated,
         
         values         
     }

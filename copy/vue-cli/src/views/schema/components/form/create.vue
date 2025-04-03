@@ -67,8 +67,8 @@ export default {
        
         onMounted(() => {
           const now = new Date().toISOString();
-          setValues({schema_created_at:now})
-          setValues({schema_updated_at:now})
+          setValues({created:now})
+          setValues({updated:now})
         })
 
 
@@ -76,6 +76,8 @@ export default {
             validate().then(validateSuccess => {
                 !validateSuccess.valid && console.log("Check the form.", errors.value) 
                 if(validateSuccess.valid){
+                    values.created = new Date().toISOString();
+                    values.updated = new Date().toISOString();
                     addSchema({...values}).then(response => {
                         router.push(`/schema/detail/${response.id}`)
                     })

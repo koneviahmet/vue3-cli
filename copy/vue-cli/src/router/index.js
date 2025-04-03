@@ -4,7 +4,7 @@ import store from "../store/index.js";
 
 import { homeRouters } from "./routers/home.js";
 import { infoRouters } from "./routers/info.js";
-import { userRouters } from "./routers/user.js";
+import { userRouters } from "./routers/users.js";
 import { schemaRouters } from "./routers/schema.js";
 import { errorRouters } from "./routers/error.js";
 import { contactsRouters } from "./routers/contacts.js"
@@ -39,7 +39,7 @@ router.beforeEach((to, from, next) => {
   const isAuth = store.getters._isAuthenticated || false;
 
   if(isAuth && to.name == "HomePage"){
-    next({ name: "UserHome" });
+    next({ name: "UsersHome" });
   }else{
     if (!roles[to.name]) {
       next({ name: "Error404" });

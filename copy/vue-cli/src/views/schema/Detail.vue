@@ -76,12 +76,12 @@
           
           <div class="stat">
             <div class="stat-title">Created At</div>
-            <div class="stat-value text-lg">{{ formatDate(selectData.created_at || selectData.createdAt) }}</div>
+            <div class="stat-value text-lg">{{ formatDate(selectData.created) }}</div>
           </div>
           
           <div class="stat">
             <div class="stat-title">Updated At</div>
-            <div class="stat-value text-lg">{{ formatDate(selectData.updated_at || selectData.updatedAt) }}</div>
+            <div class="stat-value text-lg">{{ formatDate(selectData.updated) }}</div>
           </div>
         </div>
         

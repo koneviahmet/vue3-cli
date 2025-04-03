@@ -54,11 +54,11 @@ const urlArr = ref([
     title: "Home Page",
   },
   {
-    to: "/user/login",
+    to: "/users/login",
     title: "Log In",
   },
   {
-    to: "/user/signIn",
+    to: "/users/signIn",
     title: "Sign Up",
   },
   {

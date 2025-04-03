@@ -19,4 +19,9 @@ export const infoRouters = [
     path: "/cookie-policy",
     component: () => import("../../views/info/CookiePolicy.vue"),
   },
+  {
+    name: "DockerInfo",
+    path: "/docker",
+    component: () => import("../../views/info/Docker.vue"),
+  },
 ];

@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  pocketbase:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pocketbase
+    restart: unless-stopped
+    ports:
+      - "8090:8090"
+    volumes:
+      - pb_data:/pb_data
+    networks:
+      - pocketbase_network
+
+networks:
+  pocketbase_network:
+    driver: bridge
+
+volumes:
+  pb_data:
+    driver: local 
