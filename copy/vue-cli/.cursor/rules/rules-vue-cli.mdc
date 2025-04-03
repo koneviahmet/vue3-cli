@@ -18,10 +18,13 @@ bu projede kendi geliştirdiğim vue-cli yapısını kullanıyorum. sana mantı�
       ---- tasks  = görevlerin kaydedileceği ve yönetilebileceği bir alandır.
       
     --- tablolarda created, updated ve id sutunlarını eklemene gerek yoktur. bunlar otomatik olarak oluşturulur. Aşağıda proje ile ilgili ana dizine oluşturabileceğin bir tablo oluşturma json dosyası içeriği örneği var. (örneğin: books.json)
+    -- json dosyasını oluşturduktan hemen sonra "vue-cli --tjson ./books.json" terminal kodu ile tablolar ile ilgili dosyaları projeye yüklemelisin.
     {
         books: [book_title, book_author],
         categories: [category_name],
-        authors: [author_name, author_email],
+        authors: [author_name, author_email, books_id],
     }
+    
+    -- tabloları birbirine bağlamak için tabloadi_id kullanabilirsin. örneğin yukarıda books_id ile authors tablosu books tablosu ile bağlantı oluşturmuş.
     --- önemli: sistem tarafından her tabloya "id" adında id sutunu eklenir. id değeri dışında created, updated stunları da eklenir. enin id, created ve updated değerlerini eklemene gerek yoktur.
 
