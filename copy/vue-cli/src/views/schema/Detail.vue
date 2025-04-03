@@ -104,7 +104,7 @@
         </div>
         
         <!-- Actions -->
-        <div class="card-actions justify-end mt-8">
+        <div class="card-actions justify-end mt-8" v-if="currentUser && currentUser?.id === selectData?.createdBy">
           <router-link :to="`/schema/update/${selectData.id}`" class="btn btn-primary">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -120,6 +120,8 @@
         </div>
       </div>
     </div>
+
+    
     
     <!-- No data found -->
     <div v-else class="card bg-base-100 dark:bg-neutral-800 shadow-xl p-8 text-center">
@@ -137,16 +139,20 @@
 
 <script setup>
 import { useRouter, useRoute } from "vue-router";
-import { ref } from "vue";
+import { ref, computed} from "vue";
 import { notyfError, notyfSuccess } from "../../utils/notyf.js";
 import Alert from "../../utils/alert.js";
+import { useStore } from 'vuex';
 
-const route = useRoute();
-const router = useRouter();
+const route     = useRoute();
+const router    = useRouter();
 const selectData = ref(null);
 
 import useSchema from "../../compositions/useModelSchema";
 const { loading: schemaLoading, data: schemaData, error: schemaError, getItem: getSchema, confirmDelete: deleteSchema } = useSchema();
+
+const store = useStore();
+const currentUser = computed(() => store.getters?._getCurrentUser || null);
 
 getSchema({ id: route.params.id })
 .then(response => {

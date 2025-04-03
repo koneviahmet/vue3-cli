@@ -1,0 +1,26 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+
+-backand için sahte rest api oluşturan json-server kullanıyorum.
+    - bunun için src/data/db.json dosyasını kullanıyorum.
+    - projede ihtiyaç duyduğum json-server api bağlantılarını src/services/json-services/GlobalServices.js dosyasında tanımlıyorum ve tanımladığım bu bağlantıları src/compositions dosyası altında bulunan useModel... yapıları ile çekiyorum.
+    - json-server 3004 portunda çalışıyor.başka porttan çalıştırmaya uğraşma. 
+    - json-server için örnek urller aşağıda listelenmiştir. Kullanım amacına uygun olacak şekilde "src/services/json-services/GlobalServices.js" dosyası içine sende proje yapısına uygun olacak şekilde servisler yazabilirsin. 
+        http://localhost:3004/users -> Tüm kullanıcıları listeler.
+        http://localhost:3004/users/1 -> 1 numaralı kullanıcıyı getirir.
+        http://localhost:3004/users?name=John -> Adı John olan kullanıcıları getirir.
+        http://localhost:3004/comments?postId=1 -> postIdsi 1 olan yorumları getirir.
+        http://localhost:3004/tasks?completed=false -> tamamlanmamış görevleri getirir.
+        http://localhost:3004/products?_sort=price&_order=asc -> Ürünleri fiyata göre artan sırada sıralar.
+        http://localhost:3004/books?_sort=rating&_order=desc -> Kitapları puana göre azalan sırada sıralar.
+        http://localhost:3004/customers?_sort=registrationDate&_order=asc -> Müşterileri kayıt tarihine göre artan sırada sıralar.
+        http://localhost:3004/employees?_sort=salary&_order=desc -> Çalışanları maaşa göre azalan sırada sıralar.
+        http://localhost:3004/tasks?_sort=dueDate&_order=asc -> Görevleri bitiş tarihine göre artan sırada sıralar.
+    ** önemli "src/services/json-services/GlobalServices.js" dosyaına yeni bir fonksiyon ekler isen benzer fonksiyonu "src/services/pocketbase/GlobalServices.js" dosyasına da pocketbase servisinden data çekecek şekilde eklemelisin. 
+
+    
+    
+

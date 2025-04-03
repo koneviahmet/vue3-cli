@@ -19,7 +19,7 @@ const GlobalServices = {
       return response?.data;
     } catch (e) {}
   },
-  addItem: async (table, obj) => {
+  addItem: async (table, obj) => {    
     try {
       const response = await http.post(`/${table}`, obj);
       return response?.data;

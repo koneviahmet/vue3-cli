@@ -1,0 +1,26 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+- sıradaki proje taskını tamamlamanı veya task tamamlamanı istediğim zaman aşağıdakileri yapabilirsin;
+ - tasks bölümünde işlemler yapabilmen için task-current-update.js adında bir dosya oluşturdum.
+    - mevcut taskı almak için terminalden "node task-current-update.js current-task" komutunu çalıştırabilirsin.
+    - taskı bitirdikten sonra task için neler yaptığını anlatan bir not ekle. not eklemek için "node task-current-update.js add-note 'new note'" komutunu çalıştırabilirsin.
+    - eğer taska yeni not ekleyeceksen bunu "node task-current-update.js update-task" yapmadan önce eklemelisin. yoksa eklediğin not bir sonraki taska eklenir.
+    - taskta bulunan bütün checklistleri bitirdikten sonra "node task-current-update.js update-task" komutunu çalıştırabilirsin.
+    - current-taskı aldıktan sonra bütük checklistleri tamamla ve sonrasında checklisti updata-task yap. 
+    - "node task-current-update.js" in alabileceği diğer argumanlar aşağıdaki gibidir.
+      * current-task - Get the first incomplete task
+      * add-note "note" - Add a note to the current task
+      * add-description "description" - Add a description to the current task
+      * set-note "note" - Set the note for the current task (overwrites existing)
+      * set-description "description" - Set the description for the current task (overwrites existing)
+      * get-tasks - lists all tasks
+      * update-task - Update a task (provide task data via stdin)
+      * add-checklist-item "item text" - Add a new checklist item to current task
+      * add-checklist-item ["item1", "item2"] - Add multiple checklist items to current task
+
+
+
+

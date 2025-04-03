@@ -17,6 +17,10 @@ export default function () {
     //console.log("changed",store.getters._getSchema);
   })
 
+  const user = computed(() => {
+    return store.getters?._getCurrentUser || null;
+  });
+
   const getItems = async () => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
@@ -124,7 +128,7 @@ export default function () {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
 
-      await GlobalServices.addItem('schema', obj)
+      await GlobalServices.addItem('schema', { ...obj, createdBy: user?.value?.id || null })
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
@@ -159,7 +163,7 @@ export default function () {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
 
-      await GlobalServices.updateItem('schema', obj)
+      await GlobalServices.updateItem('schema', { ...obj, createdBy: user?.value?.id || null })
         .then((response) => {
           loading.value = false;
 

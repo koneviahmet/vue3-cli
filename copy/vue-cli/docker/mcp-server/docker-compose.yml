@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mcp-server
+    restart: unless-stopped
+    ports:
+      - "3005:3005"
+    volumes:
+      - ./app:/app
+    networks:
+      - mcp_network
+
+networks:
+  mcp_network:
+    driver: bridge 

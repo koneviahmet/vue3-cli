@@ -1,0 +1,28 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+bu projede kendi geliştirdiğim vue-cli yapısını kullanıyorum. sana mantığını anlatacağım gerekirse kullanabilirsin.
+-- bu cli yapısı ile kendine hazır tablolar oluşturabilirsin. 
+    --- oluşturduğun tabloların, api bağlantıları, roouter sayfaları otomatik oluşturulur.
+    --- "vue-cli --tjson ./books.json" -> terminal kodunu kullanarak toplu tablolar oluşturabilirsin.
+    --- bunun için ana dizinde bir json dosyası oluşturmalı ve aşağıdaki json yapısına benzer bir kod eklemeli ve "vue-cli --tjson ./books.json" kodunu terminalde çağırmalısın.
+    --- sistemde hazır olarak kullanılan bazı tablolar vardır. bunları tekrardan oluşturmana gerek yok. Hazır olarak var olan tabloları ve kullanım amaçlarını aşağıda listeleyeeceğim. Hazır olan tabloların isminde yeni tablolar oluşturma.
+      ---- users = üyelerin kaydedildiği tablo. Üye kaydı, Üye girişi gibi üye işlemleri için bu tablo kullanılır.
+      ---- admin     = site ayarları gibi işlemler bu tabloda yapılır
+      ---- callendar = bu tabloda gelişmiş bir takvim vardır.
+      ---- contacts  = iletişim ile ilgili işlemler bu sayfada yapılır.
+      ---- kanban = bu sayfada bir kanban modeli planlama bulunur.
+      ---- schema = bu kısım örnek olarak hazırlanmıştır. (burada bir değişiklik yapma)
+      ---- tasks  = görevlerin kaydedileceği ve yönetilebileceği bir alandır.
+      
+    --- tablolarda created, updated ve id sutunlarını eklemene gerek yoktur. bunlar otomatik olarak oluşturulur. Aşağıda proje ile ilgili ana dizine oluşturabileceğin bir tablo oluşturma json dosyası içeriği örneği var. (örneğin: books.json)
+    {
+        books: [book_id, book_title, book_author],
+        categories: [category_id, category_name],
+        authors: [author_id, author_name],
+        publishers: [publisher_id, publisher_name],
+        languages: [language_id, language_name]
+    }
+
