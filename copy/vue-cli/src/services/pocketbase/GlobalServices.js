@@ -1,15 +1,52 @@
 import pb from "../pocketbase";
 
+
 /**
  * Generic PocketBase service for CRUD operations on collections
+ * const result = await getItems("library_books", {
+  filter: 'school_id = "abc123" && status = "available" && (genre = "fiction" || genre = "science")',
+  sort: '-created'
+});
+ * 
+ * 
+ * 
  */
 const PocketBaseService = {
-  getItems: async (collection) => {
+  getItems: async (collection, options = {}) => {
     try {
-      const records = await pb.collection(collection).getFullList();
-      return records;
-    } catch (e) {}
+      const page = options.page || 1;
+      const perPage = options.perPage || 20;
+      const sort = options.sort || '';
+      const filter = options.filter || '';
+      
+      // If options.getAll is true, return all records
+      if (options.getAll) {
+        const records = await pb.collection(collection).getFullList({
+          filter: filter,
+          sort: sort
+        });
+        return records;
+      }
+      
+      // Otherwise, paginate the results
+      const resultList = await pb.collection(collection).getList(page, perPage, {
+        filter: filter,
+        sort: sort
+      });
+
+      // Return both items and pagination info
+      return {
+        items: resultList.items,
+        totalItems: resultList.totalItems,
+        totalPages: resultList.totalPages,
+        page: resultList.page
+      };
+    } catch (e) {
+      console.error(`Error fetching ${collection}:`, e);
+      return { error: e.message };
+    }
   },
+
   searchItems: async (collection, obj) => {
     try {
       // Convert search object to filter string

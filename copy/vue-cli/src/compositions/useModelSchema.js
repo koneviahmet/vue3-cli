@@ -21,10 +21,10 @@ export default function () {
     return store.getters?._getCurrentUser || null;
   });
 
-  const getItems = async () => {
+  const getItems = async (obj = {}) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      await GlobalServices.getItems('schema')
+      await GlobalServices.getItems('schema', obj)
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
