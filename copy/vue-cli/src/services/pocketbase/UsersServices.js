@@ -66,10 +66,7 @@ const UsersServices = {
   },
   updateItem: async (id, obj) => {    
     try {
-      const record = await pb.collection('users').update(id, {
-        ...obj,
-        username: obj.username
-      });
+      const record = await pb.collection('users').update(id, {...obj});
       return record;
     } catch (e) {
       console.error("Error updating user:", e);
