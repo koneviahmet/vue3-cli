@@ -91,7 +91,7 @@
                     <span class="text-base-content font-medium">{{ getUserInitials(user) }}</span>
                   </div>
                   <div class="ml-4">
-                    <div class="font-medium text-base-content">{{ user.name }} - {{ user.userName }}</div>
+                    <div class="font-medium text-base-content">{{ user.name }} - {{ user.username }}</div>
                     <div class="text-sm text-base-content/70">Added: {{ formatDate(user.created_at || user.createdAt) }}</div>
                   </div>
                 </div>
@@ -161,7 +161,7 @@ const filteredUsers = computed(() => {
     // Apply search query filter
     if (searchQuery.value) {
       const query = searchQuery.value.toLowerCase();
-      const nameMatch = (user.name + " " + user.userName).toLowerCase().includes(query);
+      const nameMatch = (user.name + " " + user.username).toLowerCase().includes(query);
       const emailMatch = user.email.toLowerCase().includes(query);
       if (!nameMatch && !emailMatch) return false;
     }
@@ -191,7 +191,7 @@ const userDelete = (id) => {
 // Helper functions
 const getUserInitials = (user) => {
   if (!user.name) return '?';
-  return (user.name.charAt(0) + (user.userName ? user.userName.charAt(0) : '')).toUpperCase();
+  return (user.name.charAt(0) + (user.username ? user.username.charAt(0) : '')).toUpperCase();
 };
 
 const formatDate = (dateString) => {

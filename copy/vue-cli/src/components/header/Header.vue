@@ -142,7 +142,7 @@
                 </div>
               </div>
               <div>
-                <div class="font-bold">{{ user?.name }} {{ user?.userName }}</div>
+                <div class="font-bold">{{ user?.name }} {{ user?.username }}</div>
                 <div class="text-sm opacity-60">{{ user?.email || 'User' }}</div>
               </div>
             </div>
@@ -226,7 +226,7 @@ const isAuthenticated = computed(() => {
 
 const userInitials = computed(() => {
   if (!user.value) return '';
-  return (user.value.name?.charAt(0) || '') + (user.value.userName?.charAt(0) || '');
+  return (user.value.name?.charAt(0) || '') + (user.value.username?.charAt(0) || '');
 });
 </script>
 

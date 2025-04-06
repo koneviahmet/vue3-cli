@@ -23,11 +23,11 @@
             
             <div class="form-control">
               <label class="label">
-                <span class="label-text font-medium ">Username</span>
+                <span class="label-text font-medium ">username</span>
               </label> 
-              <input type="text" placeholder="Username" v-model="userName" class="input input-bordered ">
-              <label class="label" v-if="errorUserName">
-                <span class="label-text-alt text-error">{{ errorUserName }}</span>
+              <input type="text" placeholder="username" v-model="username" class="input input-bordered ">
+              <label class="label" v-if="errorusername">
+                <span class="label-text-alt text-error">{{ errorusername }}</span>
               </label>
             </div>       
 
@@ -81,7 +81,7 @@
           <h3 class="text-lg font-medium  mb-4">Account Information</h3>
           <div class="flex items-start mb-6">
             <div class="flex-shrink-0 h-16 w-16  rounded-full flex items-center justify-center  text-xl font-bold">
-              {{ name ? name.charAt(0).toUpperCase() : '' }}{{ userName ? userName.charAt(0).toUpperCase() : '' }}
+              {{ name ? name.charAt(0).toUpperCase() : '' }}{{ username ? username.charAt(0).toUpperCase() : '' }}
             </div>
             <div class="ml-4">
               <p class=" text-sm mb-1">Profile photo</p>
@@ -133,7 +133,7 @@ export default {
       setValues({
         email: response.email,
         name: response.name,
-        userName: response.userName,
+        username: response.username,
         currentPassword: "",
         password: "",
         confirmPassword: "",
@@ -149,7 +149,7 @@ export default {
             const userData = {
               email: values.email,
               name: values.name,
-              userName: values.userName,
+              username: values.username,
             };
             
             // Only include password if it's provided

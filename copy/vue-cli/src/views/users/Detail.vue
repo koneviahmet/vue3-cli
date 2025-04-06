@@ -55,7 +55,7 @@
             <span class="text-4xl font-bold text-primary">{{ getUserInitials() }}</span>
           </div>
         </div>
-        <h2 class="text-2xl font-bold text-primary-content mt-4">{{ usersData.name }} {{ usersData.userName }}</h2>
+        <h2 class="text-2xl font-bold text-primary-content mt-4">{{ usersData.name }} {{ usersData.username }}</h2>
         <p class="text-primary-content opacity-80 mt-1">{{ usersData.email }}</p>
         <div class="mt-3">
           <span class="badge badge-lg badge-accent gap-2">
@@ -92,7 +92,7 @@
           <div class="space-y-4">
             <div class="card bg-base-200 dark:bg-neutral-700 shadow-sm p-4">
               <h3 class="text-sm font-medium opacity-70">Full Name</h3>
-              <p class="text-lg font-medium">{{ usersData.name }} - {{ usersData.userName }}</p>
+              <p class="text-lg font-medium">{{ usersData.name }} - {{ usersData.username }}</p>
             </div>
             
             <div class="card bg-base-200 dark:bg-neutral-700 shadow-sm p-4">
@@ -180,7 +180,7 @@ const formatDate = (dateString) => {
 // Get user initials for avatar
 const getUserInitials = () => {
   if (!usersData.value || !usersData.value.name) return '?';
-  return (usersData.value.name.charAt(0) + (usersData.value.userName ? usersData.value.userName.charAt(0) : '')).toUpperCase();
+  return (usersData.value.name.charAt(0) + (usersData.value.username ? usersData.value.username.charAt(0) : '')).toUpperCase();
 };
 
 // Confirm user deletion

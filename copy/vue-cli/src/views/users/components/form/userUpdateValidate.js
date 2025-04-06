@@ -5,7 +5,7 @@ import * as yup from "yup";
 export default function () {
   const { value: email, errorMessage: errorEmail } = useField("email");
   const { value: name, errorMessage: errorName } = useField("name");
-  const { value: userName, errorMessage: errorUserName } = useField("userName");
+  const { value: username, errorMessage: errorusername } = useField("username");
   const { value: currentPassword, errorMessage: errorCurrentPassword } = useField("currentPassword");
   const { value: password, errorMessage: errorPassword } = useField("password");
   const { value: confirmPassword, errorMessage: errorConfirmPassword } = useField("confirmPassword");
@@ -17,7 +17,7 @@ export default function () {
         .required()
         .email(),
       name: yup.string().required(),
-      userName: yup.string().required(),
+      username: yup.string().required(),
       currentPassword: yup.string()
         .test('current-password-required', 'Current password is required when changing password', function(value) {
           // Require current password only if user is changing password
@@ -40,7 +40,7 @@ export default function () {
     setValues,
     email,
     name,
-    userName,
+    username,
     currentPassword,
     password,
     confirmPassword,
@@ -48,7 +48,7 @@ export default function () {
     errors,
     errorEmail,
     errorName,
-    errorUserName,
+    errorusername,
     errorCurrentPassword,
     errorPassword,
     errorConfirmPassword,

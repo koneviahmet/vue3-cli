@@ -21,11 +21,11 @@
         
         <div class="form-control">
           <label class="label">
-            <span class="label-text font-medium ">Username</span>
+            <span class="label-text font-medium ">username</span>
           </label> 
-          <input type="text" placeholder="Enter your last name" v-model="userName" class="input input-bordered ">
-          <label class="label" v-if="errorUserName">
-            <span class="label-text-alt text-error">{{ errorUserName }}</span>
+          <input type="text" placeholder="Enter your last name" v-model="username" class="input input-bordered ">
+          <label class="label" v-if="errorusername">
+            <span class="label-text-alt text-error">{{ errorusername }}</span>
           </label>
         </div>
       </div>

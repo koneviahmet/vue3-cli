@@ -75,7 +75,7 @@
         
         <div class="mb-6">
           <h3 class="text-lg font-semibold mb-2">Assigned To</h3>
-          <div>{{ assignedUserName }}</div>
+          <div>{{ assignedusername }}</div>
         </div>
         
         <div>
@@ -182,11 +182,11 @@ const completedItems = computed(() => {
   return props.task.checklist.filter(item => item.completed).length;
 });
 
-const assignedUserName = computed(() => {
+const assignedusername = computed(() => {
   if (!props.task.assignedTo) return 'Unassigned';
 
   const user = props.users.find(u => u.id === props.task.assignedTo);
-  return user ? `${user.name} - ${user?.userName}` : `User #${props.task.assignedTo}`;
+  return user ? `${user.name} - ${user?.username}` : `User #${props.task.assignedTo}`;
 });
 
 const updateChecklistItem = (index) => {

@@ -229,7 +229,7 @@
             </div>
             <div class="flex justify-between">
               <span class="opacity-70">Assigned to:</span>
-              <span>{{ getAssignedUserName(task.assigned_to) }}</span>
+              <span>{{ getAssignedusername(task.assigned_to) }}</span>
             </div>
           </div>
         </div>
@@ -585,7 +585,7 @@ const getTagColor = (index) => {
   return colors[index % colors.length];
 };
 
-const getAssignedUserName = (userId) => {
+const getAssignedusername = (userId) => {
   if (!userId) return 'Unassigned';
   // In a real application, you would fetch the user's name from the store or API
   // For now, we'll return a placeholder

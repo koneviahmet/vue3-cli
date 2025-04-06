@@ -12,6 +12,7 @@ const services = {
     pocketbase: {
         UsersServices: import("./pocketbase/UsersServices"),
         GlobalServices: import("./pocketbase/GlobalServices"),
+        SiteSettingsServices: import("./json-services/SiteSettingsServices"),
     }
 };
 

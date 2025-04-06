@@ -29,7 +29,7 @@ const UsersServices = {
   getItem: async (obj) => {    
     try {
       const record = await pb.collection('users').getOne(obj.id);
-      return { ...record, userName: record.username };
+      return { ...record };
     } catch (e) {
       console.error("Error fetching user:", e);
     }
@@ -49,7 +49,7 @@ const UsersServices = {
   },
   addItem: async (obj) => {
     const data = {
-        "username": obj.userName,
+        "username": obj.username,
         "email": obj.email,
         "emailVisibility": false,
         "password": obj.password,
@@ -68,7 +68,7 @@ const UsersServices = {
     try {
       const record = await pb.collection('users').update(id, {
         ...obj,
-        username: obj.userName
+        username: obj.username
       });
       return record;
     } catch (e) {

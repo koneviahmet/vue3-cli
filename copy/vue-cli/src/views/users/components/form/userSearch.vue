@@ -56,7 +56,7 @@
             <tbody class="divide-y divide-base-300 bg-base-100">
               <tr v-for="user in usersData" :key="user.id" class="hover:bg-base-50">
                 <td class="py-4 px-4">{{ user.id }}</td>
-                <td class="py-4 px-4">{{ user.name }} - {{ user?.userName }}</td>
+                <td class="py-4 px-4">{{ user.name }} - {{ user?.username }}</td>
                 <td class="py-4 px-4 ">{{ user.email }}</td>
                 <td class="py-4 px-4 text-right space-x-1">
                   <router-link :to="`/users/detail/${user.id}`" class="btn btn-sm btn-primary">

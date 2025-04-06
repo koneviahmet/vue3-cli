@@ -53,7 +53,7 @@
               </thead>
               <tbody>
                 <tr v-for="user in recentUsers" :key="user.id" class="border-b border-base-300">
-                  <td class="py-2">{{ user.name }} {{ user?.userName }}</td>
+                  <td class="py-2">{{ user.name }} {{ user?.username }}</td>
                   <td class="py-2">{{ user.email }}</td>
                   <td class="py-2 text-right">
                     <router-link :to="`/users/detail/${user.id}`" class="btn btn-sm btn-primary">View</router-link>
