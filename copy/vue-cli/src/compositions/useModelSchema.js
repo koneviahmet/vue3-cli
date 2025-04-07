@@ -28,8 +28,8 @@ export default function () {
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
-              data.value = [...response];
-              resolve([...response]); 
+              data.value =  response?.items || [...response];
+              resolve(response); 
           }else{
             if(response?.error){
               error.value = response.error;
@@ -221,7 +221,7 @@ export default function () {
           if (response && !response?.error) {
             notyfSuccess("Delete success")
             deleteStoreData(obj.id)
-            resolve([...data.filter((i) => i.id != obj.id)]);
+            resolve([...data.value.filter((i) => i.id != obj.id)]);
           }else{
             if(response?.error){
               error.value = response.error;
