@@ -1,0 +1,37 @@
+{
+  "mermaid": [
+    {
+      "id": 1,
+      "title": "Temel Akış Şeması",
+      "type": "flowchart",
+      "description": "Basit karar sürecini gösteren akış şeması",
+      "code": "flowchart TD\n    A[Başla] --> B{Karar?}\n    B -->|Evet| C[İşlem 1]\n    B -->|Hayır| D[İşlem 2]\n    C --> E[Bitir]\n    D --> E",
+      "theme": "default",
+      "createdAt": "2023-06-20T10:30:00.000Z",
+      "updateAt": "2023-06-20T10:30:00.000Z",
+      "createdBy": 1
+    },
+    {
+      "id": 2,
+      "title": "Kullanıcı Etkileşimi",
+      "type": "sequenceDiagram",
+      "description": "Kullanıcı ve sistem arasındaki etkileşimleri gösteren diyagram",
+      "code": "sequenceDiagram\n    participant Kullanıcı\n    participant Sistem\n    Kullanıcı->>Sistem: Giriş yap\n    Sistem->>Sistem: Kimlik doğrula\n    Sistem-->>Kullanıcı: Giriş başarılı\n    Kullanıcı->>Sistem: Veri talep et\n    Sistem-->>Kullanıcı: Veriyi döndür",
+      "theme": "forest",
+      "createdAt": "2023-06-21T14:20:00.000Z",
+      "updateAt": "2023-06-21T14:20:00.000Z",
+      "createdBy": 1
+    },
+    {
+      "id": 3,
+      "title": "Proje Zaman Çizelgesi",
+      "type": "gantt",
+      "description": "Örnek proje görevleri ve zaman çizelgesi",
+      "code": "gantt\n    title Proje Zaman Çizelgesi\n    dateFormat YYYY-MM-DD\n    section Analiz\n    Gereksinim analizi :a1, 2023-01-01, 7d\n    Tasarım            :after a1, 10d\n    section Geliştirme\n    Kodlama          :2023-01-18, 20d\n    Test             :2023-02-08, 7d",
+      "theme": "default",
+      "createdAt": "2023-06-22T09:15:00.000Z",
+      "updateAt": "2023-06-22T09:15:00.000Z",
+      "createdBy": 1
+    }
+  ]
+} 

@@ -158,6 +158,42 @@ const directionPageArr = [
       menu: "userMenu",
       header: "userHeader",
       footer: "globalFooter"
+  },
+  {
+      page: "MermaidHome",
+      menu: "userMenu",
+      header: "userHeader",
+      footer: "globalFooter"
+  },
+  {
+      page: "MermaidCreate",
+      menu: "userMenu",
+      header: "userHeader",
+      footer: "globalFooter"
+  },
+  {
+      page: "MermaidUpdate",
+      menu: "userMenu",
+      header: "userHeader",
+      footer: "globalFooter"
+  },
+  {
+      page: "MermaidDetail",
+      menu: "userMenu",
+      header: "userHeader",
+      footer: "globalFooter"
+  },
+  {
+      page: "MermaidList",
+      menu: "userMenu",
+      header: "userHeader",
+      footer: "globalFooter"
+  },
+  {
+      page: "MermaidSearch",
+      menu: "userMenu",
+      header: "userHeader",
+      footer: "globalFooter"
   }
 ];
 

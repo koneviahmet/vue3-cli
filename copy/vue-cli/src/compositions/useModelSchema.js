@@ -1,11 +1,9 @@
 import { ref, reactive, watch, toRefs, computed } from "vue";
-import Services from "../services/index";
+import GlobalServices from "../services/pocketbase/GlobalServices.js";
 
 import store from "../store/index.js";
 import Alert from "../utils/alert.js";
 import { notyfError, notyfSuccess } from "../utils/notyf.js";
-
-const GlobalServices = (await Services.GlobalServices).default;
 
 export default function () {
   const loading = ref(false);
@@ -90,10 +88,10 @@ export default function () {
     });
   };
 
-  const getItem = async (obj) => {
+  const getItem = async (obj, options = {}) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      await GlobalServices.getItem('schema', obj)
+      await GlobalServices.getItem('schema', obj, options)
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
@@ -199,12 +197,14 @@ export default function () {
 
 
   const confirmDelete = (obj) => {
-    return new Promise(async () => {
+    return new Promise(async (resolve, reject) => {
       Alert.showPrompt("Are you sure you want to delete?").then((res) => {
         if(!res.isConfirmed){
           notyfError("you gave up")
         }else{
           deleteItem(obj)
+            .then(res => resolve(res))
+            .catch(err => reject(err))
         }
       });
     })

@@ -1,8 +1,7 @@
 import { ref, reactive } from "vue";
-import Services from "../services/index.js";
+import SiteSettingsServices from "../services/json-services/SiteSettingsServices.js";
 import { notyfError, notyfSuccess } from "../utils/notyf.js";
 
-const SiteSettingsServices = (await Services.SiteSettingsServices).default;
 
 export default function () {
   const loading = ref(false);

@@ -12,6 +12,7 @@ import { adminRouters } from "./routers/admin.js"
 import { tasksRouters } from "./routers/tasks.js"
 import { kanbanRouters } from "./routers/kanban.js"
 import { calendarRouters } from "./routers/calendar.js"
+import { mermaidRouters } from "./routers/mermaid.js"
 //import
 
 const router = createRouter({ 
@@ -25,6 +26,7 @@ const router = createRouter({
         ...tasksRouters,
         ...kanbanRouters,
         ...calendarRouters,
+        ...mermaidRouters,
         ...errorRouters
     ],
 

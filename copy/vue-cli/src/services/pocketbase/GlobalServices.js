@@ -13,17 +13,20 @@ import pb from "../pocketbase";
  */
 const PocketBaseService = {
   getItems: async (collection, options = {}) => {
+    
     try {
       const page = options.page || 1;
       const perPage = options.perPage || 20;
       const sort = options.sort || '';
       const filter = options.filter || '';
+      const expand = options.expand || '';
       
-      // If options.getAll is true, return all records
-      if (options.getAll) {
+      // If options is empty or options.getAll is true, return all records
+      if (options.getAll || Object.keys(options).length === 0) {
         const records = await pb.collection(collection).getFullList({
           filter: filter,
-          sort: sort
+          sort: sort,
+          expand: expand,
         });
         return records;
       }
@@ -31,7 +34,8 @@ const PocketBaseService = {
       // Otherwise, paginate the results
       const resultList = await pb.collection(collection).getList(page, perPage, {
         filter: filter,
-        sort: sort
+        sort: sort,
+        expand: expand
       });
 
       // Return both items and pagination info
@@ -43,10 +47,9 @@ const PocketBaseService = {
       };
     } catch (e) {
       console.error(`Error fetching ${collection}:`, e);
-      return { error: e.message };
+      throw e; // Rethrow the error to allow proper error handling upstream
     }
   },
-
   searchItems: async (collection, obj) => {
     try {
       // Convert search object to filter string
@@ -62,11 +65,22 @@ const PocketBaseService = {
       return records.items;
     } catch (e) {}
   },
-  getItem: async (collection, obj) => {
+  getItem: async (collection, {id}, options = {}) => {
+
     try {
-      const record = await pb.collection(collection).getOne(obj.id);
+      const expand = options.expand || '';
+      
+      // Handle backward compatibility - if id is an object with an id property
+      const recordId = typeof id === 'object' && id !== null ? id.id : id;
+      
+      const record = await pb.collection(collection).getOne(recordId, {
+        expand: expand
+      });
       return record;
-    } catch (e) {}
+    } catch (e) {
+      console.error(`Error fetching ${collection} item:`, e);
+      return { error: e.message };
+    }
   },
   addItem: async (collection, obj) => {
     console.log(collection,"-", obj);

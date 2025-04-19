@@ -11,6 +11,7 @@ export default createStore({
     schema: [], 
     contacts: [],
     tasks: [],
+    mermaid: []
   },
   mutations: {
     setUser(state, user) {
@@ -29,6 +30,21 @@ export default createStore({
     addTasks(state, tasks) {
       state.tasks = [...tasks];
     },
+    addMermaid(state, mermaid) {
+      state.mermaid = [...mermaid];
+    },
+    addMermaidItem(state, item) {
+      state.mermaid.push(item);
+    },
+    updateMermaidItem(state, updatedItem) {
+      const index = state.mermaid.findIndex(item => item.id === updatedItem.id);
+      if (index !== -1) {
+        state.mermaid.splice(index, 1, updatedItem);
+      }
+    },
+    deleteMermaidItem(state, id) {
+      state.mermaid = state.mermaid.filter(item => item.id !== id);
+    }
   },
   getters: {
     _isAuthenticated: (state) => state.user !== null,
@@ -44,6 +60,7 @@ export default createStore({
     _getContacts: (state) => state?.contacts, 
     _getSchema: (state) => state?.schema,
     _getTasks: (state) => state?.tasks,
+    _getMermaid: (state) => state?.mermaid,
   },
   plugins: [
     createPersistedState({

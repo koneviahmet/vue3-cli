@@ -81,6 +81,9 @@ export default {
             getSchema({ id: route.params.id })
             .then(response => {
                 setValues({schemaText:response.schemaText})
+                
+                setValues({created:response.created})
+                setValues({updated:response.updated})
             })
             .catch(error => console.log(error))
         })
@@ -89,7 +92,6 @@ export default {
             validate().then(validateSuccess => {
                 !validateSuccess.valid && console.log("Check the form.", errors.value) 
                 if(validateSuccess.valid){
-                    values.updated = new Date().toISOString();
                     updateSchema({id: route.params.id, ...values}).then(response => {
                         router.push(`/schema/detail/${response.id}`)
                     })

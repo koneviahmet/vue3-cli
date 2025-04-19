@@ -46,6 +46,12 @@ const rolePageArr = {
   TasksSearch: [1, 2, 3],
   KanbanBoard: [1, 2, 3],
   CalendarView: [1, 2, 3],
+  MermaidHome: [1, 2, 3],
+  MermaidCreate: [1, 2, 3],
+  MermaidUpdate: [1, 2, 3],
+  MermaidDetail: [1, 2, 3],
+  MermaidList: [1, 2, 3],
+  MermaidSearch: [1, 2, 3],
   // Admin pages
   AdminHome: [1, 2, 3],
   AdminSettings: [1, 2, 3],

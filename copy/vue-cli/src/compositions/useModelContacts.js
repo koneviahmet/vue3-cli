@@ -1,11 +1,11 @@
 import { ref, reactive, watch, toRefs, computed } from "vue";
-import Services from "../services/index.js";
+import GlobalServices from "../services/pocketbase/GlobalServices.js";
+
 
 import store from "../store/index.js";
 import Alert from "../utils/alert.js";
 import { notyfError, notyfSuccess } from "../utils/notyf.js";
 
-const GlobalServices = (await Services.GlobalServices).default;
 
 export default function useContacts() {
   const loading = ref(false);

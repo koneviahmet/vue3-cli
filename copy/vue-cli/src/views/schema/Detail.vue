@@ -149,16 +149,20 @@ const router    = useRouter();
 const selectData = ref(null);
 
 import useSchema from "../../compositions/useModelSchema";
-const { loading: schemaLoading, data: schemaData, error: schemaError, getItem: getSchema, confirmDelete: deleteSchema } = useSchema();
+const { loading: schemaLoading, data: schemaData, error: schemaError, getItems: getSchemas, confirmDelete: deleteSchema } = useSchema();
 
 const store = useStore();
 const currentUser = computed(() => store.getters?._getCurrentUser || null);
 
-getSchema({ id: route.params.id })
-.then(response => {
-  selectData.value = response;
+
+getSchemas({
+  filter: `id="${route.params.id}"`,
+  expand: 'createdBy'
 })
-.catch(error => console.log(error));
+.then(response => {
+  selectData.value = response.items[0];
+}).catch(error => console.log(error));
+
 
 // Format date to a readable format
 const formatDate = (dateString) => {

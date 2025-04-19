@@ -66,9 +66,8 @@ export default {
         const {loading: schemaLoading, error: schemaError, addItem: addSchema} = useSchema();
        
         onMounted(() => {
-          const now = new Date().toISOString();
-          setValues({created:now})
-          setValues({updated:now})
+          setValues({created:new Date().toISOString()})
+          setValues({updated:new Date().toISOString()})
         })
 
 
@@ -76,8 +75,6 @@ export default {
             validate().then(validateSuccess => {
                 !validateSuccess.valid && console.log("Check the form.", errors.value) 
                 if(validateSuccess.valid){
-                    values.created = new Date().toISOString();
-                    values.updated = new Date().toISOString();
                     addSchema({...values}).then(response => {
                         router.push(`/schema/detail/${response.id}`)
                     })

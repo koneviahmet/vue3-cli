@@ -1,10 +1,10 @@
 import { ref, reactive, computed } from "vue";
-import Services from "../services/index";
+import KanbanServices from "../services/json-services/GlobalServices.js";
+
 import store from "../store/index.js";
 import Alert from "../utils/alert.js";
 import { notyfError, notyfSuccess } from "../utils/notyf.js";
 
-const KanbanServices = (await Services.KanbanServices).default;
 
 
 export default function useKanban() {

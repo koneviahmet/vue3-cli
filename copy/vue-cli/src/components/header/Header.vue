@@ -41,6 +41,11 @@
               <router-link to="/kanban" class="rounded-lg font-medium" :class="{'active': $route.path.includes('/kanban')}">
                 Kanban
               </router-link>
+            </li> 
+            <li>
+              <router-link to="/Mermaid" class="rounded-lg font-medium" :class="{'active': $route.path.includes('/Mermaid')}">
+                Mermaid
+              </router-link>
             </li>
             <li v-if="isAuthenticated">
               <router-link to="/calendar" class="rounded-lg font-medium" :class="{'active': $route.path === '/calendar'}">

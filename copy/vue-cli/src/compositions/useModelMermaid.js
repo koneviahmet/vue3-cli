@@ -1,30 +1,38 @@
-import { ref, reactive, computed, toRefs } from "vue";
-import UsersServices from "../services/pocketbase/UsersServices.js";
+import { ref, reactive, watch, toRefs, computed } from "vue";
+import GlobalServices from "../services/pocketbase/GlobalServices.js";
 
 import store from "../store/index.js";
+import Alert from "../utils/alert.js";
+import { notyfError, notyfSuccess } from "../utils/notyf.js";
 
 
 export default function () {
   const loading = ref(false);
   const data = ref([]);
-  const error = ref(null);
+  const error = ref(false);
 
-  /* get all users */
-  const getItems = async () => {
+  watch(data, () => {
+    store.commit("addMermaid", [...data.value])
+  })
+
+  const user = computed(() => {
+    return store.getters?._getCurrentUser || null;
+  });
+
+  const getItems = async (obj = {}) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      await UsersServices.getItems()
+      await GlobalServices.getItems('mermaid', obj)
         .then((response) => {
           loading.value = false;
-
           if (response && !response?.error) {
-            data.value = [...response];
-            resolve([...response]);
-          }else{
+              data.value =  response?.items || [...response];
+              resolve(response); 
+          } else {
             if(response?.error){
               error.value = response.error;
               reject(response.error);
-            }else{
+            } else {
               const systemError = "Sistemden kaynaklanan bir hata oldu";
               if (response?.error){
                 error.value = response.error;
@@ -35,7 +43,6 @@ export default function () {
               reject(systemError)
             }
           }
-
         })
         .catch((error) => {
           loading.value = false;
@@ -48,18 +55,17 @@ export default function () {
   const searchItems = async (obj) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      await UsersServices.searchItems(obj)
+      await GlobalServices.searchItems('mermaid', obj)
         .then((response) => {
           loading.value = false;
-
           if (response && !response?.error) {
             data.value = [...response];
-            resolve([...response]);
-          }else{
+            resolve([...response]); 
+          } else {
             if(response?.error){
               error.value = response.error;
               reject(response.error);
-            }else{
+            } else {
               const systemError = "Sistemden kaynaklanan bir hata oldu";
               if (response?.error){
                 error.value = response.error;
@@ -70,8 +76,6 @@ export default function () {
               reject(systemError)
             }
           }
-
-
         })
         .catch((error) => {
           loading.value = false;
@@ -81,22 +85,19 @@ export default function () {
     });
   };
 
-  // get user with id
-  const getItem = async (obj) => {
+  const getItem = async (obj, options = {}) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      await UsersServices.getItem(obj)
+      await GlobalServices.getItem('mermaid', obj, options)
         .then((response) => {
           loading.value = false;
-
           if (response && !response?.error) {
-            data.value = { ...response };
-            resolve({ ...response });
-          }else{
+            resolve({...response}); 
+          } else {
             if(response?.error){
               error.value = response.error;
               reject(response.error);
-            }else{
+            } else {
               const systemError = "Sistemden kaynaklanan bir hata oldu";
               if (response?.error){
                 error.value = response.error;
@@ -107,7 +108,6 @@ export default function () {
               reject(systemError)
             }
           }
-
         })
         .catch((error) => {
           loading.value = false;
@@ -117,59 +117,20 @@ export default function () {
     });
   };
 
-  const loginItem = async (obj) => {
-    loading.value = true;
-    return new Promise(async (resolve, reject) => {
-      await UsersServices.loginItem(obj)
-        .then((response) => {
-          loading.value = false;
-          if (response && !response?.error) {
-            // data.value = { ...response };
-            store.commit("setUser", response);
-            resolve({ ...response });
-          }else{
-            if(response?.error){
-              error.value = response.error;
-              reject(response.error);
-            }else{
-              const systemError = "Sistemden kaynaklanan bir hata oldu";
-              if (response?.error){
-                error.value = response.error;
-                reject(response.error);
-              }
-            
-              error.value = systemError;
-              reject(systemError)
-            }
-          }
-
-        })
-        .catch((error) => {
-          loading.value = false;
-          error.value = error;
-          reject(error);
-        });
-    });
-  };
-
-  // add new user
   const addItem = async (obj) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-
-      await UsersServices.addItem({ ...obj })
+      await GlobalServices.addItem('mermaid', { ...obj, createdBy: user?.value?.id || null })
         .then((response) => {
           loading.value = false;
-          console.log(response);
-          
           if (response && !response?.error) {
-            data.value = [...data.value, response];
+            addStoreData(response)
             resolve({ ...response });
-          }else{
+          } else {
             if(response?.error){
               error.value = response.error;
               reject(response.error);
-            }else{
+            } else {
               const systemError = "Sistemden kaynaklanan bir hata oldu";
               if (response?.error){
                 error.value = response.error;
@@ -180,7 +141,6 @@ export default function () {
               reject(systemError)
             }
           }
-
         })
         .catch((error) => {
           loading.value = false;
@@ -190,22 +150,20 @@ export default function () {
     });
   };
 
-  const updateItem = async (id, obj) => {
+  const updateItem = async (obj) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      await UsersServices.updateItem(id, obj)
+      await GlobalServices.updateItem('mermaid', { ...obj, createdBy: user?.value?.id || null })
         .then((response) => {
           loading.value = false;
-
           if (response && !response?.error) {
-            //data.value = [...response]
-            store.commit("setUser", response);
+            updateStoreData(response)
             resolve({ ...response });
-          }else{
+          } else {
             if(response?.error){
               error.value = response.error;
               reject(response.error);
-            }else{
+            } else {
               const systemError = "Sistemden kaynaklanan bir hata oldu";
               if (response?.error){
                 error.value = response.error;
@@ -216,7 +174,6 @@ export default function () {
               reject(systemError)
             }
           }
-
         })
         .catch((error) => {
           loading.value = false;
@@ -225,22 +182,35 @@ export default function () {
         });
     });
   };
+
+  const confirmDelete = (obj) => {
+    return new Promise((resolve, reject) => {
+      Alert.Delete().then(() => {
+        deleteItem(obj).then(res => {
+          resolve(res)
+        }).catch(err => {
+          reject(err)
+        })
+      }).catch(() => {
+        reject(false)
+      })
+    })
+  }
 
   const deleteItem = async (obj) => {
     loading.value = true;
     return new Promise(async (resolve, reject) => {
-      await UsersServices.deleteItem(obj)
+      await GlobalServices.deleteItem('mermaid', obj)
         .then((response) => {
           loading.value = false;
-
           if (response && !response?.error) {
-            data.value = [...data.value.filter((i) => i.id != obj.id)];
-            resolve([...data.value.filter((i) => i.id != obj.id)]);
-          }else{
+            deleteStoreData(obj.id)
+            resolve({ ...response });
+          } else {
             if(response?.error){
               error.value = response.error;
               reject(response.error);
-            }else{
+            } else {
               const systemError = "Sistemden kaynaklanan bir hata oldu";
               if (response?.error){
                 error.value = response.error;
@@ -251,7 +221,6 @@ export default function () {
               reject(systemError)
             }
           }
-
         })
         .catch((error) => {
           loading.value = false;
@@ -261,34 +230,28 @@ export default function () {
     });
   };
 
+  const addStoreData = (item) => {
+    store.commit("addMermaidItem", item);
+  }
 
-  const logOut = async () => {
-    loading.value = true;
-    return new Promise(async (resolve, reject) => {
-      await UsersServices.logOut()
-        .then((response) => {
-          loading.value = false;
-          resolve(response);
-        })
-        .catch((error) => {
-          loading.value = false;
-          error.value = error;
-          reject(error);
-        });
-    });
-  };
+  const updateStoreData = (item) => {
+    store.commit("updateMermaidItem", item);
+  }
+
+  const deleteStoreData = (id) => {
+    store.commit("deleteMermaidItem", id);
+  }
 
   return {
-    error,
     loading,
     data,
-    getItem,
-    searchItems,
+    error,
     getItems,
+    getItem,
     addItem,
     updateItem,
     deleteItem,
-    loginItem,
-    logOut
+    confirmDelete,
+    searchItems
   };
-}
+} 
