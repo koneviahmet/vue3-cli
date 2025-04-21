@@ -1,5 +1,5 @@
 import { ref, reactive, watch, toRefs, computed } from "vue";
-import TasksServices from "../services/json-services/GlobalServices.js";
+import TasksServices from "../services/json-services/TasksServices.js";
 import store from "../store/index.js";
 import Alert from "../utils/alert.js";
 import { notyfError, notyfSuccess } from "../utils/notyf.js";

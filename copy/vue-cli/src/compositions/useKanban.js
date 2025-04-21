@@ -1,5 +1,5 @@
 import { ref, reactive, computed } from "vue";
-import KanbanServices from "../services/json-services/GlobalServices.js";
+import KanbanServices from "../services/json-services/KanbanServices.js";
 
 import store from "../store/index.js";
 import Alert from "../utils/alert.js";
