@@ -1,5 +1,5 @@
 import { ref, reactive, watch, toRefs, computed } from "vue";
-import GlobalServices from "../services/pocketbase/GlobalServices.js";
+import GlobalServices from "../services/json-services/GlobalServices.js";
 
 import store from "../store/index.js";
 import Alert from "../utils/alert.js";
