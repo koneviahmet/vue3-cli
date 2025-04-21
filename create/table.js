@@ -106,13 +106,18 @@ const createTable = async (table_name, secJson) => {
             await afs.createPage(copyComponents + table_name + "/components");
             await afs.createPage(copyComponents + table_name + "/components/form");
             await afs.createPage(copyComponents + table_name + "/components/menu");
+            await afs.createPage(copyComponents + table_name + "/components/other");
             const componentFormCreate  = await afs.readFile(sourceComponents + 'schema/components/form/create.vue');
             const componentFormCreateValidate  = await afs.readFile(sourceComponents + 'schema/components/form/createValidate.js');
             const componentFormSearch  = await afs.readFile(sourceComponents + 'schema/components/form/search.vue');
             const componentFormSearchValidate  = await afs.readFile(sourceComponents + 'schema/components/form/searchValidate.js');
             const componentFormUpdate  = await afs.readFile(sourceComponents + 'schema/components/form/update.vue');
             const componentFormUpdateValidate  = await afs.readFile(sourceComponents + 'schema/components/form/updateValidate.js');
+            const componentOtherList  = await afs.readFile(sourceComponents + 'schema/components/other/List.vue');
 
+
+
+            
             let secJsonFirstUF = secJson[0].charAt(0).toUpperCase() + secJson[0].slice(1);
             let componentFormCreateR   = await afs.replaceFile(componentFormCreate, 'Schema Text', secJson[0]);  
                             
@@ -229,6 +234,7 @@ const createTable = async (table_name, secJson) => {
             await writeFile(copyComponents  + table_name + '/components/form/searchValidate.js', componentFormSearchValidateR);
             await writeFile(copyComponents  + table_name + '/components/form/update.vue', componentFormUpdateR);
             await writeFile(copyComponents  + table_name + '/components/form/updateValidate.js', componentFormUpdateValidateR);
+            await writeFile(copyComponents  + table_name + '/components/other/List.vue', componentOtherList);
             
             /* components menu */
             await afs.createPage(copyComponents + table_name + "/components/menu");
