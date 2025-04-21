@@ -642,7 +642,7 @@ const refreshTables = async () => {
   
   try {
     // Get database structure from JSON server
-
+    
     
     const tableList = [];
     for (const [tableName, records] of Object.entries(jsonServerData)) {
@@ -870,63 +870,32 @@ const migrateSelectedTables = async () => {
             });
           }
           
-          // Create collection with proper error handling
-          try {
-            if (schemaFields.length === 0) {
-              addMigrationLog(`Warning: No valid fields found for collection ${tableName}`, 'warning');
-            }
-            
-            // Sanitize collection name (PocketBase has restrictions)
-            const sanitizedName = tableName.replace(/[^a-zA-Z0-9_]/g, '_').toLowerCase();
-            if (sanitizedName !== tableName) {
-              addMigrationLog(`Collection name "${tableName}" contains invalid characters. Using "${sanitizedName}" instead.`, 'warning');
-            }
-            
-            // Create the collection
-            await pb.collections.create({
-              name: sanitizedName,
-              type: 'base',
-              schema: schemaFields,
-              listRule: '',
-              viewRule: '',
-              createRule: '',
-              updateRule: '',
-              deleteRule: ''
-            });
-            
-            addMigrationLog(`Collection ${sanitizedName} created successfully`, 'success');
-            
-            // If we had to rename the collection, update the tableName for record imports
-            if (sanitizedName !== tableName) {
-              tableName = sanitizedName;
-            }
-          } catch (error) {
-            console.error('Collection creation error:', error);
-            
-            // Try to provide more details about the error
-            let errorDetails = error.message || 'Unknown error';
-            if (error.data && error.data.message) {
-              errorDetails = error.data.message;
-            }
-            
-            // Special handling for common errors
-            if (errorDetails.includes('already exists')) {
-              addMigrationLog(`Collection with name "${tableName}" already exists. Will attempt to use it anyway.`, 'warning');
-              collectionExists = true;
-            } else if (errorDetails.includes('schema')) {
-              addMigrationLog(`Schema error: ${errorDetails}. Check field types.`, 'error');
-              migrationStatus.value[tableName] = 'failed';
-              continue;
-            } else {
-              addMigrationLog(`Failed to create collection ${tableName}: ${errorDetails}`, 'error');
-              migrationStatus.value[tableName] = 'failed';
-              continue;
-            }
+          // Sanitize collection name (PocketBase has restrictions)
+          const sanitizedName = tableName.replace(/[^a-zA-Z0-9_]/g, '_').toLowerCase();
+          if (sanitizedName !== tableName) {
+            addMigrationLog(`Collection name "${tableName}" contains invalid characters. Using "${sanitizedName}" instead.`, 'warning');
           }
+          
+          // Create the collection
+          await pb.collections.create({
+            name: sanitizedName,
+            type: 'base',
+            schema: schemaFields,
+            listRule: '',
+            viewRule: '',
+            createRule: '',
+            updateRule: '',
+            deleteRule: ''
+          });
+          
+          addMigrationLog(`Collection ${sanitizedName} created successfully`, 'success');
+          
+          // Use sanitizedName for record imports
+          const collectionName = sanitizedName;
         }
         
         // Import records
-        addMigrationLog(`Importing ${records.length} records to ${tableName}...`, 'info');
+        addMigrationLog(`Importing ${records.length} records to ${collectionName}...`, 'info');
         
         let successCount = 0;
         let errorCount = 0;
@@ -943,11 +912,11 @@ const migrateSelectedTables = async () => {
               }
             }
             
-            await pb.collection(tableName).create(recordData);
+            await pb.collection(collectionName).create(recordData);
             successCount++;
           } catch (error) {
             errorCount++;
-            console.error(`Error importing record to ${tableName}:`, error);
+            console.error(`Error importing record to ${collectionName}:`, error);
             
             // Log only the first few errors to avoid flooding the log
             if (errorCount <= 3) {
@@ -962,14 +931,14 @@ const migrateSelectedTables = async () => {
           }
         }
         
-        addMigrationLog(`Import completed for ${tableName}: ${successCount} successful, ${errorCount} failed`, 
+        addMigrationLog(`Import completed for ${collectionName}: ${successCount} successful, ${errorCount} failed`, 
           errorCount > 0 ? 'warning' : 'success');
         
-        migrationStatus.value[tableName] = errorCount === records.length ? 'failed' : 'completed';
+        migrationStatus.value[collectionName] = errorCount === records.length ? 'completed' : 'failed';
       } catch (error) {
-        console.error(`Error migrating table ${tableName}:`, error);
-        addMigrationLog(`Failed to migrate ${tableName}: ${error.message}`, 'error');
-        migrationStatus.value[tableName] = 'failed';
+        console.error(`Error migrating table ${collectionName}:`, error);
+        addMigrationLog(`Failed to migrate ${collectionName}: ${error.message}`, 'error');
+        migrationStatus.value[collectionName] = 'failed';
       }
     }
     
