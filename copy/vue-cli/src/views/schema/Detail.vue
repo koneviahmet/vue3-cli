@@ -7,7 +7,7 @@
         <p class="text-base-content/70 dark:text-neutral-content/70 mt-1">View detailed information about the schema</p>
       </div>
       <div class="mt-4 md:mt-0 flex space-x-2">
-        <router-link :to="`/schema/update/${route.params.id}`" class="btn btn-secondary btn-sm">
+        <router-link :to="`/schema/${route.params.id}/edit`" class="btn btn-secondary btn-sm">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
             <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
           </svg>
@@ -105,7 +105,7 @@
         
         <!-- Actions -->
         <div class="card-actions justify-end mt-8" v-if="currentUser && currentUser?.id === selectData?.createdBy">
-          <router-link :to="`/schema/update/${selectData.id}`" class="btn btn-primary">
+            <router-link :to="`/schema/${selectData.id}/edit`" class="btn btn-primary">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
             </svg>

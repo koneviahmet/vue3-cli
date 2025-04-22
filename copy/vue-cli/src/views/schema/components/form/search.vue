@@ -57,10 +57,10 @@
               <tr v-for="item in searchResult" :key="item.id" class="hover:bg-base-50">
                 <td class="py-4 px-4">{{item.id}}</td>
                 <td class="py-4 px-4 text-right space-x-1">
-                  <router-link :to="`/schema/detail/${item.id}`" class="btn btn-sm btn-primary">
+                  <router-link :to="`/schema/${item.id}`" class="btn btn-sm btn-primary">
                     View
                   </router-link>
-                  <router-link :to="`/schema/update/${item.id}`" class="btn btn-sm btn-secondary">
+                  <router-link :to="`/schema/${item.id}/edit`" class="btn btn-sm btn-secondary">
                     Edit
                   </router-link>
                 </td>

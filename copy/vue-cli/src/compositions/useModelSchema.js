@@ -1,5 +1,7 @@
 import { ref, reactive, watch, toRefs, computed } from "vue";
 import GlobalServices from "../services/pocketbase/GlobalServices.js";
+// import GlobalServices from "../services/json-services/GlobalServices.js";
+
 
 import store from "../store/index.js";
 import Alert from "../utils/alert.js";
@@ -10,9 +12,8 @@ export default function () {
   const data = ref([]);
   const error = ref(false);
 
-  watch(data, () => {
-    store.commit("addSchema", [...data.value])
-    //console.log("changed",store.getters._getSchema);
+  watch(data, (newData) => {            
+    if (newData?.items && newData?.items?.length > 0) store.commit("addSchema", [...newData.items])    
   })
 
   const user = computed(() => {
@@ -62,8 +63,8 @@ export default function () {
         .then((response) => {
           loading.value = false;
           if (response && !response?.error) {
-            data.value = [...response];
-            resolve([...response]); 
+            data.value =  response?.items || [...response];
+            resolve(response); 
         }else{
           if(response?.error){
             error.value = response.error;
@@ -264,6 +265,7 @@ export default function () {
   }
 
   const getStoreData = computed(() => {
+    
     return store.getters._getSchema;
   })
 
@@ -278,5 +280,6 @@ export default function () {
     addItem,
     updateItem,
     confirmDelete,
+    deleteItem,
   };
 }

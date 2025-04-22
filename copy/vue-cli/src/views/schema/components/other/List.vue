@@ -1,6 +1,5 @@
 <template>
     <div>
-      
       <!-- Search and filters -->
       <div class="bg-base-100 p-4 rounded-lg shadow mb-6">
         <div class="flex flex-col md:flex-row gap-4">
@@ -57,32 +56,66 @@
           <p class="mt-1">Try adjusting your search criteria</p>
         </div>
         
-        <div v-else class="overflow-x-auto">
-          <table class="table w-full">
-            <thead class="bg-base-100">
-              <tr>
-                <th class="py-3 px-4 text-left text-xs font-medium text-base-content/70 uppercase tracking-wider">ID</th>
-                <th class="py-3 px-4 text-right text-xs font-medium text-base-content/70 uppercase tracking-wider">Actions</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-base-200">
-              <tr v-for="item in data" :key="item.id" class="hover:bg-base-200">
-                <td class="py-4 px-4">{{ item.id }}</td>
-    
-                <td class="py-4 px-4 text-right space-x-1">
-                  <router-link :to="`/schema/detail/${item.id}`" class="btn btn-sm btn-primary">
-                    View
-                  </router-link>
-                  <router-link :to="`/schema/update/${item.id}`" class="btn btn-sm btn-secondary">
-                    Edit
-                  </router-link>
-                    <button @click="itemDelete(item)" class="btn btn-sm btn-error" :class="loading && 'loading btn-disabled'">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div v-else>
+          <!-- Bulk actions -->
+          <div class="p-4 flex items-center justify-between border-b border-base-200" v-if="selectedItems.length > 0">
+            <div class="text-sm">
+              <span class="font-medium">{{ selectedItems.length }}</span> items selected
+            </div>
+            <button 
+              @click="bulkDelete" 
+              class="btn btn-sm btn-error"
+              :class="loading && 'loading btn-disabled'"
+            >
+              Bulk Delete
+            </button>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="table w-full">
+              <thead class="bg-base-100">
+                <tr>
+                  <th class="py-3 px-4 text-left">
+                    <label class="cursor-pointer">
+                      <input type="checkbox" class="checkbox checkbox-sm" 
+                        :checked="isAllSelected" 
+                        @change="toggleSelectAll" 
+                      />
+                    </label>
+                  </th>
+                  <th class="py-3 px-4 text-left text-xs font-medium text-base-content/70 uppercase tracking-wider">ID</th>
+                  <th class="py-3 px-4 text-right text-xs font-medium text-base-content/70 uppercase tracking-wider">Actions</th>
+                </tr>
+              </thead>
+
+
+              <tbody class="divide-y divide-base-200">
+                <tr v-for="item in data" :key="item.id" class="hover:bg-base-200">
+                  <td class="py-4 px-4">
+                    <label class="cursor-pointer">
+                      <input type="checkbox" class="checkbox checkbox-sm" 
+                        :checked="isItemSelected(item)" 
+                        @change="toggleSelectItem(item)" 
+                      />
+                    </label>
+                  </td>
+                  <td class="py-4 px-4">{{ item.id }}</td>
+      
+                  <td class="py-4 px-4 text-right space-x-1">
+                    <router-link :to="`/schema/${item.id}`" class="btn btn-sm btn-primary">
+                      View
+                    </router-link>
+                    <router-link :to="`/schema/${item.id}/edit`" class="btn btn-sm btn-secondary">
+                      Edit
+                    </router-link>
+                      <button @click="itemDelete(item)" class="btn btn-sm btn-error" :class="loading && 'loading btn-disabled'">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         
         <!-- Pagination -->
@@ -132,13 +165,48 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue'
+  import { ref, computed } from 'vue'
   import Skeletor from '../../../../utils/skeletor/skeletor1.vue'
   const props = defineProps(['data', 'loading', 'error', 'totalItems', 'currentPage', 'totalPages', 'perPage'])
-  const emit = defineEmits(['itemDelete', 'handleSearch', 'clearSearch', 'handlePerPageChange', 'changePage'])
+  const emit = defineEmits(['itemDelete', 'handleSearch', 'clearSearch', 'handlePerPageChange', 'changePage', 'bulkDelete'])
   
-  const searchTerm  = ref('')
-  const perPage     = ref(props.perPage)
+  const searchTerm = ref('')
+  const perPage = ref(props.perPage)
+  const selectedItems = ref([])
+
+  // Computed properties for selection
+  const isAllSelected = computed(() => {
+    return props.data.length > 0 && selectedItems.value.length === props.data.length
+  })
+
+  // Check if an item is selected
+  const isItemSelected = (item) => {
+    return selectedItems.value.some(selectedItem => selectedItem.id === item.id)
+  }
+
+  // Toggle select all items
+  const toggleSelectAll = () => {
+    if (isAllSelected.value) {
+      selectedItems.value = []
+    } else {
+      selectedItems.value = [...props.data]
+    }
+  }
+
+  // Toggle select individual item
+  const toggleSelectItem = (item) => {
+    if (isItemSelected(item)) {
+      selectedItems.value = selectedItems.value.filter(selectedItem => selectedItem.id !== item.id)
+    } else {
+      selectedItems.value.push(item)
+    }
+  }
+
+  // Bulk delete selected items
+  const bulkDelete = () => {
+    emit('bulkDelete', selectedItems.value)
+    selectedItems.value = []
+  }
 
   const clearSearch = () => {
     searchTerm.value = ''
@@ -160,9 +228,6 @@
   const handleSearch = () => {
     emit('handleSearch', searchTerm.value)
   }
-  
-
- 
   </script>
   
   

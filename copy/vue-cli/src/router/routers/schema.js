@@ -15,12 +15,12 @@ export const schemaRouters = [
   },
   {
     name: `${defaultPathName}Update`,
-    path: `/${defaultPath}/update/:id`,
+    path: `/${defaultPath}/:id/edit`,
     component: () => import(`../../views/${defaultPath}/Update.vue`),
   },
   {
     name: `${defaultPathName}Detail`,
-    path: `/${defaultPath}/detail/:id`,
+    path: `/${defaultPath}/:id`,
     component: () => import(`../../views/${defaultPath}/Detail.vue`),
   },
   {

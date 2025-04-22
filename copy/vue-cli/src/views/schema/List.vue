@@ -25,6 +25,7 @@
         :currentPage="currentPage"
         :totalPages="totalPages"
         :perPage="perPage"
+        @bulkDelete="bulkDelete"
         @itemDelete="itemDelete" 
         @handleSearch="handleSearch" 
         @clearSearch="clearSearch" 
@@ -41,7 +42,7 @@ import Skeletor from "../../utils/skeletor/skeletor1.vue";
 import useSchema from "../../compositions/useModelSchema";
 import Alert from "../../utils/alert.js";
 import List from "./components/other/List.vue";
-const { loading: schemaLoading, data: schemaData, error: schemaError, getItems: getSchemas, confirmDelete: deleteSchema } = useSchema();
+const { loading: schemaLoading, data: schemaData, error: schemaError, getItems: getSchemas, confirmDelete: deleteSchema, deleteItem: deleteSchemaNoConfirm } = useSchema();
 
 // Pagination and search state
 const currentPage = ref(1);
@@ -74,10 +75,7 @@ const fetchDatas = async () => {
     // Update total items from response
     totalItems.value = response?.totalItems || response?.length || 0;
     
-    // If the response doesn't include pagination info
-    if (!response?.totalItems) {
-      schemaData.value = response;
-    }
+  
   } catch (error) {
     console.error("Error fetching schemas:", error);
   }
@@ -130,6 +128,21 @@ const itemDelete = (item) => {
 };
 
 
+// Bulk delete
+const bulkDelete = async (items) => {
+
+  Alert.showPrompt("Are you sure you want to delete these schemas?").then(async () => {
+    items.forEach(async item => {
+      await deleteSchemaNoConfirm(item.id)
+      .then(() => {
+      notyfSuccess("Schema deleted successfully");
+      })
+      .catch(err => notyfError("Error: " + err));
+    });
+
+    fetchDatas();
+  });
+};
 
 
 </script>

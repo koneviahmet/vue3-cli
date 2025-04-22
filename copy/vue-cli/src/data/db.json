@@ -116,63 +116,18 @@
   ],
   "schema": [
     {
-      "id": 6,
-      "schemaText": "asdasdx"
+      "schemaText": "1",
+      "created": "2025-04-22T21:03:45.386Z",
+      "updated": "2025-04-22T21:03:45.386Z",
+      "createdBy": "zxidbc6oeg85on3",
+      "id": 1
     },
     {
-      "schemaText": "sadasd",
-      "id": 7
-    },
-    {
-      "schemaText": "sadasd",
-      "id": 8
-    },
-    {
-      "schemaText": "asd",
-      "id": 9
-    },
-    {
-      "schemaText": "deneme",
-      "id": 10
-    },
-    {
-      "schemaText": "asd",
-      "id": 11
-    },
-    {
-      "id": 12,
-      "schemaText": "asd"
-    },
-    {
-      "schemaText": "asd",
-      "id": 13
-    },
-    {
-      "schemaText": "asd",
-      "created": "2025-04-03T19:05:36.076Z",
-      "updated": "2025-04-03T19:05:36.076Z",
-      "id": 14
-    },
-    {
-      "schemaText": "asd",
-      "created": "2025-04-03T19:10:50.836Z",
-      "updated": "2025-04-03T19:10:50.836Z",
-      "createdBy": 6,
-      "id": 15
-    },
-    {
-      "schemaText": "asd",
-      "created": "2025-04-03T19:11:07.101Z",
-      "updated": "2025-04-03T19:11:07.101Z",
-      "createdBy": 6,
-      "id": 16
-    },
-    {
-      "schemaText": "asd",
-      "created": "2025-04-10T10:49:02.816Z",
-      "updated": "2025-04-10T10:49:02.816Z",
-      "createdBy": "81w89xrhokvpxxt",
-      "id": 17
+      "schemaText": "2",
+      "created": "2025-04-22T21:03:50.944Z",
+      "updated": "2025-04-22T21:03:50.944Z",
+      "createdBy": "zxidbc6oeg85on3",
+      "id": 2
     }
   ],
   "contacts": [
@@ -507,7 +462,7 @@
           "completed": true
         }
       ],
-      "columnId": 2,
+      "columnId": 3,
       "assignedTo": 1,
       "created_at": "2025-03-29T13:01:22.670Z",
       "updated_at": "2025-03-29T13:13:37.064Z"

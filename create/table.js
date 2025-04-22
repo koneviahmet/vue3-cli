@@ -116,6 +116,8 @@ const createTable = async (table_name, secJson) => {
             const componentOtherList  = await afs.readFile(sourceComponents + 'schema/components/other/List.vue');
 
 
+            let componentOtherListR = await afs.replaceFile(componentOtherList, 'schema', table_name);
+                componentOtherListR = await afs.replaceFile(componentOtherListR, 'Schema', table_nameUF);
 
             
             let secJsonFirstUF = secJson[0].charAt(0).toUpperCase() + secJson[0].slice(1);
@@ -234,7 +236,7 @@ const createTable = async (table_name, secJson) => {
             await writeFile(copyComponents  + table_name + '/components/form/searchValidate.js', componentFormSearchValidateR);
             await writeFile(copyComponents  + table_name + '/components/form/update.vue', componentFormUpdateR);
             await writeFile(copyComponents  + table_name + '/components/form/updateValidate.js', componentFormUpdateValidateR);
-            await writeFile(copyComponents  + table_name + '/components/other/List.vue', componentOtherList);
+            await writeFile(copyComponents  + table_name + '/components/other/List.vue', componentOtherListR);
             
             /* components menu */
             await afs.createPage(copyComponents + table_name + "/components/menu");

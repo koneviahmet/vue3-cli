@@ -54,7 +54,7 @@
                 <tr v-for="item in recentSchemas" :key="item.id" class="border-b border-base-300">
                   <td class="py-2">{{ item.id }}</td>
                   <td class="py-2 text-right">
-                    <router-link :to="`/schema/detail/${item.id}`" class="btn btn-sm btn-primary">View</router-link>
+                    <router-link :to="`/schema/${item.id}`" class="btn btn-sm btn-primary">View</router-link>
                   </td>
                 </tr>
               </tbody>

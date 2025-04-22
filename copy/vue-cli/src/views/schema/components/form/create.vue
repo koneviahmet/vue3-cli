@@ -76,7 +76,7 @@ export default {
                 !validateSuccess.valid && console.log("Check the form.", errors.value) 
                 if(validateSuccess.valid){
                     addSchema({...values}).then(response => {
-                        router.push(`/schema/detail/${response.id}`)
+                        router.push(`/schema/${response.id}`)
                     })
                 }
             }).catch(validateError => {

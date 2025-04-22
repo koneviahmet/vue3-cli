@@ -93,7 +93,7 @@ export default {
                 !validateSuccess.valid && console.log("Check the form.", errors.value) 
                 if(validateSuccess.valid){
                     updateSchema({id: route.params.id, ...values}).then(response => {
-                        router.push(`/schema/detail/${response.id}`)
+                        router.push(`/schema/${response.id}`)
                     })
                 }
             }).catch(validateError => {
